@@ -35,15 +35,25 @@ exports.register = async (req, res) => {
 //! User Login
 exports.login = async (req, res) => {
   try {
-    let reqBody = req.body;
-    reqBody.password = md5(req.body.password);
-    let data = await UserModel.aggregate([
-      { $match: reqBody },
-      { $project: { _id: 1, email: 1 } },
-    ]);
+    const { email, password } = req.body;
 
-    if (data.length > 0) {
-      let token = EncodeToken(data[0]["email"]);
+    const user = await UserModel.findOne({ email });
+    if (!user)
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+
+    // Compare password
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch)
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid credentials" });
+
+    console.log(isMatch);
+
+    if (isMatch) {
+      let token = EncodeToken(user.email, user._id, user.role);
 
       let options = {
         maxAge: process.env.Cookie_Expire_Time,
@@ -54,9 +64,17 @@ exports.login = async (req, res) => {
 
       // Set cookie
       res.cookie("Token", token, options);
-      res.status(200).json({ status: "success", token: token, data: data[0] });
-    } else {
-      res.status(200).json({ status: "unauthorized", data: data });
+      res.status(200).json({
+        success: true,
+        message: "Login successful",
+        user: {
+          id: user._id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
+        },
+        token: token,
+      });
     }
   } catch (e) {
     res.status(200).json({ status: "error", error: e.toString() });
