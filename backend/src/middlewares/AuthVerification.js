@@ -11,8 +11,8 @@ module.exports = (req, res, next) => {
       message: "Invalid Token",
     });
   } else {
-    let email = decoded["email"];
-    req.headers.email = email;
+    req.headers.email = decoded["email"];
+    req.headers.role = decoded["role"];
     next();
   }
 };
