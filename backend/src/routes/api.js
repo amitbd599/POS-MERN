@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const UserController = require("../controllers/UserController.js");
 const ProductController = require("../controllers/ProductController.js");
+const OrderController = require("../controllers/OrderController.js");
 const middlewares = require("../middlewares/AuthVerification.js");
 
 // Register a new user
@@ -19,5 +20,14 @@ router.get(
   middlewares,
   ProductController.getProduct
 );
+router.post(
+  "/update-product/:id",
+  middlewares,
+  ProductController.updateProduct
+);
+
+// Order routes
+router.post("/orders-create", OrderController.orderCreate);
+// router.put('/orders/status', orderController.updateOrderStatus);
 
 module.exports = router;

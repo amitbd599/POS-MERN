@@ -1,5 +1,6 @@
+const mongoose = require("mongoose");
 const ProductsModel = require("../models/ProductsModel");
-
+const ObjectId = mongoose.Types.ObjectId;
 // Create Product
 exports.createProduct = async (req, res) => {
   try {
@@ -47,6 +48,18 @@ exports.getProduct = async (req, res) => {
 
     const result = await ProductsModel.aggregate([facet, project]);
     res.status(200).json({ success: true, data: result[0] });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+};
+
+// Update Product
+exports.updateProduct = async (req, res) => {
+  const id = new ObjectId(req.params.id);
+  try {
+    const reqBody = req.body;
+    const result = await ProductsModel.updateOne({ _id: id }, reqBody);
+    res.status(201).json({ success: true, data: result });
   } catch (error) {
     res.status(400).json({ success: false, error: error.message });
   }
