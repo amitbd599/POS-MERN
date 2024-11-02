@@ -3,6 +3,7 @@ const router = express.Router();
 const UserController = require("../controllers/UserController.js");
 const ProductController = require("../controllers/ProductController.js");
 const OrderController = require("../controllers/OrderController.js");
+const PaymentController = require("../controllers/PaymentController.js");
 const middlewares = require("../middlewares/AuthVerification.js");
 
 // Register a new user
@@ -29,5 +30,8 @@ router.post(
 // Order routes
 router.post("/orders-create", OrderController.orderCreate);
 router.post('/orders-status', OrderController.updateOrderStatus);
+
+// Payment routes
+router.post('/payments-create', PaymentController.paymentCreate);
 
 module.exports = router;
