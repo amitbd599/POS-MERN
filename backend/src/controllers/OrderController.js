@@ -69,3 +69,17 @@ exports.orderCreate = async (req, res) => {
     session.endSession();
   }
 };
+
+// updateOrderStatus
+exports.updateOrderStatus = async (req, res) => {
+  try {
+    const { orderId, status } = req.body;
+    const order = await OrdersModel.updateOne(
+      { _id: new ObjectId(orderId) },
+      { status }
+    );
+    res.status(200).json({ success: true, data: order });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+};

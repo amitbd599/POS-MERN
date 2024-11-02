@@ -28,6 +28,6 @@ router.post(
 
 // Order routes
 router.post("/orders-create", OrderController.orderCreate);
-// router.put('/orders/status', orderController.updateOrderStatus);
+router.post('/orders-status', OrderController.updateOrderStatus);
 
 module.exports = router;

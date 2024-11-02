@@ -38,6 +38,7 @@ const DataSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ["Pending", "Completed", "Cancelled"],
+      required: true,
       default: "Pending",
     },
   },
