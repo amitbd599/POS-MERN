@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const ProductsModel = require("../models/ProductsModel");
 const OrdersModel = require("../models/OrdersModel");
+const CustomersModel = require("../models/CustomersModel");
 const ObjectId = mongoose.Types.ObjectId;
 
 // Place a new order
@@ -9,6 +10,12 @@ exports.orderCreate = async (req, res) => {
   session.startTransaction();
   try {
     const { customerId, userId, products } = req.body;
+
+    const customer = await CustomersModel.findById(customerId);
+    if (!customer)
+      return res
+        .status(404)
+        .json({ success: false, message: "Customer not found" });
 
     // Calculate total amount
     let totalAmount = 0;
@@ -74,11 +81,24 @@ exports.orderCreate = async (req, res) => {
 exports.updateOrderStatus = async (req, res) => {
   try {
     const { orderId, status } = req.body;
-    const order = await OrdersModel.updateOne(
+    const order = await OrdersModel.findById(orderId);
+    const orderUpdate = await OrdersModel.updateOne(
       { _id: new ObjectId(orderId) },
       { status }
     );
-    res.status(200).json({ success: true, data: order });
+
+    console.log(order.status);
+
+    if (order.status !== "Cancelled" && status === "Cancelled") {
+      // If order status is cancelled, add back the stock
+      const order = await OrdersModel.findById(orderId);
+      for (let item of order.products) {
+        await ProductsModel.findByIdAndUpdate(item.productId, {
+          $inc: { stockQuantity: item.quantity },
+        });
+      }
+    }
+    res.status(200).json({ success: true, data: orderUpdate });
   } catch (error) {
     res.status(400).json({ success: false, error: error.message });
   }

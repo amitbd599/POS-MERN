@@ -19,7 +19,7 @@ const DataSchema = new mongoose.Schema(
     },
     transactionType: {
       type: String,
-      enum: ["Restock", "Sale", "Return"], // Restrict to specified types
+      enum: ["Restock", "Return"], // Restrict to specified types
       required: true,
     },
     userId: {
