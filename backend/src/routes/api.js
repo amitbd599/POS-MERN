@@ -33,7 +33,8 @@ router.post(
 
 // Order routes
 router.post("/orders-create", OrderController.orderCreate);
-router.post("/orders-status", OrderController.updateOrderStatus);
+router.post("/orders-cancel", OrderController.updateOrderStatus);
+router.post("/orders-return", OrderController.returnOrder);
 
 // Payment routes
 router.post("/payments-create", PaymentController.paymentCreate);

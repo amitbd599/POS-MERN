@@ -21,8 +21,11 @@ const DataSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["Paid", "Unpaid"], // restricts to either "Paid" or "Unpaid"
+      enum: ["Paid", "Unpaid", "Refunded"], // restricts to either "Paid" or "Unpaid"
       default: "Unpaid",
+    },
+    refundDate: {
+      type: Date,
     },
   },
   {

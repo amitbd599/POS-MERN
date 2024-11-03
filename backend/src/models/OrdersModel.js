@@ -15,7 +15,7 @@ const DataSchema = new mongoose.Schema(
       {
         productId: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "Product", // References the Products collection
+          ref: "products", // References the Products collection
           required: true,
         },
         quantity: {
@@ -37,9 +37,12 @@ const DataSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["Pending", "Completed", "Cancelled"],
+      enum: ["Pending", "Completed", "Cancelled", "Returned"],
       required: true,
       default: "Pending",
+    },
+    returnDate: {
+      type: Date,
     },
   },
   {
