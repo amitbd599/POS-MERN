@@ -4,6 +4,7 @@ const DataSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
+      unique: true,
     },
     description: {
       type: String,
@@ -16,6 +17,6 @@ const DataSchema = new mongoose.Schema(
   }
 );
 
-const CategoriesModel = mongoose.model("Categories", DataSchema);
+const CategoriesModel = mongoose.model("categories", DataSchema);
 
 module.exports = CategoriesModel;

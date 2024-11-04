@@ -5,6 +5,7 @@ const ProductController = require("../controllers/ProductController.js");
 const OrderController = require("../controllers/OrderController.js");
 const PaymentController = require("../controllers/PaymentController.js");
 const CustomerController = require("../controllers/CustomerController.js");
+const CategoriesController = require("../controllers/CategoriesController.js");
 const InventoryTransactionController = require("../controllers/InventoryTransactionController.js");
 const middlewares = require("../middlewares/AuthVerification.js");
 
@@ -29,6 +30,24 @@ router.post(
   "/update-product/:id",
   middlewares,
   ProductController.updateProduct
+);
+
+// categories
+router.post(
+  "/create-categories",
+  middlewares,
+  CategoriesController.createCategories
+);
+router.get("/all-categories", middlewares, CategoriesController.getProduct);
+router.post(
+  "/update-categories/:id",
+  middlewares,
+  CategoriesController.updateCategories
+);
+router.delete(
+  "/delete-categories/:id",
+  middlewares,
+  CategoriesController.deleteCategories
 );
 
 // Order routes
