@@ -1,11 +1,24 @@
 const mongoose = require("mongoose");
 const ProductsModel = require("../models/ProductsModel");
+const CategoriesModel = require("../models/CategoriesModel");
 const ObjectId = mongoose.Types.ObjectId;
 // Create Product
 exports.createProduct = async (req, res) => {
   try {
     const { name, description, price, sku, categoryId, stockQuantity } =
       req.body;
+
+    // Check & ensure category exists
+    const categoryCount = await CategoriesModel.countDocuments({
+      _id: categoryId,
+    });
+    if (categoryCount === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "No category found.",
+      });
+    }
+
     const result = await ProductsModel.create({
       name,
       description,
@@ -59,6 +72,17 @@ exports.updateProduct = async (req, res) => {
   try {
     const reqBody = req.body;
     const result = await ProductsModel.updateOne({ _id: id }, reqBody);
+    res.status(201).json({ success: true, data: result });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+};
+
+// Delete Product
+exports.deleteProduct = async (req, res) => {
+  const id = new ObjectId(req.params.id);
+  try {
+    const result = await ProductsModel.deleteOne({ _id: id });
     res.status(201).json({ success: true, data: result });
   } catch (error) {
     res.status(400).json({ success: false, error: error.message });

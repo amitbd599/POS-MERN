@@ -31,6 +31,11 @@ router.post(
   middlewares,
   ProductController.updateProduct
 );
+router.delete(
+  "/delete-product/:id",
+  middlewares,
+  ProductController.deleteProduct
+);
 
 // categories
 router.post(
