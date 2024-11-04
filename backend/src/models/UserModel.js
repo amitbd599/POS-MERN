@@ -7,7 +7,7 @@ const DataSchema = new mongoose.Schema(
     password: { type: String, required: true },
     role: {
       type: String,
-      enum: ["admin", "employee"], // only allow these roles
+      enum: ["admin", "editor", "employee"], // only allow these roles
       default: "employee",
     },
   },

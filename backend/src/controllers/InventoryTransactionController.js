@@ -13,7 +13,7 @@ exports.addInventoryTransaction = async (req, res) => {
         .json({ success: false, message: "Product not found" });
 
     // Update product stock based on transaction type
-    if (transactionType === "Restock" || transactionType === "Return") {
+    if (transactionType === "Restock") {
       const newTransaction = await InventoryTransactionsModel.create({
         productId,
         quantity,

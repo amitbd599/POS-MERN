@@ -1,7 +1,8 @@
+const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const UserModel = require("../models/UserModel");
 const { EncodeToken } = require("../utility/TokenHelper");
-
+const ObjectId = mongoose.Types.ObjectId;
 //! Create user
 exports.register = async (req, res) => {
   try {
@@ -79,7 +80,7 @@ exports.login = async (req, res) => {
 };
 
 //! Update user
-exports.user_update = async (req, res) => {
+exports.userUpdate = async (req, res) => {
   let email = req.headers.email;
   const { name, password } = req.body;
 
@@ -119,7 +120,7 @@ exports.user_update = async (req, res) => {
 };
 
 //! get User
-exports.user_read = async (req, res) => {
+exports.userRead = async (req, res) => {
   let email = req.headers.email;
   try {
     let MatchStage = {
@@ -149,5 +150,16 @@ exports.logout = async (req, res) => {
     res.status(200).json({ status: "success" });
   } catch (e) {
     res.status(200).json({ status: "error", error: e.toString() });
+  }
+};
+
+//! delete user
+exports.deleteUser = async (req, res) => {
+  const id = new ObjectId(req.params.id);
+  try {
+    const result = await UserModel.deleteOne({ _id: id });
+    res.status(201).json({ success: true, data: result });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
   }
 };
