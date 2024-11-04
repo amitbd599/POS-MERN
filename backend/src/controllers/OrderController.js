@@ -90,8 +90,6 @@ exports.updateOrderStatus = async (req, res) => {
       { status }
     );
 
-    console.log(order.status);
-
     if (order.status !== "Cancelled" && status === "Cancelled") {
       // If order status is cancelled, add back the stock
       const order = await OrdersModel.findById(orderId);
@@ -142,22 +140,18 @@ exports.returnOrder = async (req, res) => {
     // Refund the payment
     const payment = await PaymentsModel.findOne({ orderId: order._id });
     if (!payment) {
-      return res
-        .status(404)
-        .json({
-          success: false,
-          message:
-            "Order Return successfully But Payment not found for this order",
-        });
+      return res.status(404).json({
+        success: false,
+        message:
+          "Order Return successfully But Payment not found for this order",
+      });
     }
 
     if (payment.status === "Refunded") {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Order Return successfully & Payment already refunded",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Order Return successfully & Payment already refunded",
+      });
     }
 
     payment.refundAmount = payment.amount;
@@ -171,5 +165,89 @@ exports.returnOrder = async (req, res) => {
     });
   } catch (error) {
     res.status(400).json({ success: false, error: error.toString() });
+  }
+};
+
+// all order
+exports.getOrder = async (req, res) => {
+  try {
+    const limit = parseInt(req.params.item); // Number of items per page
+    const pageNo = parseInt(req.params.pageNo); // Current page number
+
+    if (isNaN(limit) || isNaN(pageNo)) {
+      return res.status(400).json({ message: "Invalid parameters" });
+    }
+
+    const skipStage = { $skip: (pageNo - 1) * limit };
+    const limitStage = { $limit: limit };
+
+    const joinStage = {
+      $lookup: {
+        from: "products", // The name of the Product collection in MongoDB
+        localField: "products.productId",
+        foreignField: "_id",
+        as: "productDetails",
+      },
+    };
+
+    const projectStage = {
+      $project: {
+        _id: 0,
+        customerId: 1,
+        userId: 1,
+        totalAmount: 1,
+        status: 1,
+        productDetails: 1,
+      },
+    };
+
+    const addField = {
+      $addFields: {
+        productDetails: {
+          $map: {
+            input: "$products", // Each entry in the "products" array in Orders
+            as: "product",
+            in: {
+              $mergeObjects: [
+                {
+                  $arrayElemAt: [
+                    {
+                      $filter: {
+                        input: "$productDetails",
+                        as: "detail",
+                        cond: { $eq: ["$$detail._id", "$$product.productId"] },
+                      },
+                    },
+                    0,
+                  ],
+                },
+                {
+                  quantity: "$$product.quantity", // Pulling "quantity" from the original products array in Orders
+                },
+              ],
+            },
+          },
+        },
+      },
+    };
+
+    const facet = {
+      $facet: {
+        order: [skipStage, limitStage, joinStage, addField, projectStage],
+        totalCount: [{ $count: "count" }],
+      },
+    };
+
+    const project = {
+      $project: {
+        order: 1,
+        totalCount: { $arrayElemAt: ["$totalCount.count", 0] },
+      },
+    };
+
+    const result = await OrdersModel.aggregate([facet, project]);
+    res.status(200).json({ success: true, data: result[0] });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
   }
 };

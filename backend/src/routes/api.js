@@ -35,6 +35,7 @@ router.post(
 router.post("/orders-create", OrderController.orderCreate);
 router.post("/orders-cancel", OrderController.updateOrderStatus);
 router.post("/orders-return", OrderController.returnOrder);
+router.get("/all-orders/:item/:pageNo", OrderController.getOrder);
 
 // Payment routes
 router.post("/payments-create", PaymentController.paymentCreate);
