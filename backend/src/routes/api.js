@@ -7,6 +7,7 @@ const PaymentController = require("../controllers/PaymentController.js");
 const CustomerController = require("../controllers/CustomerController.js");
 const CategoriesController = require("../controllers/CategoriesController.js");
 const InventoryTransactionController = require("../controllers/InventoryTransactionController.js");
+const BackupController = require("../controllers/BackupController.js");
 const middlewares = require("../middlewares/AuthVerification.js");
 const RoleBasedAccess = require("../middlewares/RoleBasedAccess.js");
 
@@ -116,5 +117,8 @@ router.post(
   RoleBasedAccess("admin", "editor"),
   InventoryTransactionController.addInventoryTransaction
 );
+
+//! Backup routes
+router.get("/export-data", BackupController.exportData);
 
 module.exports = router;
