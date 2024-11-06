@@ -220,10 +220,10 @@ exports.getOrder = async (req, res) => {
 
     const joinStage = {
       $lookup: {
-        from: "products", // The name of the Product collection in MongoDB
-        localField: "products.productId",
-        foreignField: "_id",
-        as: "productDetails",
+        from: "orderproducts", // The name of the Product collection in MongoDB
+        localField: "_id",
+        foreignField: "orderId",
+        as: "products",
       },
     };
 
@@ -234,43 +234,13 @@ exports.getOrder = async (req, res) => {
         userId: 1,
         totalAmount: 1,
         status: 1,
-        productDetails: 1,
-      },
-    };
-
-    const addField = {
-      $addFields: {
-        productDetails: {
-          $map: {
-            input: "$products", // Each entry in the "products" array in Orders
-            as: "product",
-            in: {
-              $mergeObjects: [
-                {
-                  $arrayElemAt: [
-                    {
-                      $filter: {
-                        input: "$productDetails",
-                        as: "detail",
-                        cond: { $eq: ["$$detail._id", "$$product.productId"] },
-                      },
-                    },
-                    0,
-                  ],
-                },
-                {
-                  quantity: "$$product.quantity", // Pulling "quantity" from the original products array in Orders
-                },
-              ],
-            },
-          },
-        },
+        products: 1,
       },
     };
 
     const facet = {
       $facet: {
-        order: [skipStage, limitStage, joinStage, addField, projectStage],
+        order: [skipStage, limitStage, joinStage, projectStage],
         totalCount: [{ $count: "count" }],
       },
     };
