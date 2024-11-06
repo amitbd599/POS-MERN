@@ -11,6 +11,12 @@ exports.paymentCreate = async (req, res) => {
         .status(404)
         .json({ success: false, message: "Order not found" });
 
+    if (order.status === "Completed") {
+      return res
+        .status(400)
+        .json({ success: false, message: "Order already completed" });
+    }
+
     await PaymentsModel.create({
       orderId,
       amount: order.totalAmount,
