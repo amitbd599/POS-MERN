@@ -3,6 +3,7 @@ const ProductsModel = require("../models/ProductsModel");
 const PaymentsModel = require("../models/PaymentsModel");
 const OrdersModel = require("../models/OrdersModel");
 const CustomersModel = require("../models/CustomersModel");
+const OrderProductsModel = require("../models/OrderProductsModel");
 const ObjectId = mongoose.Types.ObjectId;
 
 // Place a new order
@@ -50,13 +51,27 @@ exports.orderCreate = async (req, res) => {
         {
           customerId,
           userId,
-          products: newProducts,
           totalAmount,
           status: "Pending",
         },
       ],
       { session }
     );
+
+    // add product to order
+    for (let item of newProducts) {
+      await OrderProductsModel.create(
+        [
+          {
+            orderId: order[0]._id,
+            productId: item.productId,
+            quantity: item.quantity,
+            price: item.price,
+          },
+        ],
+        { session }
+      );
+    }
 
     // Deduct stock
     for (let item of products) {

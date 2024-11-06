@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 const PaymentsModel = require("../models/PaymentsModel");
 const OrdersModel = require("../models/OrdersModel");
-const ObjectId = mongoose.Types.ObjectId;
 exports.paymentCreate = async (req, res) => {
   try {
     const { orderId, paymentMethod, status } = req.body;

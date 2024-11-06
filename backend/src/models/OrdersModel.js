@@ -11,25 +11,6 @@ const DataSchema = new mongoose.Schema(
       ref: "User", // References the Users collection
       required: true,
     },
-    products: [
-      {
-        productId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "products", // References the Products collection
-          required: true,
-        },
-        quantity: {
-          type: Number,
-          required: true,
-          min: 1,
-        },
-        price: {
-          type: Number,
-          required: true,
-          min: 0,
-        },
-      },
-    ],
     totalAmount: {
       type: Number,
       required: true,
