@@ -95,26 +95,48 @@ exports.orderCreate = async (req, res) => {
   }
 };
 
-// updateOrderStatus
-exports.updateOrderStatus = async (req, res) => {
+// cancel an Order
+exports.cancelOrder = async (req, res) => {
   try {
     const { orderId, status } = req.body;
-    const order = await OrdersModel.findById(orderId);
-    const orderUpdate = await OrdersModel.updateOne(
-      { _id: new ObjectId(orderId) },
-      { status }
-    );
 
-    if (order.status !== "Cancelled" && status === "Cancelled") {
-      // If order status is cancelled, add back the stock
-      const order = await OrdersModel.findById(orderId);
-      for (let item of order.products) {
+    //! Find the order products
+    const OrderProducts = await OrdersModel.aggregate([
+      {
+        $match: {
+          _id: new ObjectId(orderId),
+        },
+      },
+      {
+        $lookup: {
+          from: "orderproducts",
+          localField: "_id",
+          foreignField: "orderId",
+          as: "orderProduct",
+        },
+      },
+    ]);
+
+    //  Check if the order has been updated/cancelled
+    if (OrderProducts[0].status === "Cancelled") {
+      return res
+        .status(400)
+        .json({ success: false, message: "Order is already cancelled" });
+    }
+
+    //! If order status is cancelled, add back the stock
+    if (OrderProducts[0].status !== "Cancelled" && status === "Cancelled") {
+      for (let item of OrderProducts[0].orderProduct) {
         await ProductsModel.findByIdAndUpdate(item.productId, {
           $inc: { stockQuantity: item.quantity },
         });
       }
+      //! order status is updated
+      await OrdersModel.updateOne({ _id: new ObjectId(orderId) }, { status });
+      return res
+        .status(200)
+        .json({ success: true, message: "Order is cancelled!" });
     }
-    res.status(200).json({ success: true, data: orderUpdate });
   } catch (error) {
     res.status(400).json({ success: false, error: error.message });
   }

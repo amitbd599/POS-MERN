@@ -93,7 +93,7 @@ router.post(
   "/orders-cancel",
   middlewares,
   RoleBasedAccess("admin", "editor"),
-  OrderController.updateOrderStatus
+  OrderController.cancelOrder
 );
 router.post(
   "/orders-return",

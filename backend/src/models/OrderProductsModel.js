@@ -3,12 +3,10 @@ const DataSchema = new mongoose.Schema(
   {
     productId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "products", // References the Products collection
       required: true,
     },
     orderId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "orders", // References the orders collection
       required: true,
     },
     quantity: {
