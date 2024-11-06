@@ -41,6 +41,11 @@ router.get(
   middlewares,
   CustomerController.getAllCustomer
 );
+router.post(
+  "/update-customer/:id",
+  middlewares,
+  CustomerController.updateCustomer
+);
 
 // Product
 router.post(

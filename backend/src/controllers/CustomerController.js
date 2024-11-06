@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 const CustomersModel = require("../models/CustomersModel");
 
 // Add new customer
@@ -10,9 +12,13 @@ exports.addCustomer = async (req, res) => {
       phone,
       address,
     });
-    res.status(201).json({ success: true, data: newCustomer });
+    res.status(201).json({
+      success: true,
+      data: newCustomer,
+      message: "Customer create successful!",
+    });
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    res.status(400).json({ success: false, error: error.toString() });
   }
 };
 
@@ -53,24 +59,32 @@ exports.getAllCustomer = async (req, res) => {
   }
 };
 
-// Update Product
-exports.updateProduct = async (req, res) => {
+// Update customers
+exports.updateCustomer = async (req, res) => {
   const id = new ObjectId(req.params.id);
   try {
     const reqBody = req.body;
-    const result = await ProductsModel.updateOne({ _id: id }, reqBody);
-    res.status(201).json({ success: true, data: result });
+    const result = await CustomersModel.updateOne({ _id: id }, reqBody);
+    res.status(201).json({
+      success: true,
+      data: result,
+      message: "Customer update successful!",
+    });
   } catch (error) {
     res.status(400).json({ success: false, error: error.message });
   }
 };
 
-// Delete Product
-exports.deleteProduct = async (req, res) => {
+// Delete Customer
+exports.deleteCustomer = async (req, res) => {
   const id = new ObjectId(req.params.id);
   try {
     const result = await ProductsModel.deleteOne({ _id: id });
-    res.status(201).json({ success: true, data: result });
+    res.status(201).json({
+      success: true,
+      data: result,
+      message: "Customer delete successful!",
+    });
   } catch (error) {
     res.status(400).json({ success: false, error: error.message });
   }
