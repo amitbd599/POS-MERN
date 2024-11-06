@@ -51,6 +51,6 @@ const DataSchema = new mongoose.Schema(
   }
 );
 
-const OrdersModel = mongoose.model("Orders", DataSchema);
+const OrdersModel = mongoose.model("orders", DataSchema);
 
 module.exports = OrdersModel;

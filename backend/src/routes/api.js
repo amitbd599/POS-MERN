@@ -10,6 +10,7 @@ const InventoryTransactionController = require("../controllers/InventoryTransact
 const BackupController = require("../controllers/BackupController.js");
 const middlewares = require("../middlewares/AuthVerification.js");
 const RoleBasedAccess = require("../middlewares/RoleBasedAccess.js");
+const { upload } = require("../middlewares/UploadMiddleware.js");
 
 // Register a new user
 router.post(
@@ -119,6 +120,18 @@ router.post(
 );
 
 //! Backup routes
-router.get("/export-data", BackupController.exportData);
+router.get(
+  "/export-data",
+  middlewares,
+  RoleBasedAccess("admin"),
+  BackupController.exportData
+);
+router.post(
+  "/import-data",
+  middlewares,
+  RoleBasedAccess("admin"),
+  upload.single("file"),
+  BackupController.importData
+);
 
 module.exports = router;

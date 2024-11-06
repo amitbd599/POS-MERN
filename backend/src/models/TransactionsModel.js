@@ -38,9 +38,6 @@ const DataSchema = new mongoose.Schema(
   }
 );
 
-const InventoryTransactionsModel = mongoose.model(
-  "InventoryTransactions",
-  DataSchema
-);
+const TransactionsModel = mongoose.model("transactions", DataSchema);
 
-module.exports = InventoryTransactionsModel;
+module.exports = TransactionsModel;

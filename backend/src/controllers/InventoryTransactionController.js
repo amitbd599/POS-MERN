@@ -1,5 +1,5 @@
 // controllers/inventoryTransactionController.js
-const InventoryTransactionsModel = require("../models/InventoryTransactionsModel");
+const InventoryTransactionsModel = require("../models/TransactionsModel");
 const ProductsModel = require("../models/ProductsModel");
 
 // Add inventory transaction
