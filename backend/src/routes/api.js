@@ -36,6 +36,11 @@ router.post(
   RoleBasedAccess("admin", "editor"),
   CustomerController.addCustomer
 );
+router.get(
+  "/all-customers/:item/:pageNo",
+  middlewares,
+  CustomerController.getAllCustomer
+);
 
 // Product
 router.post(
