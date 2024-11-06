@@ -21,6 +21,11 @@ router.post(
 router.post("/login-profile", UserController.login);
 router.post("/update-profile", middlewares, UserController.userUpdate);
 router.get("/read-profile", middlewares, UserController.userRead);
+router.get(
+  "/read-all-profile/:item/:pageNo",
+  middlewares,
+  UserController.getAllUser
+);
 router.delete(
   "/delete-profile/:id",
   middlewares,
@@ -45,6 +50,11 @@ router.post(
   "/update-customer/:id",
   middlewares,
   CustomerController.updateCustomer
+);
+router.delete(
+  "/delete-customer/:id",
+  middlewares,
+  CustomerController.deleteCustomer
 );
 
 // Product

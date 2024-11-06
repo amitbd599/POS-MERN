@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 const CategoriesModel = require("../models/CategoriesModel");
 const ProductsModel = require("../models/ProductsModel");
-const ObjectId = mongoose.Types.ObjectId;
 
 // create categories
 exports.createCategories = async (req, res) => {

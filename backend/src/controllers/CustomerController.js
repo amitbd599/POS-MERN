@@ -79,7 +79,7 @@ exports.updateCustomer = async (req, res) => {
 exports.deleteCustomer = async (req, res) => {
   const id = new ObjectId(req.params.id);
   try {
-    const result = await ProductsModel.deleteOne({ _id: id });
+    const result = await CustomersModel.deleteOne({ _id: id });
     res.status(201).json({
       success: true,
       data: result,
