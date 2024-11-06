@@ -98,8 +98,8 @@ exports.orderCreate = async (req, res) => {
 // cancel an Order
 exports.cancelOrder = async (req, res) => {
   try {
-    const { orderId, status } = req.body;
-
+    const { orderId } = req.body;
+    let status = "Cancelled";
     //! Find the order products
     const OrderProducts = await OrdersModel.aggregate([
       {
@@ -121,7 +121,15 @@ exports.cancelOrder = async (req, res) => {
     if (OrderProducts[0].status === "Cancelled") {
       return res
         .status(400)
-        .json({ success: false, message: "Order is already cancelled" });
+        .json({ success: false, message: "Order is already cancelled!" });
+    } else if (OrderProducts[0].status === "Completed") {
+      return res
+        .status(400)
+        .json({ success: false, message: "Order is already completed!" });
+    } else if (OrderProducts[0].status === "Returned") {
+      return res
+        .status(400)
+        .json({ success: false, message: "Order is already returned!" });
     }
 
     //! If order status is cancelled, add back the stock
@@ -146,36 +154,74 @@ exports.cancelOrder = async (req, res) => {
 exports.returnOrder = async (req, res) => {
   try {
     const { orderId } = req.body;
-    const order = await OrdersModel.findById(orderId);
+    let status = "Returned";
 
-    if (!order)
+    //! Find the order products
+    const OrderProducts = await OrdersModel.aggregate([
+      {
+        $match: {
+          _id: new ObjectId(orderId),
+        },
+      },
+      {
+        $lookup: {
+          from: "orderproducts",
+          localField: "_id",
+          foreignField: "orderId",
+          as: "orderProduct",
+        },
+      },
+    ]);
+
+    console.log(OrderProducts[0]);
+
+    //! If the order not found
+    if (!OrderProducts[0]) {
       return res
         .status(404)
         .json({ success: false, message: "Order not found" });
+    }
 
-    // Ensure the order isn't already returned
-    if (order.status === "Returned") {
+    //! Ensure the order isn't already returned
+    if (OrderProducts[0].status === "Returned") {
       return res
         .status(400)
         .json({ success: false, message: "Order already returned" });
     }
 
-    // Restock each product
-    for (let item of order.products) {
-      const product = await ProductsModel.findById(item.productId._id);
-      if (product) {
-        product.stockQuantity += item.quantity; // Re-add returned quantity
-        await product.save();
-      }
+    //! Check if the order has been Cancelled/Returned/Pending
+    if (OrderProducts[0].status === "Cancelled") {
+      return res
+        .status(400)
+        .json({ success: false, message: "Order is already cancelled!" });
+    } else if (OrderProducts[0].status === "Pending") {
+      return res
+        .status(400)
+        .json({ success: false, message: "Order is already pending!" });
+    } else if (OrderProducts[0].status === "Returned") {
+      return res
+        .status(400)
+        .json({ success: false, message: "Order is already returned!" });
     }
 
-    // Update order status and return date
-    order.status = "Returned";
-    order.returnDate = new Date();
-    await order.save();
+    //! If order status is cancelled, add back the stock
+    if (OrderProducts[0].status === "Completed" && status === "Returned") {
+      for (let item of OrderProducts[0].orderProduct) {
+        await ProductsModel.findByIdAndUpdate(item.productId, {
+          $inc: { stockQuantity: item.quantity },
+        });
+      }
+      //! order status is updated
+      await OrdersModel.updateOne(
+        { _id: new ObjectId(orderId) },
+        { status: "Returned", returnDate: new Date() }
+      );
+    }
 
-    // Refund the payment
-    const payment = await PaymentsModel.findOne({ orderId: order._id });
+    //! Refund the payment
+    const payment = await PaymentsModel.findOne({
+      orderId: OrderProducts[0]._id,
+    });
     if (!payment) {
       return res.status(404).json({
         success: false,
