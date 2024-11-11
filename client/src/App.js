@@ -6,6 +6,7 @@ import CreateCategoriesPage from "./pages/CreateCategoriesPage";
 import AllCategoriesPage from "./pages/AllCategoriesPage";
 import UpdateCategoriesPage from "./pages/UpdateCategoriesPage";
 import CreateProductPage from "./pages/CreateProductPage";
+import AllProductPage from "./pages/AllProductPage";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
 
         {/* products */}
         <Route exact path='/create-product' element={<CreateProductPage />} />
+        <Route exact path='/all-product' element={<AllProductPage />} />
 
         <Route exact path='/sign-in' element={<SignInPage />} />
       </Routes>

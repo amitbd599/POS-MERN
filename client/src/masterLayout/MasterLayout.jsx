@@ -201,6 +201,17 @@ const MasterLayout = ({ children }) => {
                     Create product
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink
+                    to='/all-product'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto' />{" "}
+                    All product
+                  </NavLink>
+                </li>
               </ul>
             </li>
 
