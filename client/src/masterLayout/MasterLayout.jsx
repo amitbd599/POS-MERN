@@ -182,7 +182,7 @@ const MasterLayout = ({ children }) => {
               </ul>
             </li>
 
-            {/* Ai Application Dropdown */}
+            {/* product */}
             <li className='dropdown'>
               <Link to='#'>
                 <i className='ri-robot-2-line mr-10' />
@@ -192,57 +192,13 @@ const MasterLayout = ({ children }) => {
               <ul className='sidebar-submenu'>
                 <li>
                   <NavLink
-                    to='/text-generator'
+                    to='/create-product'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
                   >
                     <i className='ri-circle-fill circle-icon text-primary-600 w-auto' />{" "}
-                    Text Generator
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/code-generator'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-warning-main w-auto' />{" "}
-                    Code Generator
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/image-generator'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
-                    Image Generator
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/voice-generator'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Voice Generator
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/video-generator'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-success-main w-auto' />{" "}
-                    Video Generator
+                    Create product
                   </NavLink>
                 </li>
               </ul>
