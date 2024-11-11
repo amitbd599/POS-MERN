@@ -16,6 +16,7 @@ const AllProducts = () => {
                   <th scope='col'>Items</th>
                   <th scope='col'>SKU</th>
                   <th scope='col'>Stock </th>
+                  <th scope='col'>Create Date </th>
                   <th scope='col'>Action</th>
                 </tr>
               </thead>
@@ -37,14 +38,15 @@ const AllProducts = () => {
                     </div>
                   </td>
                   <td>$500.00</td>
-                  <td>15%</td>
+                  <td>$500.00</td>
+                  <td>15-02-2024</td>
                   <td>
                     <span className='d-flex gap-3'>
                       <button
                         type='button'
                         className='btn btn-success-600 radius-8 px-14 py-6'
                       >
-                        <Link to='/update-categories/id'>Edit</Link>
+                        <Link to='/update-product/id'>Edit</Link>
                       </button>
                       <button
                         type='button'

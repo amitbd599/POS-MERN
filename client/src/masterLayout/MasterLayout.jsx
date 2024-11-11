@@ -187,7 +187,7 @@ const MasterLayout = ({ children }) => {
               <Link to='#'>
                 <i className='ri-robot-2-line mr-10' />
 
-                <span>Ai Application</span>
+                <span>Products</span>
               </Link>
               <ul className='sidebar-submenu'>
                 <li>
