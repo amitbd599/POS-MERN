@@ -22,4 +22,4 @@ const Breadcrumb = ({ title }) => {
   );
 };
 
-export default Breadcrumb;
+export default Breadcrumb; 
