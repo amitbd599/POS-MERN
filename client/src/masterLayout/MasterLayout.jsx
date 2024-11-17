@@ -149,11 +149,43 @@ const MasterLayout = ({ children }) => {
                 <span>Chat</span>
               </NavLink>
             </li>
+            {/* customer */}
+            <li className='dropdown'>
+              <Link to='#'>
+                <i className='ri-user-line mr-10' />
+
+                <span>Customers</span>
+              </Link>
+              <ul className='sidebar-submenu'>
+                <li>
+                  <NavLink
+                    to='/create-customer'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto' />{" "}
+                    Create customer
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/all-customer'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto' />{" "}
+                    All customer
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
 
             {/* Invoice Dropdown */}
             <li className='dropdown'>
               <Link to='#'>
-                <Icon icon='hugeicons:invoice-03' className='menu-icon' />
+                <i class='ri-share-box-fill mr-10'></i>
                 <span>Categories</span>
               </Link>
               <ul className='sidebar-submenu'>
@@ -185,7 +217,7 @@ const MasterLayout = ({ children }) => {
             {/* product */}
             <li className='dropdown'>
               <Link to='#'>
-                <i className='ri-robot-2-line mr-10' />
+                <i className='ri-bowl-line mr-10' />
 
                 <span>Products</span>
               </Link>
@@ -215,55 +247,78 @@ const MasterLayout = ({ children }) => {
               </ul>
             </li>
 
-            {/* Crypto Currency Dropdown */}
+            {/* order */}
             <li className='dropdown'>
               <Link to='#'>
-                <i className='ri-robot-2-line mr-10' />
-                <span>Crypto Currency</span>
+                <i class='ri-funds-line mr-10'></i>
+
+                <span>Orders</span>
               </Link>
               <ul className='sidebar-submenu'>
                 <li>
                   <NavLink
-                    to='/wallet'
+                    to='/create-order'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
                   >
                     <i className='ri-circle-fill circle-icon text-primary-600 w-auto' />{" "}
-                    Wallet
+                    Create order
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
-                    to='/marketplace'
+                    to='/all-order'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
                   >
-                    <i className='ri-circle-fill circle-icon text-warning-main w-auto' />
-                    Marketplace
+                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto' />{" "}
+                    All order
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
+
+            {/* user */}
+            <li className='dropdown'>
+              <Link to='#'>
+                <i class='ri-user-settings-line mr-10'></i>
+
+                <span>Users</span>
+              </Link>
+              <ul className='sidebar-submenu'>
+                <li>
+                  <NavLink
+                    to='/add-user'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto' />{" "}
+                    Add user
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
-                    to='/marketplace-details'
+                    to='/all-user'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
                   >
-                    <i className='ri-circle-fill circle-icon text-warning-main w-auto' />
-                    Marketplace Details
+                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto' />{" "}
+                    All user
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
-                    to='/portfolio'
+                    to='/view-profile'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
                   >
-                    <i className='ri-circle-fill circle-icon text-warning-main w-auto' />
-                    Portfolios
+                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto' />{" "}
+                    View profile
                   </NavLink>
                 </li>
               </ul>

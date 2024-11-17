@@ -8,6 +8,13 @@ import UpdateCategoriesPage from "./pages/UpdateCategoriesPage";
 import CreateProductPage from "./pages/CreateProductPage";
 import AllProductPage from "./pages/AllProductPage";
 import UpdateProductPage from "./pages/UpdateProductPage";
+import CreateCustomerPage from "./pages/CreateCustomerPage";
+import AllCustomerPage from "./pages/AllCustomerPage";
+import UpdateCustomerPage from "./pages/UpdateCustomerPage";
+import AddUserPage from "./pages/AddUserPage";
+import AllUsersPage from "./pages/AllUsersPage";
+import ViewProfilePage from "./pages/ViewProfilePage";
+import CreateOrderPage from "./pages/CreateOrderPage";
 
 function App() {
   return (
@@ -37,6 +44,23 @@ function App() {
           path='/update-product/:id'
           element={<UpdateProductPage />}
         />
+
+        {/* customer */}
+        <Route exact path='/create-customer' element={<CreateCustomerPage />} />
+        <Route exact path='/all-customer' element={<AllCustomerPage />} />
+        <Route
+          exact
+          path='/update-customer/:id'
+          element={<UpdateCustomerPage />}
+        />
+
+        {/* user */}
+        <Route exact path='/add-user' element={<AddUserPage />} />
+        <Route exact path='/all-user' element={<AllUsersPage />} />
+        <Route exact path='/view-profile' element={<ViewProfilePage />} />
+
+        {/* orders */}
+        <Route exact path='/create-order' element={<CreateOrderPage />} />
 
         <Route exact path='/sign-in' element={<SignInPage />} />
       </Routes>
