@@ -15,6 +15,10 @@ import AddUserPage from "./pages/AddUserPage";
 import AllUsersPage from "./pages/AllUsersPage";
 import ViewProfilePage from "./pages/ViewProfilePage";
 import CreateOrderPage from "./pages/CreateOrderPage";
+import AllOrdersPage from "./pages/AllOrdersPage";
+import ViewOrderPage from "./pages/ViewOrderPage";
+import BackupDatabasePage from "./pages/BackupDatabasePage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -61,6 +65,14 @@ function App() {
 
         {/* orders */}
         <Route exact path='/create-order' element={<CreateOrderPage />} />
+        <Route exact path='/all-order' element={<AllOrdersPage />} />
+        <Route exact path='/view-order/:id' element={<ViewOrderPage />} />
+
+        {/* backup */}
+        <Route exact path='/backup-database' element={<BackupDatabasePage />} />
+
+        {/* login */}
+        <Route exact path='/login' element={<LoginPage />} />
 
         <Route exact path='/sign-in' element={<SignInPage />} />
       </Routes>

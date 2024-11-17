@@ -324,6 +324,28 @@ const MasterLayout = ({ children }) => {
               </ul>
             </li>
 
+            {/* backup */}
+            <li className='dropdown'>
+              <Link to='#'>
+                <i class='ri-user-settings-line mr-10'></i>
+
+                <span>Database Backup</span>
+              </Link>
+              <ul className='sidebar-submenu'>
+                <li>
+                  <NavLink
+                    to='/backup-database'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-primary-600 w-auto' />{" "}
+                    Export / Import
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
+
             <li className='sidebar-menu-group-title'>UI Elements</li>
 
             {/* Components Dropdown */}
