@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import ThemeToggleButton from "../helper/ThemeToggleButton";
+import UserStore from "../store/UserStore";
 
 const MasterLayout = ({ children }) => {
+  let { ProfileDetailsRequest, ProfileDetails } = UserStore();
   let [sidebarActive, seSidebarActive] = useState(false);
   let [mobileMenu, setMobileMenu] = useState(false);
-  const location = useLocation(); // Hook to get the current route
+  const location = useLocation();
 
   useEffect(() => {
     // Function to handle dropdown clicks
@@ -74,6 +76,15 @@ const MasterLayout = ({ children }) => {
   let mobileMenuControl = () => {
     setMobileMenu(!mobileMenu);
   };
+
+  //! Api call
+  useEffect(() => {
+    (async () => {
+      await ProfileDetailsRequest();
+    })();
+  }, []);
+
+  console.log(ProfileDetails);
 
   return (
     <section className={mobileMenu ? "overlay active" : "overlay "}>
@@ -390,7 +401,7 @@ const MasterLayout = ({ children }) => {
                     data-bs-toggle='dropdown'
                   >
                     <img
-                      src='assets/images/user.png'
+                      src={ProfileDetails?.img}
                       alt='image_user'
                       className='w-40-px h-40-px object-fit-cover rounded-circle'
                     />
@@ -399,10 +410,14 @@ const MasterLayout = ({ children }) => {
                     <div className='py-12 px-16 radius-8 bg-primary-50 mb-16 d-flex align-items-center justify-content-between gap-2'>
                       <div>
                         <h6 className='text-lg text-primary-light fw-semibold mb-2'>
-                          Shaidul Islam
+                          {ProfileDetails?.name}
                         </h6>
                         <span className='text-secondary-light fw-medium text-sm'>
-                          Admin
+                          {ProfileDetails?.email}
+                        </span>
+                        <br />
+                        <span className='text-secondary-light fw-medium text-sm'>
+                          {ProfileDetails?.role}
                         </span>
                       </div>
                       <button type='button' className='hover-text-danger'>
@@ -425,30 +440,7 @@ const MasterLayout = ({ children }) => {
                           My Profile
                         </Link>
                       </li>
-                      <li>
-                        <Link
-                          className='dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3'
-                          to='/email'
-                        >
-                          <Icon
-                            icon='tabler:message-check'
-                            className='icon text-xl'
-                          />{" "}
-                          Inbox
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          className='dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3'
-                          to='/company'
-                        >
-                          <Icon
-                            icon='icon-park-outline:setting-two'
-                            className='icon text-xl'
-                          />
-                          Setting
-                        </Link>
-                      </li>
+
                       <li>
                         <Link
                           className='dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-danger d-flex align-items-center gap-3'

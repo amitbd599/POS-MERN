@@ -134,10 +134,11 @@ exports.userRead = async (req, res) => {
         email: 1,
         name: 1,
         role: 1,
+        img: 1,
       },
     };
     let data = await UserModel.aggregate([MatchStage, project]);
-    res.status(200).json({ status: "success", data: data[0] });
+    res.status(200).json({ success: true, data: data[0] });
   } catch (e) {
     res.status(200).json({ status: "error", error: e.toString() });
   }
@@ -160,7 +161,7 @@ exports.getAllUser = async (req, res) => {
         users: [
           { $skip: skip },
           { $limit: limit },
-          { $project: { name: 1, email: 1, role: 1 } },
+          { $project: { name: 1, email: 1, role: 1, img: 1, createdAt: 1 } },
         ],
         totalCount: [{ $count: "count" }],
       },

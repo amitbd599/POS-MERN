@@ -5,6 +5,7 @@ const DataSchema = new mongoose.Schema(
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true, lowercase: true },
     password: { type: String, required: true },
+    img: { type: String },
     role: {
       type: String,
       enum: ["admin", "editor", "employee"], // only allow these roles

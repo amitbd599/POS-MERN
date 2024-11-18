@@ -6,6 +6,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 const UserStore = create((set) => ({
   isSubmit: false,
+  loading: false,
 
   // Register-user api
   RegisterUserRequest: async (reqBody) => {
@@ -60,37 +61,44 @@ const UserStore = create((set) => ({
     }
   },
 
-  // login-user api
+  //! login-user api -- done
   loginUserRequest: async (reqBody) => {
     try {
+      set({ loading: true });
       let res = await axios.post(baseURL + "/login-profile", reqBody, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
+        set({ loading: false });
         SuccessToast(res?.data?.message);
         return true;
       } else {
+        set({ loading: false });
         ErrorToast(res?.data?.message);
         return false;
       }
     } catch (e) {
+      set({ loading: false });
       ErrorToast("Something went wrong!");
       return false;
     }
   },
 
-  // profile details
+  //! profile details
   ProfileDetails: null,
   ProfileDetailsRequest: async () => {
     try {
-      let res = await axios.get(apiUrl + "/profile-read-user", {
+      set({ loading: true });
+      let res = await axios.get(baseURL + "/read-profile", {
         withCredentials: true,
       });
-      if (res.data.status === true) {
-        set({ ProfileDetails: res.data.data[0] });
+      if (res?.data?.success === true) {
+        set({ loading: false });
+        set({ ProfileDetails: res?.data?.data });
       }
     } catch (e) {
-      unAuthorize(e.response.status);
+      set({ loading: false });
+      ErrorToast("Something went wrong!");
     }
   },
 
@@ -107,6 +115,27 @@ const UserStore = create((set) => ({
       }
     } catch (e) {
       unAuthorize(e.response.status);
+    }
+  },
+
+  //! all profile details
+  AllProfileDetails: null,
+  AllProfileDetailsRequest: async (perPage, pageNo) => {
+    try {
+      set({ loading: true });
+      let res = await axios.get(
+        baseURL + "/read-all-profile/" + perPage + "/" + pageNo,
+        {
+          withCredentials: true,
+        }
+      );
+      if (res?.data?.success === true) {
+        set({ loading: false });
+        set({ AllProfileDetails: res?.data?.data });
+      }
+    } catch (e) {
+      set({ loading: false });
+      ErrorToast("Something went wrong!");
     }
   },
 }));

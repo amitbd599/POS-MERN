@@ -8,6 +8,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ToastContainer } from "react-toastify";
+import Loader from "./components/Loader";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -24,6 +25,7 @@ root.render(
       pauseOnHover
       theme='light'
     ></ToastContainer>
+    <Loader />
     <App />
   </>
 );
