@@ -140,15 +140,6 @@ const MasterLayout = ({ children }) => {
 
             <li className='sidebar-menu-group-title'>Application</li>
 
-            <li>
-              <NavLink
-                to='/chat-message'
-                className={(navData) => (navData.isActive ? "active-page" : "")}
-              >
-                <Icon icon='bi:chat-dots' className='menu-icon' />
-                <span>Chat</span>
-              </NavLink>
-            </li>
             {/* customer */}
             <li className='dropdown'>
               <Link to='#'>

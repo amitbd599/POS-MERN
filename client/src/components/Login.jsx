@@ -1,8 +1,26 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useRef } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import UserStore from "../store/UserStore";
 
 const Login = () => {
+  const navigate = useNavigate();
+  let { loginUserRequest } = UserStore();
+  let location = useLocation();
+  let { emailRef, passwordRef } = useRef();
+
+  let from = location.state?.from?.pathname || "/";
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    let email = emailRef.value;
+    let password = passwordRef.value;
+    await loginUserRequest({ email, password }).then((res) => {
+      if (res) {
+        navigate(from, { replace: true });
+      }
+    });
+  };
   return (
     <section className='auth bg-base d-flex flex-wrap'>
       <div className='auth-left d-lg-block d-none'>
@@ -27,6 +45,7 @@ const Login = () => {
                 <Icon icon='mage:email' />
               </span>
               <input
+                ref={(input) => (emailRef = input)}
                 type='email'
                 className='form-control h-56-px bg-neutral-50 radius-12'
                 placeholder='Email'
@@ -38,6 +57,7 @@ const Login = () => {
                   <Icon icon='solar:lock-password-outline' />
                 </span>
                 <input
+                  ref={(input) => (passwordRef = input)}
                   type='password'
                   className='form-control h-56-px bg-neutral-50 radius-12'
                   id='your-password'
@@ -51,6 +71,7 @@ const Login = () => {
             </div>
 
             <button
+              onClick={handleSubmit}
               type='submit'
               className='btn btn-primary text-sm btn-sm px-12 py-16 w-100 radius-12 mt-32'
             >

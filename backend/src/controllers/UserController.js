@@ -40,14 +40,14 @@ exports.login = async (req, res) => {
     const user = await UserModel.findOne({ email });
     if (!user)
       return res
-        .status(404)
+        .status(200)
         .json({ success: false, message: "User not found" });
 
     // Compare password
     const isMatch = await user.comparePassword(password);
     if (!isMatch)
       return res
-        .status(400)
+        .status(200)
         .json({ success: false, message: "Invalid credentials" });
 
     if (isMatch) {

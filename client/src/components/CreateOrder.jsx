@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 const CreateOrder = () => {
   const [rows, setRows] = useState([]);
   const [products, setProducts] = useState([]);
-
+  const [totalPrice, setTotalPrice] = useState(0);
   // Fetch products from API when component mounts
   useEffect(() => {
     fetchProducts();
@@ -58,10 +58,24 @@ const CreateOrder = () => {
     setRows(updatedRows);
   };
 
+  useEffect(() => {
+    calculateTotalPrice();
+  }, [rows]);
+
+  const calculateTotalPrice = () => {
+    const total = rows.reduce((acc, row) => {
+      const rowTotal = row.qty * row.price;
+      return acc + (isNaN(rowTotal) ? 0 : rowTotal);
+    }, 0);
+    setTotalPrice(total);
+  };
+
+  console.log(totalPrice);
+
   return (
-    <div className='order_table'>
+    <div className='order_table row mt-5'>
       <div className='col-lg-9'>
-        <div className='card h-100'>
+        <div className='card h-100 '>
           <div className='card-header'>
             <h5 className='card-title mb-0'>Order Products Table</h5>
           </div>
@@ -140,6 +154,45 @@ const CreateOrder = () => {
                 >
                   Add New Field
                 </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='col-lg-3'>
+        <div className='card '>
+          <div className='card-body p-0'>
+            <div className='p-24 border-bottom'>
+              <div className='tab-content' id='pills-tabContent'>
+                <div
+                  className='tab-pane fade show active'
+                  id='pills-Buy'
+                  role='tabpanel'
+                  aria-labelledby='pills-Buy-tab'
+                  tabIndex={0}
+                >
+                  <div className=''>
+                    <div>
+                      <h6 className='mb-16 text-neutral-700'>Order info:</h6>
+                    </div>
+                    <div className=' mt-24'>
+                      <h3 className='text-danger-600 mb-16'>${totalPrice}</h3>
+                      <span className='text-neutral-500 text-sm'>
+                        Order created by: <strong>Alex johan</strong>
+                      </span>
+                      <span className='text-neutral-500 text-sm'>
+                        Order created date: <strong>24/12/2024</strong>
+                      </span>
+                    </div>
+
+                    <button
+                      type='button'
+                      className='btn btn-primary text-md btn-sm px-12 py-16 w-100 radius-8 mt-24 pb-8'
+                    >
+                      Place Order
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

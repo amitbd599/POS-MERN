@@ -1,7 +1,7 @@
 import axios from "axios";
-import create from "zustand";
-import { setEmail, unAuthorize } from "../helper/helper";
-import Cookies from "js-cookie";
+import { create } from "zustand";
+import { baseURL } from "../helper/config";
+import { ErrorToast, SuccessToast, unAuthorize } from "../helper/helper";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const UserStore = create((set) => ({
@@ -22,93 +22,32 @@ const UserStore = create((set) => ({
     }
   },
 
-  // forgot-password-user api
-  ForgotPasswordUserRequest: async (email) => {
-    set({ isSubmit: true });
-    let res = await axios.post(
-      apiUrl + "/forgot-password-user/" + email,
-      {},
-      {
-        withCredentials: true,
-      }
-    );
-    if (res.data.status === true) {
-      set({ isSubmit: false });
-      return true;
-    } else {
-      set({ isSubmit: false });
-      return false;
-    }
-  },
-
-  // otp-verify-user api
-  OTPVerifyUserRequest: async (email, code) => {
-    set({ isSubmit: true });
-    let res = await axios.post(
-      apiUrl + "/otp-verify-user/" + email + "/" + code,
-      {},
-      {
-        withCredentials: true,
-      }
-    );
-    if (res.data.status === true) {
-      set({ isSubmit: false });
-      return true;
-    } else {
-      set({ isSubmit: false });
-      return false;
-    }
-  },
-
-  // otp-verify-user api
-  ResetPasswordRequest: async (email, code, password) => {
-    set({ isSubmit: true });
-    let res = await axios.post(
-      apiUrl + "/reset-password-user/" + email + "/" + code,
-      { password },
-      {
-        withCredentials: true,
-      }
-    );
-    if (res.data.status === true) {
-      set({ isSubmit: false });
-      return true;
-    } else {
-      set({ isSubmit: false });
-      return false;
-    }
-  },
-
   // is login
   login: false,
   isLogin: async () => {
     try {
-      let res = await axios.get(
-        apiUrl + "/verify-user",
-        {
-          withCredentials: true,
-        }
-      );
+      let res = await axios.get(apiUrl + "/verify-user", {
+        withCredentials: true,
+      });
 
       if (res.data.status === true) {
-        set({ login: true })
-        return true
+        set({ login: true });
+        return true;
       }
     } catch (e) {
       if (e.response.status === 401) {
-        set({ login: false })
-        return false
+        set({ login: false });
+        return false;
       }
     }
-
-
   },
 
   // logout
   logout: async () => {
     try {
       let res = await axios.get(apiUrl + "/logout-user", {
-        withCredentials: true, credentials: "include"
+        withCredentials: true,
+        credentials: "include",
       });
       if (res.data.status === true) {
         return true;
@@ -116,20 +55,26 @@ const UserStore = create((set) => ({
         return false;
       }
     } catch (e) {
-      console.log(e)
+      console.log(e);
       return false;
     }
   },
 
   // login-user api
   loginUserRequest: async (reqBody) => {
-    let res = await axios.post(apiUrl + "/login-user", reqBody, {
-      withCredentials: true,
-    });
-    if (res.data.status === true) {
-      setEmail(reqBody.email);
-      return true;
-    } else {
+    try {
+      let res = await axios.post(baseURL + "/login-profile", reqBody, {
+        withCredentials: true,
+      });
+      if (res?.data?.success === true) {
+        SuccessToast(res?.data?.message);
+        return true;
+      } else {
+        ErrorToast(res?.data?.message);
+        return false;
+      }
+    } catch (e) {
+      ErrorToast("Something went wrong!");
       return false;
     }
   },
@@ -167,6 +112,3 @@ const UserStore = create((set) => ({
 }));
 
 export default UserStore;
-
-
-
