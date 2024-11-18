@@ -206,3 +206,9 @@ table.dataTable td.dt-type-date {
 .overlay.active::after {
   width: 100%;
 }
+
+.order_table {
+  .basic-table tbody td {
+    padding: 10px 10px 0 0;
+  }
+}

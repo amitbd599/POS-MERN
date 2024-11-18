@@ -47,7 +47,7 @@ exports.getProduct = async (req, res) => {
 
     const facet = {
       $facet: {
-        product: [{ $skip: skip }, { $limit: limit }, { $project: { _id: 0 } }],
+        product: [{ $skip: skip }, { $limit: limit }],
         totalCount: [{ $count: "count" }],
       },
     };

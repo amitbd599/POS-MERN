@@ -66,7 +66,7 @@ router.post(
 );
 router.get(
   "/read-product/:item/:pageNo",
-  middlewares,
+  // middlewares,
   ProductController.getProduct
 );
 router.post(
