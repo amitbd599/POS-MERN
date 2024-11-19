@@ -1,17 +1,35 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import UserStore from "../store/UserStore";
+import ReactPaginate from "react-paginate";
+import { DeleteAlert } from "../helper/helper";
 
 const AllUsers = () => {
-  let { AllProfileDetailsRequest, AllProfileDetails } = UserStore();
+  let { AllProfileDetailsRequest, AllProfileDetails, DeleteProfileRequest } =
+    UserStore();
+  const navigate = useNavigate();
+  const params = useParams();
   useEffect(() => {
     (async () => {
       await AllProfileDetailsRequest(10, 1);
     })();
-  }, []);
+  }, [AllProfileDetailsRequest]);
 
-  console.log(AllProfileDetails?.users);
+  const TotalData = AllProfileDetails?.totalCount;
+  const handelPageClick = (event) => {
+    let pageNo = event.selected;
+    AllProfileDetailsRequest(10, pageNo + 1);
+    navigate(`/all-user/${pageNo + 1}`);
+  };
+
+  let deleteProfile = async (id) => {
+    DeleteAlert(DeleteProfileRequest, id).then(async (res) => {
+      if (res) {
+        await AllProfileDetailsRequest(10, 1);
+      }
+    });
+  };
 
   return (
     <div className='card h-100 p-0 radius-12'>
@@ -98,20 +116,12 @@ const AllUsers = () => {
                     <div className='d-flex align-items-center gap-10 justify-content-center'>
                       <button
                         type='button'
-                        className='bg-info-focus bg-hover-info-200 text-info-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle'
-                      >
-                        <Icon
-                          icon='majesticons:eye-line'
-                          className='icon text-xl'
-                        />
-                      </button>
-                      <button
-                        type='button'
                         className='bg-success-focus text-success-600 bg-hover-success-200 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle'
                       >
                         <Icon icon='lucide:edit' className='menu-icon' />
                       </button>
                       <button
+                        onClick={() => deleteProfile(item?._id)}
                         type='button'
                         className='remove-item-btn bg-danger-focus bg-hover-danger-200 text-danger-600 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle'
                       >
@@ -127,67 +137,32 @@ const AllUsers = () => {
             </tbody>
           </table>
         </div>
+
         <div className='d-flex align-items-center justify-content-between flex-wrap gap-2 mt-24'>
-          <span>Showing 1 to 10 of 12 entries</span>
-          <ul className='pagination d-flex flex-wrap align-items-center gap-2 justify-content-center'>
-            <li className='page-item'>
-              <Link
-                className='page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px  text-md'
-                to='#'
-              >
-                <Icon icon='ep:d-arrow-left' className='' />
-              </Link>
-            </li>
-            <li className='page-item'>
-              <Link
-                className='page-link text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md bg-primary-600 text-white'
-                to='#'
-              >
-                1
-              </Link>
-            </li>
-            <li className='page-item'>
-              <Link
-                className='page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px'
-                to='#'
-              >
-                2
-              </Link>
-            </li>
-            <li className='page-item'>
-              <Link
-                className='page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md'
-                to='#'
-              >
-                3
-              </Link>
-            </li>
-            <li className='page-item'>
-              <Link
-                className='page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md'
-                to='#'
-              >
-                4
-              </Link>
-            </li>
-            <li className='page-item'>
-              <Link
-                className='page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px w-32-px text-md'
-                to='#'
-              >
-                5
-              </Link>
-            </li>
-            <li className='page-item'>
-              <Link
-                className='page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px  text-md'
-                to='#'
-              >
-                {" "}
-                <Icon icon='ep:d-arrow-right' className='' />{" "}
-              </Link>
-            </li>
-          </ul>
+          <span>Showing 1 to 10 of {TotalData} entries</span>
+          {TotalData > 10 ? (
+            <div>
+              <ReactPaginate
+                className='pagination d-flex flex-wrap align-items-center gap-2 justify-content-center'
+                previousLabel='<'
+                nextLabel='>'
+                pageClassName='page-item'
+                activeClassName='active'
+                pageLinkClassName=' page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px  text-md'
+                previousLinkClassName='page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px  text-md'
+                nextLinkClassName='text-secondary-light'
+                activeLinkClassName=' active-link'
+                breakLabel='...'
+                pageCount={TotalData / 10}
+                initialPage={params.pageNo - 1}
+                pageRangeDisplayed={3}
+                onPageChange={handelPageClick}
+                type='button'
+              />
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

@@ -138,6 +138,29 @@ const UserStore = create((set) => ({
       ErrorToast("Something went wrong!");
     }
   },
+
+  //! delete profile
+  DeleteProfileRequest: async (id) => {
+    try {
+      set({ loading: true });
+      let res = await axios.delete(baseURL + "/delete-profile/" + id, {
+        withCredentials: true,
+      });
+      if (res?.data?.success === true) {
+        set({ loading: false });
+        SuccessToast(res?.data?.message);
+        return true;
+      } else {
+        set({ loading: false });
+        ErrorToast(res?.data?.message);
+        return false;
+      }
+    } catch (e) {
+      set({ loading: false });
+      ErrorToast("Something went wrong!");
+      return false;
+    }
+  },
 }));
 
 export default UserStore;

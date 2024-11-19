@@ -196,7 +196,16 @@ exports.deleteUser = async (req, res) => {
   const id = new ObjectId(req.params.id);
   try {
     const result = await UserModel.deleteOne({ _id: id });
-    res.status(201).json({ success: true, data: result });
+
+    if (result?.deletedCount === 1) {
+      res.status(200).json({
+        success: true,
+        data: result,
+        message: "User delete successful!",
+      });
+    } else {
+      res.status(200).json({ success: false, message: "User not found!" });
+    }
   } catch (error) {
     res.status(400).json({ success: false, error: error.message });
   }

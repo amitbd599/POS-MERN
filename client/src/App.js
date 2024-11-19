@@ -60,7 +60,7 @@ function App() {
 
         {/* user */}
         <Route exact path='/add-user' element={<AddUserPage />} />
-        <Route exact path='/all-user' element={<AllUsersPage />} />
+        <Route exact path='/all-user/:pageNo' element={<AllUsersPage />} />
         <Route exact path='/view-profile' element={<ViewProfilePage />} />
 
         {/* orders */}

@@ -1,5 +1,7 @@
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+const MySwal = withReactContent(Swal);
 let EmailRegx = /\S+@\S+\.\S+/;
 
 class FormHelper {
@@ -57,11 +59,11 @@ class FormHelper {
   }
 
   DeleteAlert(apiFun, id) {
-    console.log(apiFun, id);
-    return Swal.fire({
+    return MySwal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
-      icon: "warning",
+      // icon: "warning",
+      iconHtml: '<i class="ri-error-warning-line icon__inner"></i>',
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",

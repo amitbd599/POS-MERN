@@ -272,3 +272,21 @@ table.dataTable td.dt-type-date {
     transform: translateX(30px) scale(1);
   }
 }
+
+.page-item.active {
+  .page-link {
+    background-color: var(--primary-600) !important;
+  }
+}
+
+.swal2-title {
+  font-size: 30px !important;
+}
+
+.swal2-icon {
+  border: none;
+  .icon__inner {
+    font-size: 80px;
+    color: #fde047;
+  }
+}
