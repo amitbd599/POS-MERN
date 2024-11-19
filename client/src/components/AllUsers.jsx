@@ -1,13 +1,19 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import UserStore from "../store/UserStore";
 import ReactPaginate from "react-paginate";
-import { DeleteAlert } from "../helper/helper";
+import { DeleteAlert, formatDate } from "../helper/helper";
 
 const AllUsers = () => {
-  let { AllProfileDetailsRequest, AllProfileDetails, DeleteProfileRequest } =
-    UserStore();
+  let {
+    AllProfileDetailsRequest,
+    AllProfileDetails,
+    DeleteProfileRequest,
+    ProfileDetailsById,
+    ProfileDetailsByIdRequest,
+    ProfileUpdateById,
+  } = UserStore();
   const navigate = useNavigate();
   const params = useParams();
   useEffect(() => {
@@ -26,9 +32,21 @@ const AllUsers = () => {
   let deleteProfile = async (id) => {
     DeleteAlert(DeleteProfileRequest, id).then(async (res) => {
       if (res) {
-        await AllProfileDetailsRequest(10, 1);
+        await AllProfileDetailsRequest(10, parseInt(params.pageNo));
       }
     });
+  };
+
+  let viewUser = async (id) => {
+    await ProfileDetailsByIdRequest(id);
+  };
+
+  console.log(ProfileDetailsById);
+  const [selectedRole, setSelectedRole] = useState(ProfileDetailsById?.role); // Initial value
+
+  const updateRole = async (objId) => {
+    await ProfileUpdateById({ role: selectedRole }, objId);
+    await AllProfileDetailsRequest(10, parseInt(params.pageNo));
   };
 
   return (
@@ -109,12 +127,15 @@ const AllUsers = () => {
                       {item?.email}
                     </span>
                   </td>
-                  <td>{item?.createdAt}</td>
+                  <td>{formatDate(item?.createdAt)}</td>
                   <td>{item?.role}</td>
 
                   <td className='text-center'>
                     <div className='d-flex align-items-center gap-10 justify-content-center'>
                       <button
+                        onClick={() => viewUser(item?._id)}
+                        data-bs-toggle='modal'
+                        data-bs-target='#exampleModal'
                         type='button'
                         className='bg-success-focus text-success-600 bg-hover-success-200 fw-medium w-40-px h-40-px d-flex justify-content-center align-items-center rounded-circle'
                       >
@@ -163,6 +184,97 @@ const AllUsers = () => {
           ) : (
             ""
           )}
+        </div>
+      </div>
+
+      {/* Modal */}
+      <div
+        className='modal fade view__user'
+        id='exampleModal'
+        tabIndex={-1}
+        aria-labelledby='exampleModalLabel'
+        aria-hidden='true'
+      >
+        <div className='modal-dialog modal-dialog-centered'>
+          <div className='modal-content'>
+            <div className='modal-header'>
+              <h1 className='modal-title fs-5' id='exampleModalLabel'>
+                View user information
+              </h1>
+              <button
+                type='button'
+                className='btn-close'
+                data-bs-dismiss='modal'
+                aria-label='Close'
+              />
+            </div>
+            <div className='modal-body'>
+              <div className='card'>
+                <div className='card-body'>
+                  <div className='row gy-3'>
+                    <div className='col-12'>
+                      <div className='inner__card'>
+                        <div className='img__card'>
+                          <img
+                            src={ProfileDetailsById?.img}
+                            className='img-fluid'
+                            alt=''
+                          />
+                          <div className='text__inner'>
+                            <p>
+                              Name: <strong>{ProfileDetailsById?.name}</strong>{" "}
+                            </p>
+                            <p>
+                              Email Id:{" "}
+                              <strong>{ProfileDetailsById?.email}</strong>{" "}
+                            </p>
+                            <p>
+                              User role:{" "}
+                              <strong>{ProfileDetailsById?.role}</strong>{" "}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className='col-12'>
+                      <label className='form-label'>Update user role</label>
+
+                      <select
+                        className='form-select'
+                        aria-label='Default select example'
+                        onChange={(event) =>
+                          setSelectedRole(event.target.value)
+                        }
+                      >
+                        <option>Change role</option>
+                        <option value={"admin"}>Admin</option>
+                        <option value={"editor"}>Editor</option>
+                        <option value={"employee"}>Employee</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='modal-footer'>
+              <button
+                type='button'
+                className='btn btn-danger-600 radius-8 px-16 py-6'
+                data-bs-dismiss='modal'
+              >
+                Close
+              </button>
+              <button
+                onClick={() => updateRole(ProfileDetailsById?._id)}
+                type='button'
+                className='btn btn-success-600 radius-8 px-16 py-6'
+                data-bs-dismiss='modal'
+              >
+                Order paid
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

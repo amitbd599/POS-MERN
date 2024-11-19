@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import moment from "moment";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 const MySwal = withReactContent(Swal);
@@ -58,6 +59,11 @@ class FormHelper {
     }
   }
 
+  formatDate(date) {
+    const formattedDate = moment(date).format("DD-MM-YYYY");
+    return formattedDate;
+  }
+
   DeleteAlert(apiFun, id) {
     return MySwal.fire({
       title: "Are you sure?",
@@ -89,4 +95,5 @@ export const {
   getEmail,
   unAuthorize,
   DeleteAlert,
+  formatDate,
 } = new FormHelper();

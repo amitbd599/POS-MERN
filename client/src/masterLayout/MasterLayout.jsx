@@ -84,8 +84,6 @@ const MasterLayout = ({ children }) => {
     })();
   }, []);
 
-  console.log(ProfileDetails);
-
   return (
     <section className={mobileMenu ? "overlay active" : "overlay "}>
       {/* sidebar */}

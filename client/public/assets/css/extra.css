@@ -215,17 +215,19 @@ table.dataTable td.dt-type-date {
 
 .loader__inner {
   z-index: 999999;
-  background: #00000018;
+  background: #00000036;
   width: 100%;
   height: 100vh;
   position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
 }
 .loader__inner.active {
-  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 
 .mover {
@@ -288,5 +290,26 @@ table.dataTable td.dt-type-date {
   .icon__inner {
     font-size: 80px;
     color: #fde047;
+  }
+}
+
+.view__user {
+  .inner__card {
+    .img__card {
+      display: flex;
+      img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 100px;
+        overflow: hidden;
+      }
+      .text__inner {
+        padding-left: 20px;
+        p {
+          margin-bottom: 0;
+        }
+      }
+    }
   }
 }

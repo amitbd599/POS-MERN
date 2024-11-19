@@ -21,6 +21,12 @@ router.post(
 router.post("/login-profile", UserController.login);
 router.post("/update-profile", middlewares, UserController.userUpdate);
 router.get("/read-profile", middlewares, UserController.userRead);
+router.get("/read-profile-by-id/:id", middlewares, UserController.userReadByID);
+router.post(
+  "/update-profile-by-id/:id",
+  middlewares,
+  UserController.userUpdateById
+);
 router.get(
   "/read-all-profile/:item/:pageNo",
   middlewares,

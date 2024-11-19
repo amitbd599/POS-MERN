@@ -84,7 +84,7 @@ const UserStore = create((set) => ({
     }
   },
 
-  //! profile details
+  //! profile details -- done
   ProfileDetails: null,
   ProfileDetailsRequest: async () => {
     try {
@@ -102,23 +102,51 @@ const UserStore = create((set) => ({
     }
   },
 
-  // update profile details
-  ProfileUpdateRequest: async (reqBody) => {
+  //! profile details by id -- done
+  ProfileDetailsById: null,
+  ProfileDetailsByIdRequest: async (id) => {
     try {
-      let res = await axios.post(apiUrl + "/profile-update-user", reqBody, {
+      set({ loading: true });
+      let res = await axios.get(baseURL + "/read-profile-by-id/" + id, {
         withCredentials: true,
       });
-      if (res.data.status === true) {
-        return true;
-      } else {
-        return false;
+      if (res?.data?.success === true) {
+        set({ loading: false });
+        set({ ProfileDetailsById: res?.data?.data });
       }
     } catch (e) {
-      unAuthorize(e.response.status);
+      set({ loading: false });
+      ErrorToast("Something went wrong!");
     }
   },
 
-  //! all profile details
+  //! update profile by id
+  ProfileUpdateById: async (reqBody, id) => {
+    console.log(reqBody, id);
+
+    try {
+      let res = await axios.post(
+        baseURL + "/update-profile-by-id/" + id,
+        reqBody,
+        {
+          withCredentials: true,
+        }
+      );
+      if (res?.data?.success === true) {
+        set({ loading: false });
+        SuccessToast(res?.data?.message);
+        return true;
+      } else {
+        set({ loading: false });
+        return false;
+      }
+    } catch (e) {
+      set({ loading: false });
+      ErrorToast("Something went wrong!");
+    }
+  },
+
+  //! all profile details -- done
   AllProfileDetails: null,
   AllProfileDetailsRequest: async (perPage, pageNo) => {
     try {

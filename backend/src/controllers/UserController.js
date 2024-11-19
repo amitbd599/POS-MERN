@@ -119,6 +119,46 @@ exports.userUpdate = async (req, res) => {
   }
 };
 
+//! Update user by id
+exports.userUpdateById = async (req, res) => {
+  const id = new ObjectId(req.params.id);
+  const { role } = req.body;
+
+  try {
+    const user = await UserModel.findOne({ _id: id });
+
+    if (!user)
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+
+    if (!!user === true) {
+      let data = await UserModel.updateOne(
+        { _id: id },
+        {
+          $set: {
+            role,
+          },
+        }
+      );
+
+      res
+        .status(200)
+        .json({
+          success: true,
+          data: data,
+          message: "User role update successful.",
+        });
+    } else {
+      res
+        .status(200)
+        .json({ status: "error", message: "User role update unsuccessful." });
+    }
+  } catch (e) {
+    res.status(200).json({ status: "error", data: e.toString() });
+  }
+};
+
 //! get User
 exports.userRead = async (req, res) => {
   let email = req.headers.email;
@@ -126,6 +166,31 @@ exports.userRead = async (req, res) => {
     let MatchStage = {
       $match: {
         email,
+      },
+    };
+
+    let project = {
+      $project: {
+        email: 1,
+        name: 1,
+        role: 1,
+        img: 1,
+      },
+    };
+    let data = await UserModel.aggregate([MatchStage, project]);
+    res.status(200).json({ success: true, data: data[0] });
+  } catch (e) {
+    res.status(200).json({ status: "error", error: e.toString() });
+  }
+};
+
+//! get User id
+exports.userReadByID = async (req, res) => {
+  const id = new ObjectId(req.params.id);
+  try {
+    let MatchStage = {
+      $match: {
+        _id: id,
       },
     };
 
