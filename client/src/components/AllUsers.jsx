@@ -10,12 +10,14 @@ const AllUsers = () => {
     AllProfileDetailsRequest,
     AllProfileDetails,
     DeleteProfileRequest,
-    ProfileDetailsById,
     ProfileDetailsByIdRequest,
-    ProfileUpdateById,
+    ProfileUpdateByIdRequest,
   } = UserStore();
+  const [user, setUser] = useState("");
   const navigate = useNavigate();
   const params = useParams();
+
+  //! AllProfileDetailsRequest
   useEffect(() => {
     (async () => {
       await AllProfileDetailsRequest(10, 1);
@@ -23,12 +25,15 @@ const AllUsers = () => {
   }, [AllProfileDetailsRequest]);
 
   const TotalData = AllProfileDetails?.totalCount;
+
+  //! handelPageClick
   const handelPageClick = (event) => {
     let pageNo = event.selected;
     AllProfileDetailsRequest(10, pageNo + 1);
     navigate(`/all-user/${pageNo + 1}`);
   };
 
+  //! deleteProfile
   let deleteProfile = async (id) => {
     DeleteAlert(DeleteProfileRequest, id).then(async (res) => {
       if (res) {
@@ -37,15 +42,31 @@ const AllUsers = () => {
     });
   };
 
+  //! viewUser
+  const [apiRole, setApiRole] = useState(undefined);
+  const [selectedRole, setSelectedRole] = useState("");
   let viewUser = async (id) => {
-    await ProfileDetailsByIdRequest(id);
+    await ProfileDetailsByIdRequest(id).then((res) => {
+      setUser(res);
+      setTimeout(() => {
+        const roleFromApi = res?.role;
+        setApiRole(roleFromApi);
+      }, 100);
+    });
+  };
+  useEffect(() => {
+    if (apiRole !== undefined) {
+      setSelectedRole(apiRole);
+    }
+  }, [apiRole]);
+
+  const handleChange = (event) => {
+    setSelectedRole(event.target.value);
   };
 
-  console.log(ProfileDetailsById);
-  const [selectedRole, setSelectedRole] = useState(ProfileDetailsById?.role); // Initial value
-
+  //! updateRole
   const updateRole = async (objId) => {
-    await ProfileUpdateById({ role: selectedRole }, objId);
+    await ProfileUpdateByIdRequest({ role: selectedRole }, objId);
     await AllProfileDetailsRequest(10, parseInt(params.pageNo));
   };
 
@@ -215,22 +236,16 @@ const AllUsers = () => {
                     <div className='col-12'>
                       <div className='inner__card'>
                         <div className='img__card'>
-                          <img
-                            src={ProfileDetailsById?.img}
-                            className='img-fluid'
-                            alt=''
-                          />
+                          <img src={user?.img} className='img-fluid' alt='' />
                           <div className='text__inner'>
                             <p>
-                              Name: <strong>{ProfileDetailsById?.name}</strong>{" "}
+                              Name: <strong>{user?.name}</strong>{" "}
                             </p>
                             <p>
-                              Email Id:{" "}
-                              <strong>{ProfileDetailsById?.email}</strong>{" "}
+                              Email Id: <strong>{user?.email}</strong>{" "}
                             </p>
                             <p>
-                              User role:{" "}
-                              <strong>{ProfileDetailsById?.role}</strong>{" "}
+                              User role: <strong>{user?.role}</strong>{" "}
                             </p>
                           </div>
                         </div>
@@ -243,9 +258,13 @@ const AllUsers = () => {
                       <select
                         className='form-select'
                         aria-label='Default select example'
-                        onChange={(event) =>
-                          setSelectedRole(event.target.value)
-                        }
+                        // value={ProfileDetailsById?.role}
+                        // onChange={(event) =>
+                        //   setSelectedRole(event.target.value)
+                        // }
+
+                        value={selectedRole || "default"} // Prevents default issue
+                        onChange={handleChange}
                       >
                         <option>Change role</option>
                         <option value={"admin"}>Admin</option>
@@ -266,12 +285,12 @@ const AllUsers = () => {
                 Close
               </button>
               <button
-                onClick={() => updateRole(ProfileDetailsById?._id)}
+                onClick={() => updateRole(user?._id)}
                 type='button'
                 className='btn btn-success-600 radius-8 px-16 py-6'
                 data-bs-dismiss='modal'
               >
-                Order paid
+                Update Role
               </button>
             </div>
           </div>

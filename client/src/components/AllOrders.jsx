@@ -47,11 +47,11 @@ const AllOrders = () => {
                       <td className='d-flex align-items-center gap-2'>
                         <button className='btn btn-warning-600 radius-8 px-16 py-6 d-flex align-items-center gap-1'>
                           Return
-                          <i class='ri-reply-line'></i>
+                          <i className='ri-reply-line'></i>
                         </button>
                         <button className='btn btn-danger-600 radius-8 px-16 py-6 d-flex align-items-center gap-1'>
                           Cancel
-                          <i class='ri-close-large-line'></i>
+                          <i className='ri-close-large-line'></i>
                         </button>
                         <button
                           data-bs-toggle='modal'
@@ -59,7 +59,7 @@ const AllOrders = () => {
                           className='btn btn-success-600 radius-8 px-16 py-6 d-flex align-items-center gap-1'
                         >
                           Complete with payment
-                          <i class='ri-check-double-fill'></i>
+                          <i className='ri-check-double-fill'></i>
                         </button>
                       </td>
                     </tr>

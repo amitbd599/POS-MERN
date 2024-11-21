@@ -113,6 +113,7 @@ const UserStore = create((set) => ({
       if (res?.data?.success === true) {
         set({ loading: false });
         set({ ProfileDetailsById: res?.data?.data });
+        return res?.data?.data;
       }
     } catch (e) {
       set({ loading: false });
@@ -120,10 +121,27 @@ const UserStore = create((set) => ({
     }
   },
 
+  //! update profile
+  ProfileUpdate: async (reqBody) => {
+    try {
+      let res = await axios.post(baseURL + "/update-profile", reqBody, {
+        withCredentials: true,
+      });
+      if (res?.data?.success === true) {
+        set({ loading: false });
+        SuccessToast(res?.data?.message);
+        return true;
+      } else {
+        set({ loading: false });
+        return false;
+      }
+    } catch (e) {
+      set({ loading: false });
+      ErrorToast("Something went wrong!");
+    }
+  },
   //! update profile by id
-  ProfileUpdateById: async (reqBody, id) => {
-    console.log(reqBody, id);
-
+  ProfileUpdateByIdRequest: async (reqBody, id) => {
     try {
       let res = await axios.post(
         baseURL + "/update-profile-by-id/" + id,

@@ -185,7 +185,7 @@ const MasterLayout = ({ children }) => {
             {/* Invoice Dropdown */}
             <li className='dropdown'>
               <Link to='#'>
-                <i class='ri-share-box-fill mr-10'></i>
+                <i className='ri-share-box-fill mr-10'></i>
                 <span>Categories</span>
               </Link>
               <ul className='sidebar-submenu'>
@@ -250,7 +250,7 @@ const MasterLayout = ({ children }) => {
             {/* order */}
             <li className='dropdown'>
               <Link to='#'>
-                <i class='ri-funds-line mr-10'></i>
+                <i className='ri-funds-line mr-10'></i>
 
                 <span>Orders</span>
               </Link>
@@ -283,7 +283,7 @@ const MasterLayout = ({ children }) => {
             {/* user */}
             <li className='dropdown'>
               <Link to='#'>
-                <i class='ri-user-settings-line mr-10'></i>
+                <i className='ri-user-settings-line mr-10'></i>
 
                 <span>Users</span>
               </Link>
@@ -327,7 +327,7 @@ const MasterLayout = ({ children }) => {
             {/* backup */}
             <li className='dropdown'>
               <Link to='#'>
-                <i class='ri-database-2-line mr-10'></i>
+                <i className='ri-database-2-line mr-10'></i>
 
                 <span>Database Backup</span>
               </Link>

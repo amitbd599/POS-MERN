@@ -82,12 +82,10 @@ exports.login = async (req, res) => {
 //! Update user
 exports.userUpdate = async (req, res) => {
   let email = req.headers.email;
-  const { name, password } = req.body;
+  const { name, password, img, number } = req.body;
 
   try {
     const user = await UserModel.findOne({ email });
-    console.log(user);
-    console.log(!!user);
     if (!user)
       return res
         .status(404)
@@ -104,15 +102,21 @@ exports.userUpdate = async (req, res) => {
           $set: {
             name,
             password: hashedPassword,
+            img,
+            number,
           },
         }
       );
 
-      res.status(200).json({ status: "success", data: data });
+      res.status(200).json({
+        success: true,
+        data: data,
+        message: "Profile update successful.",
+      });
     } else {
       res
         .status(200)
-        .json({ status: "error", data: "Email / password not match!" });
+        .json({ success: false, message: "Email / password not match!" });
     }
   } catch (e) {
     res.status(200).json({ status: "error", data: e.toString() });
@@ -142,17 +146,15 @@ exports.userUpdateById = async (req, res) => {
         }
       );
 
-      res
-        .status(200)
-        .json({
-          success: true,
-          data: data,
-          message: "User role update successful.",
-        });
+      res.status(200).json({
+        success: true,
+        data: data,
+        message: "User role update successful.",
+      });
     } else {
       res
         .status(200)
-        .json({ status: "error", message: "User role update unsuccessful." });
+        .json({ success: false, message: "User role update unsuccessful." });
     }
   } catch (e) {
     res.status(200).json({ status: "error", data: e.toString() });
@@ -171,10 +173,7 @@ exports.userRead = async (req, res) => {
 
     let project = {
       $project: {
-        email: 1,
-        name: 1,
-        role: 1,
-        img: 1,
+        password: 0,
       },
     };
     let data = await UserModel.aggregate([MatchStage, project]);
