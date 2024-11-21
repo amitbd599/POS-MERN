@@ -1,19 +1,66 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import UserStore from "../store/UserStore";
+import { ErrorToast, IsEmpty } from "../helper/helper";
+import { useNavigate } from "react-router-dom";
 
 const AddUser = () => {
-  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  let { RegisterUserRequest } = UserStore();
+  let navigate = useNavigate();
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
+  let { nameRef, emailRef, phoneRef, passwordRef } = useRef();
+  const [imagePreview, setImagePreview] = useState(
+    "assets/images/user-grid/user-grid-img13.png"
+  );
+
+  //! Image upload
+  const readURL = (input) => {
+    if (input.target.files && input.target.files[0]) {
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreviewUrl(reader.result);
+      reader.onload = (e) => {
+        setImagePreview(e.target.result);
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(input.target.files[0]);
     }
   };
+
+  const [selectedRole, setSelectedRole] = useState("");
+  const handleChange = (event) => {
+    setSelectedRole(event.target.value);
+  };
+
+  //! update User Profile
+  const createUserProfile = async () => {
+    let name = nameRef.value;
+    let email = emailRef.value;
+    let password = passwordRef.value;
+    let number = phoneRef.value;
+    let img = imagePreview;
+    let role = selectedRole;
+
+    if (
+      IsEmpty(name) ||
+      IsEmpty(email) ||
+      IsEmpty(number) ||
+      IsEmpty(password) ||
+      IsEmpty(role)
+    ) {
+      ErrorToast("Please fill your profile");
+    } else {
+      let result = await RegisterUserRequest({
+        name,
+        email,
+        number,
+        password,
+        img,
+        role,
+      });
+      if (result) {
+        navigate("/all-user/1");
+      }
+    }
+  };
+
   return (
     <div className='card h-100 p-0 radius-12'>
       <div className='card-body p-24'>
@@ -33,7 +80,7 @@ const AddUser = () => {
                         id='imageUpload'
                         accept='.png, .jpg, .jpeg'
                         hidden
-                        onChange={handleImageChange}
+                        onChange={readURL}
                       />
                       <label
                         htmlFor='imageUpload'
@@ -49,16 +96,14 @@ const AddUser = () => {
                       <div
                         id='imagePreview'
                         style={{
-                          backgroundImage: imagePreviewUrl
-                            ? `url(${imagePreviewUrl})`
-                            : "",
+                          backgroundImage: `url(${imagePreview})`,
                         }}
                       ></div>
                     </div>
                   </div>
                 </div>
                 {/* Upload Image End */}
-                <form action='#'>
+                <div>
                   <div className='mb-20'>
                     <label
                       htmlFor='name'
@@ -71,6 +116,7 @@ const AddUser = () => {
                       className='form-control radius-8'
                       id='name'
                       placeholder='Enter Full Name'
+                      ref={(input) => (nameRef = input)}
                     />
                   </div>
                   <div className='mb-20'>
@@ -85,6 +131,22 @@ const AddUser = () => {
                       className='form-control radius-8'
                       id='email'
                       placeholder='Enter email address'
+                      ref={(input) => (emailRef = input)}
+                    />
+                  </div>
+                  <div className='mb-20'>
+                    <label
+                      htmlFor='number'
+                      className='form-label fw-semibold text-primary-light text-sm mb-8'
+                    >
+                      Number <span className='text-danger-600'>*</span>{" "}
+                    </label>
+                    <input
+                      type='text'
+                      className='form-control radius-8'
+                      id='number'
+                      placeholder='Enter password'
+                      ref={(input) => (phoneRef = input)}
                     />
                   </div>
                   <div className='mb-20'>
@@ -99,6 +161,7 @@ const AddUser = () => {
                       className='form-control radius-8'
                       id='password'
                       placeholder='Enter password'
+                      ref={(input) => (passwordRef = input)}
                     />
                   </div>
                   <div className='mb-20'>
@@ -110,34 +173,28 @@ const AddUser = () => {
                       <span className='text-danger-600'>*</span>{" "}
                     </label>
                     <select
-                      className='form-control radius-8 form-select'
-                      id='role'
-                      defaultValue='Enter Event Title'
+                      className='form-select'
+                      aria-label='Default select example'
+                      value={selectedRole || ""} // Prevents default issue
+                      onChange={handleChange}
                     >
-                      <option value='Enter Event Title' disabled>
-                        Enter Event Title
-                      </option>
-                      <option value='admin'>Admin</option>
-                      <option value='editor'>Editor</option>
-                      <option value='employee'>Employee</option>
+                      <option>Select role</option>
+                      <option value={"admin"}>Admin</option>
+                      <option value={"editor"}>Editor</option>
+                      <option value={"employee"}>Employee</option>
                     </select>
                   </div>
 
-                  <div className='d-flex align-items-center justify-content-center gap-3'>
+                  <div>
                     <button
-                      type='button'
-                      className='border border-danger-600 bg-hover-danger-200 text-danger-600 text-md px-56 py-11 radius-8'
-                    >
-                      Cancel
-                    </button>
-                    <button
+                      onClick={createUserProfile}
                       type='submit'
                       className='btn btn-primary border border-primary-600 text-md px-56 py-12 radius-8'
                     >
-                      Save
+                      Create a user
                     </button>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>

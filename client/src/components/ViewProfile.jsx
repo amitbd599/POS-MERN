@@ -29,14 +29,14 @@ const ViewProfile = () => {
   //! update User Profile
   const updateUserProfile = async () => {
     let name = nameRef.value;
-    let phone = phoneRef.value;
+    let number = phoneRef.value;
     let password = passwordRef.value;
     let img = imagePreview;
 
-    if (IsEmpty(name) || IsEmpty(phone) || IsEmpty(password)) {
+    if (IsEmpty(name) || IsEmpty(number) || IsEmpty(password)) {
       ErrorToast("Please fill your profile");
     } else {
-      let result = await ProfileUpdate({ name, phone, password, img });
+      let result = await ProfileUpdate({ name, number, password, img });
       if (result) {
         ProfileDetailsRequest();
       }
@@ -82,6 +82,15 @@ const ViewProfile = () => {
                   </span>
                   <span className='w-70 text-secondary-light fw-medium'>
                     : {ProfileDetails?.email}
+                  </span>
+                </li>
+                <li className='d-flex align-items-center gap-1 mb-12'>
+                  <span className='w-30 text-md fw-semibold text-primary-light'>
+                    {" "}
+                    Number
+                  </span>
+                  <span className='w-70 text-secondary-light fw-medium'>
+                    : {ProfileDetails?.number}
                   </span>
                 </li>
                 <li className='d-flex align-items-center gap-1 mb-12'>
@@ -233,19 +242,13 @@ const ViewProfile = () => {
                       </div>
                     </div>
                   </div>
-                  <div className='d-flex align-items-center justify-content-center gap-3'>
-                    <button
-                      type='button'
-                      className='border border-danger-600 bg-hover-danger-200 text-danger-600 text-md px-56 py-11 radius-8'
-                    >
-                      Cancel
-                    </button>
+                  <div className='pt-2'>
                     <button
                       onClick={updateUserProfile}
                       type='button'
                       className='btn btn-primary border border-primary-600 text-md px-56 py-12 radius-8'
                     >
-                      Save
+                      Update profile
                     </button>
                   </div>
                 </div>

@@ -8,17 +8,19 @@ const UserStore = create((set) => ({
   isSubmit: false,
   loading: false,
 
-  // Register-user api
+  //! Register-user api
   RegisterUserRequest: async (reqBody) => {
     set({ isSubmit: true });
-    let res = await axios.post(apiUrl + "/register-user", reqBody, {
+    let res = await axios.post(baseURL + "/register-profile", reqBody, {
       withCredentials: true,
     });
-    if (res.data.status === true) {
+    if (res?.data?.success === true) {
       set({ isSubmit: false });
+      SuccessToast(res?.data?.message);
       return true;
     } else {
       set({ isSubmit: false });
+      ErrorToast(res?.data?.message);
       return false;
     }
   },

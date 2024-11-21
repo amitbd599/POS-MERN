@@ -6,29 +6,33 @@ const ObjectId = mongoose.Types.ObjectId;
 //! Create user
 exports.register = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role, number, img } = req.body;
 
-    let user = await UserModel.findOne({ email });
+    let user = await UserModel.findOne({
+      $or: [{ email }, { number }],
+    });
 
     if (user) {
       return res
-        .status(400)
-        .json({ status: "error", msg: "email already exist" });
+        .status(200)
+        .json({ success: false, message: "Email or number already exist" });
     }
 
     // Create and save the new user
-    user = await UserModel.create({ name, email, password, role });
-    res.status(201).json({
-      status: "success",
+    user = await UserModel.create({ name, email, password, role, number, img });
+    res.status(200).json({
+      success: true,
       data: {
         id: user._id,
         name: user.name,
         email: user.email,
         role: user.role,
+        role: user.number,
       },
+      message: "User created successfully",
     });
   } catch (e) {
-    res.status(500).json({ status: "error", error: e.toString() });
+    res.status(200).json({ status: "error", error: e.toString() });
   }
 };
 

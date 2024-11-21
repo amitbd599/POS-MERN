@@ -258,11 +258,6 @@ const AllUsers = () => {
                       <select
                         className='form-select'
                         aria-label='Default select example'
-                        // value={ProfileDetailsById?.role}
-                        // onChange={(event) =>
-                        //   setSelectedRole(event.target.value)
-                        // }
-
                         value={selectedRole || "default"} // Prevents default issue
                         onChange={handleChange}
                       >
