@@ -253,9 +253,9 @@ exports.getAllUser = async (req, res) => {
 exports.logout = async (req, res) => {
   try {
     res.clearCookie("Token");
-    res.status(200).json({ status: "success" });
+    res.status(200).json({ success: true, message: "Logout success!" });
   } catch (e) {
-    res.status(200).json({ status: "error", error: e.toString() });
+    res.status(200).json({ success: false, error: e.toString() });
   }
 };
 

@@ -5,7 +5,7 @@ import ThemeToggleButton from "../helper/ThemeToggleButton";
 import UserStore from "../store/UserStore";
 
 const MasterLayout = ({ children }) => {
-  let { ProfileDetailsRequest, ProfileDetails } = UserStore();
+  let { profileDetailsRequest, profileDetails, logoutRequest } = UserStore();
   let [sidebarActive, seSidebarActive] = useState(false);
   let [mobileMenu, setMobileMenu] = useState(false);
   const location = useLocation();
@@ -80,9 +80,14 @@ const MasterLayout = ({ children }) => {
   //! Api call
   useEffect(() => {
     (async () => {
-      await ProfileDetailsRequest();
+      await profileDetailsRequest();
     })();
-  }, []);
+  }, [profileDetailsRequest]);
+
+  let logout = async () => {
+    await logoutRequest();
+    window.location.href = "/login";
+  };
 
   return (
     <section className={mobileMenu ? "overlay active" : "overlay "}>
@@ -170,7 +175,7 @@ const MasterLayout = ({ children }) => {
                 </li>
                 <li>
                   <NavLink
-                    to='/all-customer'
+                    to='/all-customer/1'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
@@ -399,7 +404,7 @@ const MasterLayout = ({ children }) => {
                     data-bs-toggle='dropdown'
                   >
                     <img
-                      src={ProfileDetails?.img}
+                      src={profileDetails?.img}
                       alt='image_user'
                       className='w-40-px h-40-px object-fit-cover rounded-circle'
                     />
@@ -408,14 +413,14 @@ const MasterLayout = ({ children }) => {
                     <div className='py-12 px-16 radius-8 bg-primary-50 mb-16 d-flex align-items-center justify-content-between gap-2'>
                       <div>
                         <h6 className='text-lg text-primary-light fw-semibold mb-2'>
-                          {ProfileDetails?.name}
+                          {profileDetails?.name}
                         </h6>
                         <span className='text-secondary-light fw-medium text-sm'>
-                          {ProfileDetails?.email}
+                          {profileDetails?.email}
                         </span>
                         <br />
                         <span className='text-secondary-light fw-medium text-sm'>
-                          {ProfileDetails?.role}
+                          {profileDetails?.role}
                         </span>
                       </div>
                       <button type='button' className='hover-text-danger'>
@@ -441,6 +446,7 @@ const MasterLayout = ({ children }) => {
 
                       <li>
                         <Link
+                          onClick={logout}
                           className='dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-danger d-flex align-items-center gap-3'
                           to='#'
                         >

@@ -5,7 +5,7 @@ import { ErrorToast, IsEmpty } from "../helper/helper";
 import { useNavigate } from "react-router-dom";
 
 const AddUser = () => {
-  let { RegisterUserRequest } = UserStore();
+  let { registerUserRequest } = UserStore();
   let navigate = useNavigate();
 
   let { nameRef, emailRef, phoneRef, passwordRef } = useRef();
@@ -47,7 +47,7 @@ const AddUser = () => {
     ) {
       ErrorToast("Please fill your profile");
     } else {
-      let result = await RegisterUserRequest({
+      let result = await registerUserRequest({
         name,
         email,
         number,

@@ -7,37 +7,37 @@ import { DeleteAlert, formatDate } from "../helper/helper";
 
 const AllUsers = () => {
   let {
-    AllProfileDetailsRequest,
-    AllProfileDetails,
-    DeleteProfileRequest,
+    allProfileDetailsRequest,
+    allProfileDetails,
+    deleteProfileRequest,
     ProfileDetailsByIdRequest,
-    ProfileUpdateByIdRequest,
+    profileUpdateByIdRequest,
   } = UserStore();
   const [user, setUser] = useState("");
   const navigate = useNavigate();
   const params = useParams();
 
-  //! AllProfileDetailsRequest
+  //! allProfileDetailsRequest
   useEffect(() => {
     (async () => {
-      await AllProfileDetailsRequest(10, 1);
+      await allProfileDetailsRequest(10, 1);
     })();
-  }, [AllProfileDetailsRequest]);
+  }, [allProfileDetailsRequest]);
 
-  const TotalData = AllProfileDetails?.totalCount;
+  const TotalData = allProfileDetails?.totalCount;
 
   //! handelPageClick
   const handelPageClick = (event) => {
     let pageNo = event.selected;
-    AllProfileDetailsRequest(10, pageNo + 1);
+    allProfileDetailsRequest(10, pageNo + 1);
     navigate(`/all-user/${pageNo + 1}`);
   };
 
   //! deleteProfile
   let deleteProfile = async (id) => {
-    DeleteAlert(DeleteProfileRequest, id).then(async (res) => {
+    DeleteAlert(deleteProfileRequest, id).then(async (res) => {
       if (res) {
-        await AllProfileDetailsRequest(10, parseInt(params.pageNo));
+        await allProfileDetailsRequest(10, parseInt(params.pageNo));
       }
     });
   };
@@ -66,8 +66,8 @@ const AllUsers = () => {
 
   //! updateRole
   const updateRole = async (objId) => {
-    await ProfileUpdateByIdRequest({ role: selectedRole }, objId);
-    await AllProfileDetailsRequest(10, parseInt(params.pageNo));
+    await profileUpdateByIdRequest({ role: selectedRole }, objId);
+    await allProfileDetailsRequest(10, parseInt(params.pageNo));
   };
 
   return (
@@ -126,7 +126,7 @@ const AllUsers = () => {
               </tr>
             </thead>
             <tbody>
-              {AllProfileDetails?.users.map((item, index) => (
+              {allProfileDetails?.users.map((item, index) => (
                 <tr key={index}>
                   <td>
                     <div className='d-flex align-items-center'>

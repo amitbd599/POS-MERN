@@ -51,7 +51,11 @@ function App() {
 
         {/* customer */}
         <Route exact path='/create-customer' element={<CreateCustomerPage />} />
-        <Route exact path='/all-customer' element={<AllCustomerPage />} />
+        <Route
+          exact
+          path='/all-customer/:pageNo'
+          element={<AllCustomerPage />}
+        />
         <Route
           exact
           path='/update-customer/:id'

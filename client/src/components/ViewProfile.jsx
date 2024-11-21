@@ -4,16 +4,16 @@ import { ErrorToast, formatDate, IsEmpty } from "../helper/helper";
 import UserStore from "../store/UserStore";
 const ViewProfile = () => {
   let { nameRef, phoneRef, passwordRef } = useRef();
-  let { ProfileDetailsRequest, ProfileDetails, ProfileUpdate } = UserStore();
+  let { profileDetailsRequest, profileDetails, profileUpdate } = UserStore();
   const [imagePreview, setImagePreview] = useState(
     "assets/images/user-grid/user-grid-img13.png"
   );
   useEffect(() => {
     (() => {
-      ProfileDetailsRequest();
-      setImagePreview(ProfileDetails?.img);
+      profileDetailsRequest();
+      setImagePreview(profileDetails?.img);
     })();
-  }, [ProfileDetails?.img, ProfileDetailsRequest]);
+  }, [profileDetails?.img, profileDetailsRequest]);
 
   //! Image upload
   const readURL = (input) => {
@@ -36,9 +36,9 @@ const ViewProfile = () => {
     if (IsEmpty(name) || IsEmpty(number) || IsEmpty(password)) {
       ErrorToast("Please fill your profile");
     } else {
-      let result = await ProfileUpdate({ name, number, password, img });
+      let result = await profileUpdate({ name, number, password, img });
       if (result) {
-        ProfileDetailsRequest();
+        profileDetailsRequest();
       }
     }
   };
@@ -55,13 +55,13 @@ const ViewProfile = () => {
           <div className='pb-24 ms-16 mb-24 me-16  mt--100'>
             <div className='text-center border border-top-0 border-start-0 border-end-0'>
               <img
-                src={ProfileDetails?.img}
+                src={profileDetails?.img}
                 alt=''
                 className='border br-white border-width-2-px w-200-px h-200-px rounded-circle object-fit-cover'
               />
-              <h6 className='mb-0 mt-16'>{ProfileDetails?.name}</h6>
+              <h6 className='mb-0 mt-16'>{profileDetails?.name}</h6>
               <span className='text-secondary-light mb-16'>
-                {ProfileDetails?.email}
+                {profileDetails?.email}
               </span>
             </div>
             <div className='mt-24'>
@@ -72,7 +72,7 @@ const ViewProfile = () => {
                     Full Name
                   </span>
                   <span className='w-70 text-secondary-light fw-medium'>
-                    : {ProfileDetails?.name}
+                    : {profileDetails?.name}
                   </span>
                 </li>
                 <li className='d-flex align-items-center gap-1 mb-12'>
@@ -81,7 +81,7 @@ const ViewProfile = () => {
                     Email
                   </span>
                   <span className='w-70 text-secondary-light fw-medium'>
-                    : {ProfileDetails?.email}
+                    : {profileDetails?.email}
                   </span>
                 </li>
                 <li className='d-flex align-items-center gap-1 mb-12'>
@@ -90,7 +90,7 @@ const ViewProfile = () => {
                     Number
                   </span>
                   <span className='w-70 text-secondary-light fw-medium'>
-                    : {ProfileDetails?.number}
+                    : {profileDetails?.number}
                   </span>
                 </li>
                 <li className='d-flex align-items-center gap-1 mb-12'>
@@ -99,7 +99,7 @@ const ViewProfile = () => {
                     User role
                   </span>
                   <span className='w-70 text-secondary-light fw-medium'>
-                    : {ProfileDetails?.role}
+                    : {profileDetails?.role}
                   </span>
                 </li>
                 <li className='d-flex align-items-center gap-1 mb-12'>
@@ -108,7 +108,7 @@ const ViewProfile = () => {
                     Join date
                   </span>
                   <span className='w-70 text-secondary-light fw-medium'>
-                    : {formatDate(ProfileDetails?.createdAt)}
+                    : {formatDate(profileDetails?.createdAt)}
                   </span>
                 </li>
                 <li className='d-flex align-items-center gap-1 mb-12'>
@@ -117,7 +117,7 @@ const ViewProfile = () => {
                     Last update
                   </span>
                   <span className='w-70 text-secondary-light fw-medium'>
-                    : {formatDate(ProfileDetails?.updatedAt)}
+                    : {formatDate(profileDetails?.updatedAt)}
                   </span>
                 </li>
               </ul>
@@ -183,7 +183,7 @@ const ViewProfile = () => {
                           className='form-control radius-8'
                           id='name'
                           placeholder='Enter Full Name'
-                          defaultValue={ProfileDetails?.name}
+                          defaultValue={profileDetails?.name}
                           ref={(input) => (nameRef = input)}
                         />
                       </div>
@@ -201,7 +201,7 @@ const ViewProfile = () => {
                           className='form-control radius-8'
                           id='email'
                           placeholder='Enter email address'
-                          defaultValue={ProfileDetails?.email}
+                          defaultValue={profileDetails?.email}
                           disabled
                         />
                       </div>
@@ -219,7 +219,7 @@ const ViewProfile = () => {
                           className='form-control radius-8'
                           id='number'
                           placeholder='Enter phone number'
-                          defaultValue={ProfileDetails?.number}
+                          defaultValue={profileDetails?.number}
                           ref={(input) => (phoneRef = input)}
                         />
                       </div>
