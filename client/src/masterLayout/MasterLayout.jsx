@@ -207,13 +207,13 @@ const MasterLayout = ({ children }) => {
                 </li>
                 <li>
                   <NavLink
-                    to='/all-categories'
+                    to='/all-categories/1'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
                   >
                     <i className='ri-circle-fill circle-icon text-primary-600 w-auto' />{" "}
-                    All categories
+                    All category
                   </NavLink>
                 </li>
               </ul>

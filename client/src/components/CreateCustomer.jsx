@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom";
 
 const CreateCustomer = () => {
   let { customerCreateRequest } = CustomerStore();
-  let { nameRef, emailRef, phoneRef, addressRef } = useRef();
+  let { nameRef, emailRef, numberRef, addressRef } = useRef();
   let navigate = useNavigate();
 
   const customerCreate = async () => {
     let name = nameRef.value;
     let email = emailRef.value;
     let address = addressRef.value;
-    let number = phoneRef.value;
+    let number = numberRef.value;
 
     if (
       IsEmpty(name) ||
@@ -62,7 +62,7 @@ const CreateCustomer = () => {
               <input
                 type='text'
                 className='form-control'
-                ref={(input) => (phoneRef = input)}
+                ref={(input) => (numberRef = input)}
               />
             </div>
             <div className='col-md-6'>

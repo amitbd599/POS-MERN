@@ -1,7 +1,38 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import CustomerStore from "../store/CustomerStore";
+import { DeleteAlert, formatDate } from "../helper/helper";
+import ReactPaginate from "react-paginate";
 
 const AllCustomers = () => {
+  let { allCustomerRequest, allCustomer, deleteCustomerRequest } =
+    CustomerStore();
+  const params = useParams();
+  const navigate = useNavigate();
+  useEffect(() => {
+    (async () => {
+      await allCustomerRequest(10, 1);
+    })();
+  }, [allCustomerRequest]);
+
+  const TotalData = allCustomer?.totalCount;
+
+  //! handelPageClick
+  const handelPageClick = (event) => {
+    let pageNo = event.selected;
+    allCustomerRequest(10, pageNo + 1);
+    navigate(`/all-customer/${pageNo + 1}`);
+  };
+
+  //! deleteProfile
+  let deleteProfile = async (id) => {
+    DeleteAlert(deleteCustomerRequest, id).then(async (res) => {
+      if (res) {
+        await allCustomerRequest(10, parseInt(params.pageNo));
+      }
+    });
+  };
+
   return (
     <div>
       <div className='card'>
@@ -22,122 +53,61 @@ const AllCustomers = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Alex Johan</td>
-                  <td>amitbd590@gmail.com</td>
-                  <td>01814331350</td>
-                  <td>Hathazari, Chittagong</td>
-                  <td>15-02-2024</td>
-                  <td>
-                    <span className='d-flex gap-3'>
-                      <button
-                        type='button'
-                        className='btn btn-success-600 radius-8 px-14 py-6'
-                      >
-                        <Link to='/update-customer/id'>Edit</Link>
-                      </button>
-                      <button
-                        type='button'
-                        className='btn btn-danger-600 radius-8 px-14 py-6'
-                      >
-                        Delete
-                      </button>
-                    </span>
-                  </td>
-                </tr>
+                {allCustomer?.customer?.map((item, index) => (
+                  <tr key={index}>
+                    <td>{item?.name}</td>
+                    <td>{item?.email}</td>
+                    <td>{item?.number}</td>
+                    <td>{item?.address}</td>
+                    <td>{formatDate(item?.createdAt)}</td>
+                    <td>
+                      <span className='d-flex gap-3'>
+                        <button
+                          type='button'
+                          className='btn btn-success-600 radius-8 px-14 py-6'
+                        >
+                          <Link to={`/update-customer/${item?._id}`}>Edit</Link>
+                        </button>
+                        <button
+                          onClick={() => deleteProfile(item?._id)}
+                          type='button'
+                          className='btn btn-danger-600 radius-8 px-14 py-6'
+                        >
+                          Delete
+                        </button>
+                      </span>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
-        </div>
-
-        <div className='py-20'>
-          <ul className='pagination d-flex flex-wrap align-items-center gap-2 justify-content-center mt-24'>
-            <li className='page-item'>
-              <a
-                className='page-link bg-primary-50 text-secondary-light fw-medium radius-8 border-0  py-10 d-flex align-items-center justify-content-center h-48-px'
-                href='/pagination'
-              >
-                Previous
-              </a>
-            </li>
-            <li className='page-item'>
-              <a
-                className='page-link bg-primary-50 text-secondary-light fw-medium radius-8 border-0  py-10 d-flex align-items-center justify-content-center h-48-px w-48-px'
-                href='/pagination'
-              >
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  xmlnsXlink='http://www.w3.org/1999/xlink'
-                  aria-hidden='true'
-                  role='img'
-                  className='iconify iconify--ep text-xl'
-                  width='1em'
-                  height='1em'
-                  viewBox='0 0 1024 1024'
-                >
-                  <path
-                    fill='currentColor'
-                    d='M529.408 149.376a29.12 29.12 0 0 1 41.728 0a30.59 30.59 0 0 1 0 42.688L259.264 511.936l311.872 319.936a30.59 30.59 0 0 1-.512 43.264a29.12 29.12 0 0 1-41.216-.512L197.76 534.272a32 32 0 0 1 0-44.672zm256 0a29.12 29.12 0 0 1 41.728 0a30.59 30.59 0 0 1 0 42.688L515.264 511.936l311.872 319.936a30.59 30.59 0 0 1-.512 43.264a29.12 29.12 0 0 1-41.216-.512L453.76 534.272a32 32 0 0 1 0-44.672z'
-                  />
-                </svg>
-              </a>
-            </li>
-            <li className='page-item'>
-              <a
-                className='page-link bg-primary-50 text-secondary-light fw-medium radius-8 border-0  py-10 d-flex align-items-center justify-content-center h-48-px w-48-px'
-                href='/pagination'
-              >
-                1
-              </a>
-            </li>
-            <li className='page-item'>
-              <a
-                className='page-link bg-primary-50 text-secondary-light fw-medium radius-8 border-0  py-10 d-flex align-items-center justify-content-center h-48-px w-48-px bg-primary-600 text-white'
-                href='/pagination'
-              >
-                2
-              </a>
-            </li>
-            <li className='page-item'>
-              <a
-                className='page-link bg-primary-50 text-secondary-light fw-medium radius-8 border-0  py-10 d-flex align-items-center justify-content-center h-48-px w-48-px'
-                href='/pagination'
-              >
-                3
-              </a>
-            </li>
-            <li className='page-item'>
-              <a
-                className='page-link bg-primary-50 text-secondary-light fw-medium radius-8 border-0  py-10 d-flex align-items-center justify-content-center h-48-px w-48-px'
-                href='/pagination'
-              >
-                {" "}
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  xmlnsXlink='http://www.w3.org/1999/xlink'
-                  aria-hidden='true'
-                  role='img'
-                  className='iconify iconify--ep text-xl'
-                  width='1em'
-                  height='1em'
-                  viewBox='0 0 1024 1024'
-                >
-                  <path
-                    fill='currentColor'
-                    d='M452.864 149.312a29.12 29.12 0 0 1 41.728.064L826.24 489.664a32 32 0 0 1 0 44.672L494.592 874.624a29.12 29.12 0 0 1-41.728 0a30.59 30.59 0 0 1 0-42.752L764.736 512L452.864 192a30.59 30.59 0 0 1 0-42.688m-256 0a29.12 29.12 0 0 1 41.728.064L570.24 489.664a32 32 0 0 1 0 44.672L238.592 874.624a29.12 29.12 0 0 1-41.728 0a30.59 30.59 0 0 1 0-42.752L508.736 512L196.864 192a30.59 30.59 0 0 1 0-42.688'
-                  />
-                </svg>
-              </a>
-            </li>
-            <li className='page-item'>
-              <a
-                className='page-link bg-primary-50 text-secondary-light fw-medium radius-8 border-0  py-10 d-flex align-items-center justify-content-center h-48-px'
-                href='/pagination'
-              >
-                Next
-              </a>
-            </li>
-          </ul>
+          <div className='d-flex align-items-center justify-content-between flex-wrap gap-2 mt-24'>
+            <span>Showing 1 to 10 of {TotalData} entries</span>
+            {TotalData > 10 ? (
+              <div>
+                <ReactPaginate
+                  className='pagination d-flex flex-wrap align-items-center gap-2 justify-content-center'
+                  previousLabel='<'
+                  nextLabel='>'
+                  pageClassName='page-item'
+                  activeClassName='active'
+                  pageLinkClassName=' page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px  text-md'
+                  previousLinkClassName='page-link bg-neutral-200 text-secondary-light fw-semibold radius-8 border-0 d-flex align-items-center justify-content-center h-32-px  text-md'
+                  nextLinkClassName='text-secondary-light'
+                  activeLinkClassName=' active-link'
+                  breakLabel='...'
+                  pageCount={TotalData / 10}
+                  initialPage={params.pageNo - 1}
+                  pageRangeDisplayed={3}
+                  onPageChange={handelPageClick}
+                  type='button'
+                />
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
       </div>
     </div>

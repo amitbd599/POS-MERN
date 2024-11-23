@@ -33,7 +33,11 @@ function App() {
           path='/create-categories'
           element={<CreateCategoriesPage />}
         />
-        <Route exact path='/all-categories' element={<AllCategoriesPage />} />
+        <Route
+          exact
+          path='/all-categories/:pageNo'
+          element={<AllCategoriesPage />}
+        />
         <Route
           exact
           path='/update-categories/:id'

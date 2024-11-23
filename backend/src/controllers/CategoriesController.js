@@ -14,17 +14,26 @@ exports.createCategories = async (req, res) => {
 
     res.status(200).json({ success: true, data: result });
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    if (error.code === 11000) {
+      if (error?.keyPattern?.name) {
+        res.status(200).json({
+          success: false,
+          message: "Categories name already exists!",
+        });
+      }
+    } else {
+      res.status(200).json({ success: false, error: error.toString() });
+    }
   }
 };
 
 // get all categories
-exports.getProduct = async (req, res) => {
+exports.getCategories = async (req, res) => {
   try {
     let categories = await CategoriesModel.find();
     res.status(200).json({ success: true, data: categories });
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    res.status(200).json({ success: false, error: error.message });
   }
 };
 
@@ -34,9 +43,22 @@ exports.updateCategories = async (req, res) => {
   try {
     const reqBody = req.body;
     const result = await CategoriesModel.updateOne({ _id: id }, reqBody);
-    res.status(201).json({ success: true, data: result });
+    res.status(200).json({
+      success: true,
+      data: result,
+      message: "Categories update success!",
+    });
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    if (error.code === 11000) {
+      if (error?.keyPattern?.name) {
+        res.status(200).json({
+          success: false,
+          message: "Categories name already exists!",
+        });
+      }
+    } else {
+      res.status(200).json({ success: false, error: error.toString() });
+    }
   }
 };
 
@@ -47,16 +69,36 @@ exports.deleteCategories = async (req, res) => {
     // Check if any products reference this category
     const productCount = await ProductsModel.countDocuments({ categoryId: id });
     if (productCount > 0) {
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
-        message:
-          "Cannot delete category because it is referenced by active products.",
+        message: "Cannot delete this category it have active product.",
       });
     }
     // Proceed with deletion if no products reference this category
     const result = await CategoriesModel.deleteOne({ _id: id });
-    res.status(201).json({ success: true, data: result });
+    res.status(200).json({
+      success: true,
+      data: result,
+      message: "Categories delete success!",
+    });
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    res.status(200).json({ success: false, error: error.message });
+  }
+};
+
+//! get categories id
+exports.categoriesReadByID = async (req, res) => {
+  try {
+    const id = new ObjectId(req.params.id);
+    let MatchStage = {
+      $match: {
+        _id: id,
+      },
+    };
+
+    let data = await CategoriesModel.aggregate([MatchStage]);
+    res.status(200).json({ success: true, data: data[0] });
+  } catch (e) {
+    res.status(200).json({ status: "error", error: e.toString() });
   }
 };

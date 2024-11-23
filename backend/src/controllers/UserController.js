@@ -8,16 +8,6 @@ exports.register = async (req, res) => {
   try {
     const { name, email, password, role, number, img } = req.body;
 
-    let user = await UserModel.findOne({
-      $or: [{ email }, { number }],
-    });
-
-    if (user) {
-      return res
-        .status(200)
-        .json({ success: false, message: "Email or number already exist" });
-    }
-
     // Create and save the new user
     user = await UserModel.create({ name, email, password, role, number, img });
     res.status(200).json({
@@ -27,12 +17,26 @@ exports.register = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
-        role: user.number,
+        number: user.number,
       },
       message: "User created successfully",
     });
-  } catch (e) {
-    res.status(200).json({ status: "error", error: e.toString() });
+  } catch (error) {
+    if (error.code === 11000) {
+      if (error?.keyPattern?.email) {
+        res.status(200).json({
+          success: false,
+          message: "Email already exists!",
+        });
+      } else if (error?.keyPattern?.number) {
+        res.status(200).json({
+          success: false,
+          message: "Phone number already exists!",
+        });
+      }
+    } else {
+      res.status(200).json({ success: false, error: error.toString() });
+    }
   }
 };
 
@@ -85,10 +89,9 @@ exports.login = async (req, res) => {
 
 //! Update user
 exports.userUpdate = async (req, res) => {
-  let email = req.headers.email;
-  const { name, password, img, number } = req.body;
-
   try {
+    let email = req.headers.email;
+    const { name, password, img, number } = req.body;
     const user = await UserModel.findOne({ email });
     if (!user)
       return res
@@ -129,10 +132,9 @@ exports.userUpdate = async (req, res) => {
 
 //! Update user by id
 exports.userUpdateById = async (req, res) => {
-  const id = new ObjectId(req.params.id);
-  const { role } = req.body;
-
   try {
+    const id = new ObjectId(req.params.id);
+    const { role } = req.body;
     const user = await UserModel.findOne({ _id: id });
 
     if (!user)
@@ -167,8 +169,8 @@ exports.userUpdateById = async (req, res) => {
 
 //! get User
 exports.userRead = async (req, res) => {
-  let email = req.headers.email;
   try {
+    let email = req.headers.email;
     let MatchStage = {
       $match: {
         email,
@@ -189,8 +191,8 @@ exports.userRead = async (req, res) => {
 
 //! get User id
 exports.userReadByID = async (req, res) => {
-  const id = new ObjectId(req.params.id);
   try {
+    const id = new ObjectId(req.params.id);
     let MatchStage = {
       $match: {
         _id: id,
@@ -229,7 +231,16 @@ exports.getAllUser = async (req, res) => {
         users: [
           { $skip: skip },
           { $limit: limit },
-          { $project: { name: 1, email: 1, role: 1, img: 1, createdAt: 1 } },
+          {
+            $project: {
+              name: 1,
+              email: 1,
+              role: 1,
+              img: 1,
+              number: 1,
+              createdAt: 1,
+            },
+          },
         ],
         totalCount: [{ $count: "count" }],
       },

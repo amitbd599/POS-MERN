@@ -52,6 +52,13 @@ router.get(
   middlewares,
   CustomerController.getAllCustomer
 );
+
+router.get(
+  "/read-customer-by-id/:id",
+  middlewares,
+  CustomerController.customerReadByID
+);
+
 router.post(
   "/update-customer/:id",
   middlewares,
@@ -95,7 +102,12 @@ router.post(
   RoleBasedAccess("admin", "editor"),
   CategoriesController.createCategories
 );
-router.get("/all-categories", middlewares, CategoriesController.getProduct);
+router.get("/all-categories", middlewares, CategoriesController.getCategories);
+router.get(
+  "/read-categories-by-id/:id",
+  middlewares,
+  CategoriesController.categoriesReadByID
+);
 router.post(
   "/update-categories/:id",
   middlewares,

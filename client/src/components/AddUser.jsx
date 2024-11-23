@@ -29,7 +29,7 @@ const AddUser = () => {
     setSelectedRole(event.target.value);
   };
 
-  //! update User Profile
+  //! create User Profile
   const createUserProfile = async () => {
     let name = nameRef.value;
     let email = emailRef.value;

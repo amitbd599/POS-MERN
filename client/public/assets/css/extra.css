@@ -313,3 +313,7 @@ table.dataTable td.dt-type-date {
     }
   }
 }
+
+.object-fit {
+  object-fit: contain;
+}

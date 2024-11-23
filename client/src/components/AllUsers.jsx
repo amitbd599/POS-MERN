@@ -72,33 +72,7 @@ const AllUsers = () => {
 
   return (
     <div className='card h-100 p-0 radius-12'>
-      <div className='card-header border-bottom bg-base py-16 px-24 d-flex align-items-center flex-wrap gap-3 justify-content-between'>
-        <div className='d-flex align-items-center flex-wrap gap-3'>
-          <span className='text-md fw-medium text-secondary-light mb-0'>
-            Show
-          </span>
-
-          <form className='navbar-search'>
-            <input
-              type='text'
-              className='bg-base h-40-px w-auto'
-              name='search'
-              placeholder='Search'
-            />
-            <Icon icon='ion:search-outline' className='icon' />
-          </form>
-          <select
-            className='form-select form-select-sm w-auto ps-12 py-6 radius-12 h-40-px'
-            defaultValue='Select Status'
-          >
-            <option value='Select Status' disabled>
-              All users
-            </option>
-            <option value='Active'>Admin</option>
-            <option value='Inactive'>Editor</option>
-            <option value='Inactive'>Employee</option>
-          </select>
-        </div>
+      <div className='card-header border-bottom bg-base py-16 px-24 d-flex align-items-center flex-wrap gap-3 justify-content-end'>
         <Link
           to='/add-user'
           className='btn btn-primary text-sm btn-sm px-12 py-12 radius-8 d-flex align-items-center gap-2'
@@ -117,6 +91,7 @@ const AllUsers = () => {
               <tr>
                 <th scope='col'>Name</th>
                 <th scope='col'>Email</th>
+                <th scope='col'>Number</th>
                 <th scope='col'>Join Date</th>
                 <th scope='col'>Role</th>
 
@@ -133,7 +108,7 @@ const AllUsers = () => {
                       <img
                         src={item?.img}
                         alt='pos'
-                        className='w-40-px h-40-px rounded-circle flex-shrink-0 me-12 overflow-hidden'
+                        className='w-40-px h-40-px rounded-circle flex-shrink-0 me-12 overflow-hidden object-fit'
                       />
                       <div className='flex-grow-1'>
                         <span className='text-md mb-0 fw-normal text-secondary-light'>
@@ -148,8 +123,27 @@ const AllUsers = () => {
                       {item?.email}
                     </span>
                   </td>
+                  <td>
+                    <span className='text-md mb-0 fw-normal text-secondary-light'>
+                      {item?.number}
+                    </span>
+                  </td>
                   <td>{formatDate(item?.createdAt)}</td>
-                  <td>{item?.role}</td>
+                  <td>
+                    <span
+                      className={`badge text-sm fw-semibold  px-20 py-9 radius-4 text-white ${
+                        item?.role === "admin"
+                          ? "text-danger-600 bg-danger-100"
+                          : item?.role === "employee"
+                          ? "text-success-600 bg-success-100"
+                          : item?.role === "editor"
+                          ? "text-info-600 bg-info-100"
+                          : ""
+                      }`}
+                    >
+                      {item?.role.charAt(0).toUpperCase() + item?.role.slice(1)}
+                    </span>
+                  </td>
 
                   <td className='text-center'>
                     <div className='d-flex align-items-center gap-10 justify-content-center'>
