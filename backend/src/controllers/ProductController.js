@@ -13,7 +13,7 @@ exports.createProduct = async (req, res) => {
       _id: categoryId,
     });
     if (categoryCount === 0) {
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         message: "No category found.",
       });
@@ -27,9 +27,22 @@ exports.createProduct = async (req, res) => {
       categoryId,
       stockQuantity,
     });
-    res.status(201).json({ success: true, data: result });
+    res.status(200).json({
+      success: true,
+      data: result,
+      message: "Product create success!",
+    });
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    if (error.code === 11000) {
+      if (error?.keyPattern?.sku) {
+        res.status(200).json({
+          success: false,
+          message: "SKU already exists!",
+        });
+      }
+    } else {
+      res.status(200).json({ success: false, error: error.toString() });
+    }
   }
 };
 
@@ -45,6 +58,15 @@ exports.getProduct = async (req, res) => {
 
     const skip = (pageNo - 1) * limit;
 
+    const joinWithCategory = {
+      $lookup: {
+        from: "categories",
+        localField: "categoryId",
+        foreignField: "_id",
+        as: "category",
+      },
+    };
+
     const facet = {
       $facet: {
         product: [{ $skip: skip }, { $limit: limit }],
@@ -59,7 +81,11 @@ exports.getProduct = async (req, res) => {
       },
     };
 
-    const result = await ProductsModel.aggregate([facet, project]);
+    const result = await ProductsModel.aggregate([
+      joinWithCategory,
+      facet,
+      project,
+    ]);
     res.status(200).json({ success: true, data: result[0] });
   } catch (error) {
     res.status(400).json({ success: false, error: error.message });
@@ -68,23 +94,65 @@ exports.getProduct = async (req, res) => {
 
 // Update Product
 exports.updateProduct = async (req, res) => {
-  const id = new ObjectId(req.params.id);
   try {
+    const id = new ObjectId(req.params.id);
     const reqBody = req.body;
     const result = await ProductsModel.updateOne({ _id: id }, reqBody);
-    res.status(201).json({ success: true, data: result });
+    res.status(200).json({
+      success: true,
+      data: result,
+      message: "Product update success!",
+    });
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    if (error.code === 11000) {
+      if (error?.keyPattern?.sku) {
+        res.status(200).json({
+          success: false,
+          message: "SKU already exists!",
+        });
+      }
+    } else {
+      res.status(200).json({ success: false, error: error.toString() });
+    }
   }
 };
 
 // Delete Product
 exports.deleteProduct = async (req, res) => {
-  const id = new ObjectId(req.params.id);
   try {
+    const id = new ObjectId(req.params.id);
     const result = await ProductsModel.deleteOne({ _id: id });
-    res.status(201).json({ success: true, data: result });
+    res
+      .status(200)
+      .json({
+        success: true,
+        data: result,
+        message: "Product delete success!",
+      });
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    res.status(200).json({ success: false, error: error.message });
+  }
+};
+
+//! get Product id
+exports.productReadByID = async (req, res) => {
+  try {
+    const id = new ObjectId(req.params.id);
+    let MatchStage = {
+      $match: {
+        _id: id,
+      },
+    };
+
+    let project = {
+      $project: {
+        createdAt: 0,
+        updatedAt: 0,
+      },
+    };
+    let data = await ProductsModel.aggregate([MatchStage, project]);
+    res.status(200).json({ success: true, data: data[0] });
+  } catch (e) {
+    res.status(200).json({ status: "error", error: e.toString() });
   }
 };

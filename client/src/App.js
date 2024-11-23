@@ -46,7 +46,7 @@ function App() {
 
         {/* products */}
         <Route exact path='/create-product' element={<CreateProductPage />} />
-        <Route exact path='/all-product' element={<AllProductPage />} />
+        <Route exact path='/all-product/:pageNo' element={<AllProductPage />} />
         <Route
           exact
           path='/update-product/:id'

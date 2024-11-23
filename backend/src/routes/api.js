@@ -88,6 +88,11 @@ router.post(
   RoleBasedAccess("admin", "editor"),
   ProductController.updateProduct
 );
+router.get(
+  "/read-product-by-id/:id",
+  middlewares,
+  ProductController.productReadByID
+);
 router.delete(
   "/delete-product/:id",
   middlewares,

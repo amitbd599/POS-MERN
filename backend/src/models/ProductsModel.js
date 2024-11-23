@@ -5,9 +5,7 @@ const DataSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    image: {
-      type: String,
-    },
+
     description: {
       type: String,
       required: true,
@@ -24,7 +22,7 @@ const DataSchema = new mongoose.Schema(
     },
     categoryId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Category", // Assumes you have a Category model
+      ref: "Category",
       required: true,
     },
     stockQuantity: {

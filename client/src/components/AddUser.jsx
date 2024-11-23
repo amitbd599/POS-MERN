@@ -175,7 +175,7 @@ const AddUser = () => {
                     <select
                       className='form-select'
                       aria-label='Default select example'
-                      value={selectedRole || ""} // Prevents default issue
+                      value={selectedRole || ""}
                       onChange={handleChange}
                     >
                       <option>Select role</option>
