@@ -1,30 +1,37 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import ProductStore from "../store/ProductStore";
+import UserStore from "../store/UserStore";
+import moment from "moment";
+import OrderStore from "../store/OrderStore";
+import CustomerStore from "../store/CustomerStore";
 const CreateOrder = () => {
   const [rows, setRows] = useState([]);
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  // Fetch products from API when component mounts
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+  let { allProductRequest } = ProductStore();
+  let { profileDetails } = UserStore();
+  let { orderCreateRequest } = OrderStore();
+  let { allCustomerRequest } = CustomerStore();
 
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:5000/api/v1/read-product/2/1"
-      );
-
-      console.log(response.data.data.product);
-
-      if (response.data && response.data.data.product) {
-        setProducts(response.data.data.product);
-      }
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
+  const calculateTotalPrice = () => {
+    const total = rows.reduce((acc, row) => {
+      const rowTotal = row.qty * row.price;
+      return acc + (isNaN(rowTotal) ? 0 : rowTotal);
+    }, 0);
+    setTotalPrice(total);
   };
+
+  useEffect(() => {
+    (async () => {
+      await allProductRequest(20, 1).then(async (res) => {
+        let sortingProducts = await res?.product.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+        setProducts(sortingProducts);
+      });
+      calculateTotalPrice();
+    })();
+  }, [allProductRequest, rows]);
 
   // Handle input change
   const handleInputChange = (index, field, value) => {
@@ -58,23 +65,14 @@ const CreateOrder = () => {
     setRows(updatedRows);
   };
 
-  useEffect(() => {
-    calculateTotalPrice();
-  }, [rows]);
-
-  const calculateTotalPrice = () => {
-    const total = rows.reduce((acc, row) => {
-      const rowTotal = row.qty * row.price;
-      return acc + (isNaN(rowTotal) ? 0 : rowTotal);
-    }, 0);
-    setTotalPrice(total);
-  };
-
-  console.log(totalPrice);
-
   return (
     <div className='order_table row mt-5'>
       <div className='col-lg-9'>
+        <div className='card mb-20'>
+          <div className='card-header'>
+            <h5 className='card-title mb-0'>Customer information</h5>
+          </div>
+        </div>
         <div className='card h-100 '>
           <div className='card-header'>
             <h5 className='card-title mb-0'>Order Products Table</h5>
@@ -178,10 +176,20 @@ const CreateOrder = () => {
                     <div className=' mt-24'>
                       <h3 className='text-danger-600 mb-16'>${totalPrice}</h3>
                       <span className='text-neutral-500 text-sm'>
-                        Order created by: <strong>Alex johan</strong>
+                        Order by: <strong>{profileDetails?.name}</strong>
                       </span>
+                      <br />
                       <span className='text-neutral-500 text-sm'>
-                        Order created date: <strong>24/12/2024</strong>
+                        Role: <strong>{profileDetails?.role}</strong>
+                      </span>
+                      <br />
+                      <span className='text-neutral-500 text-sm'>
+                        Email: <strong>{profileDetails?.email}</strong>
+                      </span>
+                      <br />
+                      <span className='text-neutral-500 text-sm'>
+                        Order created:{" "}
+                        <strong>{moment().format("YYYY-MM-DD")}</strong>
                       </span>
                     </div>
 

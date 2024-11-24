@@ -3,14 +3,14 @@ import { create } from "zustand";
 import { baseURL } from "../helper/config";
 import { ErrorToast, SuccessToast, unAuthorize } from "../helper/helper";
 
-const CustomerStore = create((set) => ({
+const OrderStore = create((set) => ({
   loading: false,
 
-  //! create customer api
-  customerCreateRequest: async (reqBody) => {
+  //! create order api
+  orderCreateRequest: async (reqBody) => {
     try {
       set({ loading: true });
-      let res = await axios.post(baseURL + "/customer-create", reqBody, {
+      let res = await axios.post(baseURL + "/orders-create", reqBody, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
@@ -28,10 +28,10 @@ const CustomerStore = create((set) => ({
     }
   },
 
-  //! update customer by id
-  customerUpdateByIdRequest: async (reqBody, id) => {
+  // update product by id
+  productUpdateByIdRequest: async (reqBody, id) => {
     try {
-      let res = await axios.post(baseURL + "/update-customer/" + id, reqBody, {
+      let res = await axios.post(baseURL + "/update-product/" + id, reqBody, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
@@ -49,20 +49,20 @@ const CustomerStore = create((set) => ({
     }
   },
 
-  //! all customer api
-  allCustomer: [],
-  allCustomerRequest: async (perPage, pageNo) => {
+  // all product api
+  allProduct: [],
+  allProductRequest: async (perPage, pageNo) => {
     try {
       set({ loading: true });
       let res = await axios.get(
-        baseURL + "/all-customers/" + perPage + "/" + pageNo,
+        baseURL + "/read-product/" + perPage + "/" + pageNo,
         {
           withCredentials: true,
         }
       );
       if (res?.data?.success === true) {
         set({ loading: false });
-        set({ allCustomer: res?.data?.data });
+        set({ allProduct: res?.data?.data });
         return res?.data?.data;
       }
     } catch (e) {
@@ -71,11 +71,11 @@ const CustomerStore = create((set) => ({
     }
   },
 
-  //! customer details by id -- done
-  customerDetailsByIdRequest: async (id) => {
+  // product details by id -- done
+  productDetailsByIdRequest: async (id) => {
     try {
       set({ loading: true });
-      let res = await axios.get(baseURL + "/read-customer-by-id/" + id, {
+      let res = await axios.get(baseURL + "/read-product-by-id/" + id, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
@@ -88,11 +88,11 @@ const CustomerStore = create((set) => ({
     }
   },
 
-  //! delete customer api
-  deleteCustomerRequest: async (id) => {
+  // delete product api
+  deleteProductRequest: async (id) => {
     try {
       set({ loading: true });
-      let res = await axios.delete(baseURL + "/delete-customer/" + id, {
+      let res = await axios.delete(baseURL + "/delete-product/" + id, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
@@ -111,4 +111,4 @@ const CustomerStore = create((set) => ({
   },
 }));
 
-export default CustomerStore;
+export default OrderStore;

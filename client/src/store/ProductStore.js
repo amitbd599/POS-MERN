@@ -63,6 +63,7 @@ const ProductStore = create((set) => ({
       if (res?.data?.success === true) {
         set({ loading: false });
         set({ allProduct: res?.data?.data });
+        return res?.data?.data;
       }
     } catch (e) {
       set({ loading: false });

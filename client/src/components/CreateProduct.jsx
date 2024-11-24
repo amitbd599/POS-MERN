@@ -53,8 +53,6 @@ const CreateProduct = () => {
     }
   };
 
-  console.log(allCategory);
-
   return (
     <>
       <div className='card'>
