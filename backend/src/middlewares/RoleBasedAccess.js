@@ -1,6 +1,5 @@
 const { DecodeToken } = require("../utility/TokenHelper");
 
-
 let authorize = (...requiredRole) => {
   return (req, res, next) => {
     token = req.cookies["Token"];
@@ -17,7 +16,7 @@ let authorize = (...requiredRole) => {
 
       if (!requiredRole.includes(role)) {
         return res
-          .status(403)
+          .status(200)
           .json({ success: false, message: "Access denied" });
       } else {
         next();

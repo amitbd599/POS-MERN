@@ -118,6 +118,7 @@ const UserStore = create((set) => ({
         return true;
       } else {
         set({ loading: false });
+        ErrorToast(res?.data?.message);
         return false;
       }
     } catch (e) {
@@ -142,6 +143,7 @@ const UserStore = create((set) => ({
         return true;
       } else {
         set({ loading: false });
+        ErrorToast(res?.data?.message);
         return false;
       }
     } catch (e) {

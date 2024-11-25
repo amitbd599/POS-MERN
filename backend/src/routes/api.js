@@ -25,6 +25,7 @@ router.get("/read-profile-by-id/:id", middlewares, UserController.userReadByID);
 router.post(
   "/update-profile-by-id/:id",
   middlewares,
+  RoleBasedAccess("admin"),
   UserController.userUpdateById
 );
 router.get(
@@ -62,11 +63,13 @@ router.get(
 router.post(
   "/update-customer/:id",
   middlewares,
+  RoleBasedAccess("admin", "editor"),
   CustomerController.updateCustomer
 );
 router.delete(
   "/delete-customer/:id",
   middlewares,
+  RoleBasedAccess("admin", "editor"),
   CustomerController.deleteCustomer
 );
 
@@ -116,6 +119,7 @@ router.get(
 router.post(
   "/update-categories/:id",
   middlewares,
+  RoleBasedAccess("admin", "editor"),
   CategoriesController.updateCategories
 );
 router.delete(

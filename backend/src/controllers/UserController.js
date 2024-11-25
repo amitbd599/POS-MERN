@@ -125,8 +125,22 @@ exports.userUpdate = async (req, res) => {
         .status(200)
         .json({ success: false, message: "Email / password not match!" });
     }
-  } catch (e) {
-    res.status(200).json({ status: "error", data: e.toString() });
+  } catch (error) {
+    if (error.code === 11000) {
+      if (error?.keyPattern?.email) {
+        res.status(200).json({
+          success: false,
+          message: "Email already exists!",
+        });
+      } else if (error?.keyPattern?.number) {
+        res.status(200).json({
+          success: false,
+          message: "Phone number already exists!",
+        });
+      }
+    } else {
+      res.status(200).json({ success: false, error: error.toString() });
+    }
   }
 };
 
