@@ -73,12 +73,12 @@ const UserStore = create((set) => ({
   profileDetails: null,
   profileDetailsRequest: async () => {
     try {
-      set({ loading: true });
+      // set({ loading: true });
       let res = await axios.get(baseURL + "/read-profile", {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
-        set({ loading: false });
+        // set({ loading: false });
         set({ profileDetails: res?.data?.data });
       }
     } catch (e) {

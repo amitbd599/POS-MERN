@@ -12,7 +12,7 @@ const DataSchema = new mongoose.Schema(
     },
     paymentMethod: {
       type: String,
-      enum: ["Cash", "Card"], // restricts to either "Cash" or "Card"
+      enum: ["Cash", "Bank"],
       required: true,
     },
     paymentDate: {

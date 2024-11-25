@@ -42,7 +42,7 @@ const CreateOrder = () => {
         // convert it for use React Select npm
         const data = res?.customer?.map((item) => ({
           value: item._id,
-          label: item.name,
+          label: item.name + " " + item.number,
         }));
         setCustomers(data);
       });
@@ -125,7 +125,7 @@ const CreateOrder = () => {
 
   return (
     <div className='order_table one row mt-5'>
-      <div className='col-lg-9'>
+      <div className='col-xl-9'>
         <div className='card order__card '>
           <div className='card-header'>
             <h5 className='card-title mb-0'>Order Products Table</h5>
@@ -216,7 +216,7 @@ const CreateOrder = () => {
           </div>
         </div>
       </div>
-      <div className='col-lg-3'>
+      <div className='col-xl-3'>
         <div className='card '>
           <div className='card-body p-0'>
             <div className='p-24 border-bottom'>

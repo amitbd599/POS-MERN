@@ -8,12 +8,12 @@ exports.paymentCreate = async (req, res) => {
     const order = await OrdersModel.findById(orderId);
     if (!order)
       return res
-        .status(404)
+        .status(200)
         .json({ success: false, message: "Order not found" });
 
     if (order.status === "Completed") {
       return res
-        .status(400)
+        .status(200)
         .json({ success: false, message: "Order already completed" });
     }
 
@@ -31,8 +31,14 @@ exports.paymentCreate = async (req, res) => {
       { status: "Completed" }
     );
 
-    res.status(201).json({ success: true, data: updatedOrderStatus });
+    res
+      .status(200)
+      .json({
+        success: true,
+        data: updatedOrderStatus,
+        message: "Order payment completed",
+      });
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    res.status(200).json({ success: false, error: error.message });
   }
 };

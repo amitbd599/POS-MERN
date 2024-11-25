@@ -130,15 +130,15 @@ exports.cancelOrder = async (req, res) => {
     //  Check if the order has been updated/cancelled
     if (OrderProducts[0].status === "Cancelled") {
       return res
-        .status(400)
+        .status(200)
         .json({ success: false, message: "Order is already cancelled!" });
     } else if (OrderProducts[0].status === "Completed") {
       return res
-        .status(400)
+        .status(200)
         .json({ success: false, message: "Order is already completed!" });
     } else if (OrderProducts[0].status === "Returned") {
       return res
-        .status(400)
+        .status(200)
         .json({ success: false, message: "Order is already returned!" });
     }
 
@@ -156,7 +156,7 @@ exports.cancelOrder = async (req, res) => {
         .json({ success: true, message: "Order is cancelled!" });
     }
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    res.status(200).json({ success: false, error: error.message });
   }
 };
 
@@ -273,8 +273,9 @@ exports.getOrder = async (req, res) => {
 
     const skipStage = { $skip: (pageNo - 1) * limit };
     const limitStage = { $limit: limit };
+    const sort = { $sort: { createdAt: -1 } };
 
-    const joinStage = {
+    const joinStageProducts = {
       $lookup: {
         from: "orderproducts", // The name of the Product collection in MongoDB
         localField: "_id",
@@ -282,21 +283,48 @@ exports.getOrder = async (req, res) => {
         as: "products",
       },
     };
+    const joinStageCustomer = {
+      $lookup: {
+        from: "customers", // The name of the customers collection in MongoDB
+        localField: "customerId",
+        foreignField: "_id",
+        as: "customer",
+      },
+    };
+
+    const joinStageUserId = {
+      $lookup: {
+        from: "users", // The name of the users collection in MongoDB
+        localField: "userId",
+        foreignField: "_id",
+        as: "user",
+      },
+    };
 
     const projectStage = {
       $project: {
-        _id: 0,
+        _id: 1,
         customerId: 1,
         userId: 1,
         totalAmount: 1,
         status: 1,
         products: 1,
+        customer: 1,
+        "user.name": 1,
       },
     };
 
     const facet = {
       $facet: {
-        order: [skipStage, limitStage, joinStage, projectStage],
+        order: [
+          sort,
+          skipStage,
+          limitStage,
+          joinStageProducts,
+          joinStageCustomer,
+          joinStageUserId,
+          projectStage,
+        ],
         totalCount: [{ $count: "count" }],
       },
     };

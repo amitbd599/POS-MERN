@@ -1,25 +1,34 @@
 import React, { useEffect, useRef, useState } from "react";
+import Select from "react-select";
 import ProductStore from "../store/ProductStore";
 import { ErrorToast, IsEmpty } from "../helper/helper";
 import { useNavigate } from "react-router-dom";
 import CategoryStore from "../store/CategoryStore";
 const CreateProduct = () => {
   let { productCreateRequest } = ProductStore();
-  let { allCategoryRequest, allCategory } = CategoryStore();
-
+  let { allCategoryRequest } = CategoryStore();
   let { nameRef, descriptionRef, priceRef, skuRef, stockQuantityRef } =
     useRef();
+  let [category, setCategory] = useState([]);
   let navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
-      await allCategoryRequest();
+      await allCategoryRequest().then((res) => {
+        // convert it for use React Select npm
+        const data = res?.map((item) => ({
+          ...item,
+          value: item._id,
+          label: item.name,
+        }));
+        setCategory(data);
+      });
     })();
   }, [allCategoryRequest]);
 
   const [categoryId, setCategoryId] = useState("");
-  const handleChange = (event) => {
-    setCategoryId(event.target.value);
+  const handleChange = (option) => {
+    setCategoryId(option.value);
   };
 
   const customerCreate = async () => {
@@ -95,19 +104,14 @@ const CreateProduct = () => {
             </div>
             <div className='col-md-6'>
               <label className='form-label'>Product category*</label>
-              <select
-                className='form-select'
-                aria-label='Default select example'
-                value={categoryId || ""}
+
+              <Select
+                className='basic-single'
+                classNamePrefix='select'
+                name='category'
+                options={category}
                 onChange={handleChange}
-              >
-                <option selected=''>Open this select menu</option>
-                {allCategory?.map((item, index) => (
-                  <option key={index} value={item?._id}>
-                    {item?.name}
-                  </option>
-                ))}
-              </select>
+              />
             </div>
             <div className='col-md-6'>
               <label className='form-label'>Product Stock Quantity*</label>
