@@ -73,7 +73,7 @@ function App() {
 
         {/* orders */}
         <Route exact path='/create-order' element={<CreateOrderPage />} />
-        <Route exact path='/all-order' element={<AllOrdersPage />} />
+        <Route exact path='/all-order/:pageNo' element={<AllOrdersPage />} />
         <Route exact path='/view-order/:id' element={<ViewOrderPage />} />
 
         {/* backup */}

@@ -317,3 +317,9 @@ table.dataTable td.dt-type-date {
 .object-fit {
   object-fit: contain;
 }
+
+.order_table.one {
+  .order__card {
+    min-height: 71vh;
+  }
+}

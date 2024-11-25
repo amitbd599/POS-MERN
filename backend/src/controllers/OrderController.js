@@ -14,10 +14,18 @@ exports.orderCreate = async (req, res) => {
     const { customerId, userId, products } = req.body;
 
     const customer = await CustomersModel.findById(customerId);
+
+    // check if customer not exists
     if (!customer)
       return res
-        .status(404)
-        .json({ success: false, message: "Customer not found" });
+        .status(200)
+        .json({ success: false, message: "Customer not found." });
+
+    // check if products not exists
+    if (products.length <= 0)
+      return res
+        .status(200)
+        .json({ success: false, message: "No product select." });
 
     // Calculate total amount
     let totalAmount = 0;
@@ -28,7 +36,7 @@ exports.orderCreate = async (req, res) => {
       });
 
       if (!product || product.stockQuantity < item.quantity) {
-        return res.status(400).json({
+        return res.status(200).json({
           success: false,
           message: "Product out of stock or does not exist",
         });
@@ -42,8 +50,6 @@ exports.orderCreate = async (req, res) => {
       newProducts.push(newProduct);
       totalAmount += product.price * item.quantity;
     }
-
-    console.log(newProducts);
 
     // Create order
     const order = await OrdersModel.create(
@@ -85,10 +91,14 @@ exports.orderCreate = async (req, res) => {
     }
 
     await session.commitTransaction();
-    res.status(201).json({ success: true, data: order });
+    res.status(200).json({
+      success: true,
+      data: order,
+      message: "Order create successfully.",
+    });
   } catch (error) {
     await session.abortTransaction();
-    res.status(400).json({ success: false, error: error.toString() });
+    res.status(200).json({ success: false, error: error.toString() });
   } finally {
     // End the session
     session.endSession();

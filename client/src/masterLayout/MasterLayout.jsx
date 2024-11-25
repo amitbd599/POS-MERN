@@ -273,7 +273,7 @@ const MasterLayout = ({ children }) => {
                 </li>
                 <li>
                   <NavLink
-                    to='/all-order'
+                    to='/all-order/1'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
