@@ -1,7 +1,7 @@
 import React from "react";
 import MasterLayout from "../masterLayout/MasterLayout";
 import Breadcrumb from "../components/Breadcrumb";
-import DashBoardLayerTwo from "../components/DashBoardLayerTwo";
+import DashBoard from "../components/DashBoard";
 
 const HomePage = () => {
   return (
@@ -12,7 +12,7 @@ const HomePage = () => {
         <Breadcrumb title='AI' />
 
         {/* DashBoardLayerTwo */}
-        <DashBoardLayerTwo />
+        <DashBoard />
       </MasterLayout>
     </>
   );

@@ -323,3 +323,7 @@ table.dataTable td.dt-type-date {
     min-height: 71vh;
   }
 }
+
+.apexcharts-yaxis {
+  transform: translateX(30px);
+}

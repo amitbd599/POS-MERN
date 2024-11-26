@@ -11,8 +11,6 @@ const LoadingStore = create((set) => ({
           ? state.activeRequests + 1
           : state.activeRequests - 1;
 
-      console.log(state);
-
       return {
         activeRequests: updatedRequests,
         loading: updatedRequests > 0, // Set `loading` based on active requests

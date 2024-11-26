@@ -7,6 +7,7 @@ const PaymentController = require("../controllers/PaymentController.js");
 const CustomerController = require("../controllers/CustomerController.js");
 const CategoriesController = require("../controllers/CategoriesController.js");
 const BackupController = require("../controllers/BackupController.js");
+const DashboardController = require("../controllers/DashboardController.js");
 const middlewares = require("../middlewares/AuthVerification.js");
 const RoleBasedAccess = require("../middlewares/RoleBasedAccess.js");
 const { upload } = require("../middlewares/UploadMiddleware.js");
@@ -149,12 +150,19 @@ router.post(
 );
 router.get("/all-orders/:item/:pageNo", middlewares, OrderController.getOrder);
 
-// Payment routes
+//! Payment routes
 router.post(
   "/payments-create",
   middlewares,
   RoleBasedAccess("admin", "editor"),
   PaymentController.paymentCreate
+);
+
+//! dashboard data
+router.get(
+  "/dashboard-data",
+  middlewares,
+  DashboardController.getDashboardData
 );
 
 //! Backup routes
