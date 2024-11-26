@@ -2,28 +2,27 @@ import axios from "axios";
 import { create } from "zustand";
 import { baseURL } from "../helper/config";
 import { ErrorToast, SuccessToast, unAuthorize } from "../helper/helper";
-
+import LoadingStore from "./LoadingStore";
+const { loadingRequest } = LoadingStore.getState();
 const ProductStore = create((set) => ({
-  loading: false,
-
   //! create product api
   productCreateRequest: async (reqBody) => {
     try {
-      set({ loading: true });
+      loadingRequest(true);
       let res = await axios.post(baseURL + "/create-product", reqBody, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         SuccessToast(res?.data?.message);
         return true;
       } else {
-        set({ loading: false });
+        loadingRequest(false);
         ErrorToast(res?.data?.message);
         return false;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },
@@ -31,20 +30,21 @@ const ProductStore = create((set) => ({
   //! update product by id
   productUpdateByIdRequest: async (reqBody, id) => {
     try {
+      loadingRequest(true);
       let res = await axios.post(baseURL + "/update-product/" + id, reqBody, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         SuccessToast(res?.data?.message);
         return true;
       } else {
-        set({ loading: false });
+        loadingRequest(false);
         ErrorToast(res?.data?.message);
         return false;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },
@@ -53,7 +53,7 @@ const ProductStore = create((set) => ({
   allProduct: [],
   allProductRequest: async (perPage, pageNo) => {
     try {
-      set({ loading: true });
+      loadingRequest(true);
       let res = await axios.get(
         baseURL + "/read-product/" + perPage + "/" + pageNo,
         {
@@ -61,12 +61,12 @@ const ProductStore = create((set) => ({
         }
       );
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         set({ allProduct: res?.data?.data });
         return res?.data?.data;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },
@@ -74,16 +74,16 @@ const ProductStore = create((set) => ({
   //! product details by id -- done
   productDetailsByIdRequest: async (id) => {
     try {
-      set({ loading: true });
+      loadingRequest(true);
       let res = await axios.get(baseURL + "/read-product-by-id/" + id, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         return res?.data?.data;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },
@@ -91,21 +91,21 @@ const ProductStore = create((set) => ({
   //! delete product api
   deleteProductRequest: async (id) => {
     try {
-      set({ loading: true });
+      loadingRequest(true);
       let res = await axios.delete(baseURL + "/delete-product/" + id, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         SuccessToast(res?.data?.message);
         return true;
       } else {
-        set({ loading: false });
+        loadingRequest(false);
         ErrorToast(res?.data?.message);
         return false;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },

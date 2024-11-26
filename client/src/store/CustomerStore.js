@@ -2,28 +2,27 @@ import axios from "axios";
 import { create } from "zustand";
 import { baseURL } from "../helper/config";
 import { ErrorToast, SuccessToast, unAuthorize } from "../helper/helper";
-
+import LoadingStore from "./LoadingStore";
+const { loadingRequest } = LoadingStore.getState();
 const CustomerStore = create((set) => ({
-  loading: false,
-
   //! create customer api
   customerCreateRequest: async (reqBody) => {
     try {
-      set({ loading: true });
+      loadingRequest(true);
       let res = await axios.post(baseURL + "/customer-create", reqBody, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         SuccessToast(res?.data?.message);
         return true;
       } else {
-        set({ loading: false });
+        loadingRequest(false);
         ErrorToast(res?.data?.message);
         return false;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },
@@ -31,20 +30,21 @@ const CustomerStore = create((set) => ({
   //! update customer by id
   customerUpdateByIdRequest: async (reqBody, id) => {
     try {
+      loadingRequest(true);
       let res = await axios.post(baseURL + "/update-customer/" + id, reqBody, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         SuccessToast(res?.data?.message);
         return true;
       } else {
-        set({ loading: false });
+        loadingRequest(false);
         ErrorToast(res?.data?.message);
         return false;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },
@@ -53,7 +53,7 @@ const CustomerStore = create((set) => ({
   allCustomer: [],
   allCustomerRequest: async (perPage, pageNo) => {
     try {
-      set({ loading: true });
+      loadingRequest(true);
       let res = await axios.get(
         baseURL + "/all-customers/" + perPage + "/" + pageNo,
         {
@@ -61,12 +61,12 @@ const CustomerStore = create((set) => ({
         }
       );
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         set({ allCustomer: res?.data?.data });
         return res?.data?.data;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },
@@ -74,16 +74,16 @@ const CustomerStore = create((set) => ({
   //! customer details by id -- done
   customerDetailsByIdRequest: async (id) => {
     try {
-      set({ loading: true });
+      loadingRequest(true);
       let res = await axios.get(baseURL + "/read-customer-by-id/" + id, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         return res?.data?.data;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },
@@ -91,21 +91,21 @@ const CustomerStore = create((set) => ({
   //! delete customer api
   deleteCustomerRequest: async (id) => {
     try {
-      set({ loading: true });
+      loadingRequest(true);
       let res = await axios.delete(baseURL + "/delete-customer/" + id, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         SuccessToast(res?.data?.message);
         return true;
       } else {
-        set({ loading: false });
+        loadingRequest(false);
         ErrorToast(res?.data?.message);
         return false;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },

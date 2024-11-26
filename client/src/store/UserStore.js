@@ -2,28 +2,27 @@ import axios from "axios";
 import { create } from "zustand";
 import { baseURL } from "../helper/config";
 import { ErrorToast, SuccessToast, unAuthorize } from "../helper/helper";
-
+import LoadingStore from "./LoadingStore";
+const { loadingRequest } = LoadingStore.getState();
 const UserStore = create((set) => ({
-  loading: false,
-
   //! Register-user api
   registerUserRequest: async (reqBody) => {
     try {
-      set({ loading: true });
+      loadingRequest(true);
       let res = await axios.post(baseURL + "/register-profile", reqBody, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         SuccessToast(res?.data?.message);
         return true;
       } else {
-        set({ loading: false });
+        loadingRequest(false);
         ErrorToast(res?.data?.message);
         return false;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       ErrorToast("Something went wrong!");
       return false;
     }
@@ -43,7 +42,7 @@ const UserStore = create((set) => ({
         return false;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },
@@ -51,21 +50,21 @@ const UserStore = create((set) => ({
   //! login-user api -- done
   loginUserRequest: async (reqBody) => {
     try {
-      set({ loading: true });
+      loadingRequest(true);
       let res = await axios.post(baseURL + "/login-profile", reqBody, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         SuccessToast(res?.data?.message);
         return true;
       } else {
-        set({ loading: false });
+        loadingRequest(false);
         ErrorToast(res?.data?.message);
         return false;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
     }
   },
 
@@ -73,16 +72,16 @@ const UserStore = create((set) => ({
   profileDetails: null,
   profileDetailsRequest: async () => {
     try {
-      // set({ loading: true });
+      loadingRequest(true);
       let res = await axios.get(baseURL + "/read-profile", {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
-        // set({ loading: false });
+        loadingRequest(false);
         set({ profileDetails: res?.data?.data });
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },
@@ -91,17 +90,17 @@ const UserStore = create((set) => ({
   profileDetailsById: null,
   ProfileDetailsByIdRequest: async (id) => {
     try {
-      set({ loading: true });
+      loadingRequest(true);
       let res = await axios.get(baseURL + "/read-profile-by-id/" + id, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         set({ profileDetailsById: res?.data?.data });
         return res?.data?.data;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },
@@ -109,20 +108,21 @@ const UserStore = create((set) => ({
   //! update profile
   profileUpdate: async (reqBody) => {
     try {
+      loadingRequest(true);
       let res = await axios.post(baseURL + "/update-profile", reqBody, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         SuccessToast(res?.data?.message);
         return true;
       } else {
-        set({ loading: false });
+        loadingRequest(false);
         ErrorToast(res?.data?.message);
         return false;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },
@@ -130,6 +130,7 @@ const UserStore = create((set) => ({
   //! update profile by id
   profileUpdateByIdRequest: async (reqBody, id) => {
     try {
+      loadingRequest(true);
       let res = await axios.post(
         baseURL + "/update-profile-by-id/" + id,
         reqBody,
@@ -138,16 +139,16 @@ const UserStore = create((set) => ({
         }
       );
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         SuccessToast(res?.data?.message);
         return true;
       } else {
-        set({ loading: false });
+        loadingRequest(false);
         ErrorToast(res?.data?.message);
         return false;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },
@@ -156,7 +157,7 @@ const UserStore = create((set) => ({
   allProfileDetails: null,
   allProfileDetailsRequest: async (perPage, pageNo) => {
     try {
-      set({ loading: true });
+      loadingRequest(true);
       let res = await axios.get(
         baseURL + "/read-all-profile/" + perPage + "/" + pageNo,
         {
@@ -164,11 +165,11 @@ const UserStore = create((set) => ({
         }
       );
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         set({ allProfileDetails: res?.data?.data });
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },
@@ -176,21 +177,21 @@ const UserStore = create((set) => ({
   //! delete profile
   deleteProfileRequest: async (id) => {
     try {
-      set({ loading: true });
+      loadingRequest(true);
       let res = await axios.delete(baseURL + "/delete-profile/" + id, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
-        set({ loading: false });
+        loadingRequest(false);
         SuccessToast(res?.data?.message);
         return true;
       } else {
-        set({ loading: false });
+        loadingRequest(false);
         ErrorToast(res?.data?.message);
         return false;
       }
     } catch (e) {
-      set({ loading: false });
+      loadingRequest(false);
       unAuthorize(e.status);
     }
   },
