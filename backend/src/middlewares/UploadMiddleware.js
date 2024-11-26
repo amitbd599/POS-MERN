@@ -8,4 +8,12 @@ const fileStorageEngine = multer.diskStorage({
   },
 });
 
-module.exports.upload = multer({ storage: fileStorageEngine });
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === "application/json") {
+    cb(null, true);
+  } else {
+    cb(new Error("Only JSON files are allowed"), false);
+  }
+};
+
+module.exports.upload = multer({ storage: fileStorageEngine, fileFilter });

@@ -1,14 +1,23 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import BackupStore from "../store/BackupStore";
 import { backupURL } from "../helper/config";
 
 const BackupDatabase = () => {
-  let { exportCreateRequest } = BackupStore();
+  let { importCreateRequest } = BackupStore();
 
-  let createExport = async () => {
-    await exportCreateRequest();
+  const [file, setFile] = useState(null);
+
+  const handleFileChange = (e) => setFile(e.target.files[0]);
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", file);
+
+    console.log(file);
+
+    await importCreateRequest(formData);
   };
   return (
     <div className='row'>
@@ -18,18 +27,19 @@ const BackupDatabase = () => {
             <h6 className='text-lg fw-semibold mb-0'>Import Database</h6>
           </div>
           <div className='card-body p-24'>
-            <label
-              htmlFor='basic-upload'
-              className='border border-primary-600 fw-medium text-primary-600 px-16 py-12 radius-12 d-inline-flex align-items-center gap-2 bg-hover-primary-50'
-            >
-              <Icon icon='solar:upload-linear' className='text-xl' />
-              Click to upload
-            </label>
             <input
               type='file'
               className='form-control w-auto mt-24 form-control-lg'
               id='basic-upload'
+              accept='.json'
+              onChange={handleFileChange}
             />
+            <button
+              onClick={handleUpload}
+              className='btn btn-primary-600 radius-8 px-20 py-11 mt-16'
+            >
+              Import JSON file
+            </button>
           </div>
         </div>
       </div>
