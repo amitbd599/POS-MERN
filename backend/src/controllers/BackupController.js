@@ -1,10 +1,10 @@
 const fs = require("fs");
-
+const path = require("path");
 const CategoriesModel = require("../models/CategoriesModel");
 const UserModel = require("../models/UserModel");
 const CustomersModel = require("../models/CustomersModel");
-const TransactionsModel = require("../models/TransactionsModel");
 const OrdersModel = require("../models/OrdersModel");
+const OrderProductsModel = require("../models/OrderProductsModel");
 const PaymentsModel = require("../models/PaymentsModel");
 const ProductsModel = require("../models/ProductsModel");
 
@@ -13,8 +13,8 @@ exports.exportData = async (req, res) => {
     // Fetch all data from the collection
     const categories = await CategoriesModel.find({});
     const customers = await CustomersModel.find({});
-    const transactions = await InventoryTransactionsModel.find({});
     const orders = await OrdersModel.find({});
+    const orderproducts = await OrderProductsModel.find({});
     const payments = await PaymentsModel.find({});
     const products = await ProductsModel.find({});
     const user = await UserModel.find({});
@@ -26,13 +26,13 @@ exports.exportData = async (req, res) => {
         day: "numeric",
         year: "numeric",
       })
-      .replace(/ /g, "-");
+      .replace(/ /g, " ");
 
     const data = {
       categories,
       customers,
       orders,
-      transactions,
+      orderproducts,
       payments,
       products,
       user,
@@ -43,17 +43,19 @@ exports.exportData = async (req, res) => {
       "../../backup",
       `backup__${formattedDate}.json`
     );
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
 
-    res.download(filePath, "backup.json", (err) => {
+    // close the file when developing mode
+    // fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
+
+    res.download(filePath, `backup__${formattedDate}.json`, (err) => {
       if (err) {
         console.log(err);
-        res.status(500).send("Error downloading the file");
+        res.status(200).send({ message: "Error downloading the file" });
       }
     });
   } catch (error) {
     console.error("Error exporting data:", error);
-    res.status(500).json({ message: "Failed to export data" });
+    res.status(200).json({ message: "Failed to export data" });
   }
 };
 
@@ -79,14 +81,14 @@ exports.importData = async (req, res) => {
       await CustomersModel.insertMany(data.customers);
     }
 
-    if (data.transactions) {
-      await TransactionsModel.deleteMany(); // Optional: Clear existing data
-      await TransactionsModel.insertMany(data.transactions);
-    }
-
     if (data.orders) {
       await OrdersModel.deleteMany(); // Optional: Clear existing data
       await OrdersModel.insertMany(data.orders);
+    }
+
+    if (data.orderproducts) {
+      await OrderProductsModel.deleteMany(); // Optional: Clear existing data
+      await OrderProductsModel.insertMany(data.orders);
     }
 
     if (data.payments) {

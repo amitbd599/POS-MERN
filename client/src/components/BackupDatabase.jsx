@@ -1,7 +1,15 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React from "react";
+import { Link } from "react-router-dom";
+import BackupStore from "../store/BackupStore";
+import { backupURL } from "../helper/config";
 
 const BackupDatabase = () => {
+  let { exportCreateRequest } = BackupStore();
+
+  let createExport = async () => {
+    await exportCreateRequest();
+  };
   return (
     <div className='row'>
       <div className='col-md-6'>
@@ -31,12 +39,12 @@ const BackupDatabase = () => {
             <h6 className='text-lg fw-semibold mb-0'>Export Database</h6>
           </div>
           <div className='card-body p-24'>
-            <button
-              type='button'
+            <Link
+              to={backupURL}
               className='btn btn-primary-600 radius-8 px-20 py-11'
             >
               Create a database backup
-            </button>
+            </Link>
           </div>
         </div>
       </div>
