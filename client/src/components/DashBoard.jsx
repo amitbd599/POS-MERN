@@ -8,6 +8,7 @@ const DashBoard = () => {
   const [chartSeries, setChartSeries] = useState([
     { name: "This month", data: [] },
   ]);
+  const [barChartSeries, setBarChartSeries] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -20,6 +21,23 @@ const DashBoard = () => {
               data: res?.orderModelChart,
             },
           ]);
+
+          console.log(res?.ordersByStatusData?.Completed?.count);
+
+          const seriesData = [
+            {
+              x: "Completed",
+              y: res?.ordersByStatusData?.Completed?.count || 0,
+            },
+            { x: "Pending", y: res?.ordersByStatusData?.Pending?.count || 0 },
+            { x: "Returned", y: res?.ordersByStatusData?.Returned?.count || 0 },
+            {
+              x: "Cancelled",
+              y: res?.ordersByStatusData?.Cancelled?.count || 0,
+            },
+          ];
+
+          setBarChartSeries([{ name: "Order status", data: seriesData }]);
         }
       });
     })();
@@ -140,6 +158,60 @@ const DashBoard = () => {
           color: "#487FFF40",
         },
       },
+    },
+  };
+
+  let barChartOptions = {
+    chart: {
+      type: "bar",
+      height: 264,
+      toolbar: {
+        show: false,
+      },
+    },
+    plotOptions: {
+      bar: {
+        borderRadius: 6,
+        horizontal: false,
+        columnWidth: 25,
+        endingShape: "rounded",
+      },
+    },
+    dataLabels: {
+      enabled: true,
+    },
+    fill: {
+      type: "gradient",
+      colors: ["#487FFF"], // Set the starting color (top color) here
+      gradient: {
+        shade: "light", // Gradient shading type
+        type: "vertical", // Gradient direction (vertical)
+        shadeIntensity: 0.5, // Intensity of the gradient shading
+        gradientToColors: ["#487FFF"], // Bottom gradient color (with transparency)
+        inverseColors: false, // Do not invert colors
+        opacityFrom: 1, // Starting opacity
+        opacityTo: 1, // Ending opacity
+        stops: [0, 100],
+      },
+    },
+    grid: {
+      show: false,
+      borderColor: "#487FFF",
+      strokeDashArray: 4, // Use a number for dashed style
+      position: "back",
+      padding: {
+        top: -10,
+        right: -10,
+        bottom: -10,
+        left: -10,
+      },
+    },
+    xaxis: {
+      type: "category",
+      categories: ["Completed", "Pending", "Returned", "Cancelled"],
+    },
+    yaxis: {
+      show: false,
     },
   };
 
@@ -503,6 +575,30 @@ const DashBoard = () => {
                 options={chartOptions}
                 series={chartSeries}
                 type='area'
+                height={264}
+              />
+            </div>
+          </div>
+        </div>
+        <div className='col-xxl-3 col-xl-6'>
+          <div className='card h-100 radius-8 border'>
+            <div className='card-body p-24'>
+              <h6 className='mb-12 fw-semibold text-lg mb-16'>
+                Order Bar Chart
+              </h6>
+              <div className='d-flex align-items-center gap-2 mb-20'>
+                <p className='fw-semibold mb-0'>Pending order</p>
+                <p className='text-sm mb-0'>
+                  <span className='bg-danger-focus border br-danger px-8 py-2 rounded-pill fw-semibold text-danger-main text-sm d-inline-flex align-items-center gap-1'>
+                    {dashboardData.ordersByStatusData?.Pending?.count || 0}
+                    <Icon icon='iconamoon:arrow-down-2-fill' className='icon' />
+                  </span>
+                </p>
+              </div>
+              <ReactApexChart
+                options={barChartOptions}
+                series={barChartSeries}
+                type='bar'
                 height={264}
               />
             </div>

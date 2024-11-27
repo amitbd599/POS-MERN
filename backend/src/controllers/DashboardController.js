@@ -7,6 +7,7 @@ const UserModel = require("../models/UserModel");
 // get all data
 exports.getDashboardData = async (req, res) => {
   try {
+    //! === 1 === categories
     let categories = await CategoriesModel.aggregate([
       {
         $facet: {
@@ -23,6 +24,7 @@ exports.getDashboardData = async (req, res) => {
       },
     ]);
 
+    //! === 2 === customers
     let customers = await CustomersModel.aggregate([
       {
         $facet: {
@@ -40,6 +42,8 @@ exports.getDashboardData = async (req, res) => {
         },
       },
     ]);
+
+    //! === 3 === orders
     let orders = await OrdersModel.aggregate([
       {
         $facet: {
@@ -104,6 +108,7 @@ exports.getDashboardData = async (req, res) => {
       },
     ]);
 
+    //! === 4 === ordersByStatus
     const ordersByStatus = await OrdersModel.aggregate([
       {
         $group: {
@@ -122,6 +127,7 @@ exports.getDashboardData = async (req, res) => {
       };
     });
 
+    //! === 5 === products
     let products = await ProductsModel.aggregate([
       {
         $facet: {
@@ -154,6 +160,8 @@ exports.getDashboardData = async (req, res) => {
         },
       },
     ]);
+
+    //! === 6 === users
     let users = await UserModel.aggregate([
       {
         $facet: {
@@ -192,6 +200,7 @@ exports.getDashboardData = async (req, res) => {
       },
     ]);
 
+    //! === 7 === monthlyOrderData
     let monthlyOrderData = await OrdersModel.aggregate([
       {
         $group: {
@@ -203,7 +212,6 @@ exports.getDashboardData = async (req, res) => {
         $sort: { _id: 1 }, // Sort by month (1 = Jan, 12 = Dec)
       },
     ]);
-
     // Map data to ensure all 12 months are represented
     const orderModelChart = Array(12).fill(0); // Default 0 for all months
     monthlyOrderData.forEach((data) => {
