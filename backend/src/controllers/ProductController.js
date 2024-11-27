@@ -53,7 +53,7 @@ exports.getProduct = async (req, res) => {
     const pageNo = parseInt(req.params.pageNo); // Current page number
 
     if (isNaN(limit) || isNaN(pageNo)) {
-      return res.status(400).json({ message: "Invalid parameters" });
+      return res.status(200).json({ message: "Invalid parameters" });
     }
 
     const skip = (pageNo - 1) * limit;
@@ -88,7 +88,7 @@ exports.getProduct = async (req, res) => {
     ]);
     res.status(200).json({ success: true, data: result[0] });
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    res.status(200).json({ success: false, error: error.message });
   }
 };
 
@@ -122,13 +122,11 @@ exports.deleteProduct = async (req, res) => {
   try {
     const id = new ObjectId(req.params.id);
     const result = await ProductsModel.deleteOne({ _id: id });
-    res
-      .status(200)
-      .json({
-        success: true,
-        data: result,
-        message: "Product delete success!",
-      });
+    res.status(200).json({
+      success: true,
+      data: result,
+      message: "Product delete success!",
+    });
   } catch (error) {
     res.status(200).json({ success: false, error: error.message });
   }
@@ -153,6 +151,6 @@ exports.productReadByID = async (req, res) => {
     let data = await ProductsModel.aggregate([MatchStage, project]);
     res.status(200).json({ success: true, data: data[0] });
   } catch (e) {
-    res.status(200).json({ status: "error", error: e.toString() });
+    res.status(200).json({ success: false, error: e.toString() });
   }
 };

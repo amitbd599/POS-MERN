@@ -195,22 +195,22 @@ exports.returnOrder = async (req, res) => {
     //! Ensure the order isn't already returned
     if (OrderProducts[0].status === "Returned") {
       return res
-        .status(400)
+        .status(200)
         .json({ success: false, message: "Order already returned" });
     }
 
     //! Check if the order has been Cancelled/Returned/Pending
     if (OrderProducts[0].status === "Cancelled") {
       return res
-        .status(400)
+        .status(200)
         .json({ success: false, message: "Order is already cancelled!" });
     } else if (OrderProducts[0].status === "Pending") {
       return res
-        .status(400)
+        .status(200)
         .json({ success: false, message: "Order is already pending!" });
     } else if (OrderProducts[0].status === "Returned") {
       return res
-        .status(400)
+        .status(200)
         .json({ success: false, message: "Order is already returned!" });
     }
 
@@ -241,7 +241,7 @@ exports.returnOrder = async (req, res) => {
     }
 
     if (payment.status === "Refunded") {
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         message: "Order Return successfully & Payment already refunded",
       });
@@ -257,7 +257,7 @@ exports.returnOrder = async (req, res) => {
       message: "Order returned and payment refunded successfully",
     });
   } catch (error) {
-    res.status(400).json({ success: false, error: error.toString() });
+    res.status(200).json({ success: false, error: error.toString() });
   }
 };
 
@@ -268,7 +268,7 @@ exports.getOrder = async (req, res) => {
     const pageNo = parseInt(req.params.pageNo); // Current page number
 
     if (isNaN(limit) || isNaN(pageNo)) {
-      return res.status(400).json({ message: "Invalid parameters" });
+      return res.status(200).json({ message: "Invalid parameters" });
     }
 
     const skipStage = { $skip: (pageNo - 1) * limit };
@@ -339,6 +339,6 @@ exports.getOrder = async (req, res) => {
     const result = await OrdersModel.aggregate([facet, project]);
     res.status(200).json({ success: true, data: result[0] });
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    res.status(200).json({ success: false, error: error.message });
   }
 };

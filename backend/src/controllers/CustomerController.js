@@ -44,7 +44,9 @@ exports.getAllCustomer = async (req, res) => {
     const pageNo = parseInt(req.params.pageNo); // Current page number
 
     if (isNaN(limit) || isNaN(pageNo)) {
-      return res.status(400).json({ message: "Invalid parameters" });
+      return res
+        .status(200)
+        .json({ success: true, message: "Invalid parameters" });
     }
 
     const skip = (pageNo - 1) * limit;
@@ -140,6 +142,6 @@ exports.customerReadByID = async (req, res) => {
     let data = await CustomersModel.aggregate([MatchStage, project]);
     res.status(200).json({ success: true, data: data[0] });
   } catch (e) {
-    res.status(200).json({ status: "error", error: e.toString() });
+    res.status(200).json({ success: false, error: e.toString() });
   }
 };

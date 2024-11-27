@@ -272,7 +272,7 @@ const DashBoard = () => {
   };
 
   // console.log(dashboardData.categories?.[0]?.totalCategories);
-  console.log(dashboardData.users?.[0]?.recentUsers);
+  console.log(dashboardData.products?.[0]?.outOfStockProducts);
 
   return (
     <section>
@@ -358,17 +358,15 @@ const DashBoard = () => {
                 <div className='w-50-px h-50-px bg-info rounded-circle d-flex justify-content-center align-items-center'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
-                    xmlnsXlink='http://www.w3.org/1999/xlink'
-                    aria-hidden='true'
-                    role='img'
-                    className='iconify iconify--fluent text-white text-2xl mb-0'
                     width='1em'
                     height='1em'
-                    viewBox='0 0 20 20'
+                    viewBox='0 0 1024 1024'
+                    className='iconify iconify--gridicons text-white text-2xl mb-0'
                   >
                     <path
                       fill='currentColor'
-                      d='M6.75 10a3.25 3.25 0 1 0 0-6.5a3.25 3.25 0 0 0 0 6.5m5.687 5.145c.53.217 1.204.355 2.062.355c4 0 4-3 4-3A1.5 1.5 0 0 0 17 11h-4.628c.393.476.629 1.085.629 1.75v.356a3 3 0 0 1-.017.252a5 5 0 0 1-.546 1.787M17 7.5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0M1.5 13a2 2 0 0 1 2-2H10a2 2 0 0 1 2 2s0 4-5.25 4s-5.25-4-5.25-4m11.5.106l-.003.064Z'
+                      fill-rule='evenodd'
+                      d='M464 144c8.837 0 16 7.163 16 16v304c0 8.836-7.163 16-16 16H160c-8.837 0-16-7.164-16-16V160c0-8.837 7.163-16 16-16zm-52 68H212v200h200zm493.333 87.686c6.248 6.248 6.248 16.379 0 22.627l-181.02 181.02c-6.248 6.248-16.378 6.248-22.627 0l-181.019-181.02c-6.248-6.248-6.248-16.379 0-22.627l181.02-181.02c6.248-6.248 16.378-6.248 22.627 0zm-84.853 11.313L713 203.52L605.52 311L713 418.48zM464 544c8.837 0 16 7.164 16 16v304c0 8.837-7.163 16-16 16H160c-8.837 0-16-7.163-16-16V560c0-8.836 7.163-16 16-16zm-52 68H212v200h200zm452-68c8.837 0 16 7.164 16 16v304c0 8.837-7.163 16-16 16H560c-8.837 0-16-7.163-16-16V560c0-8.836 7.163-16 16-16zm-52 68H612v200h200z'
                     />
                   </svg>
                 </div>
@@ -377,7 +375,7 @@ const DashBoard = () => {
           </div>
         </div>
         <div className='col'>
-          <div className='card shadow-none border bg-gradient-start-4 h-100'>
+          <div className='card shadow-none border bg-gradient-start-1 h-100'>
             <div className='card-body p-20'>
               <div className='d-flex flex-wrap align-items-center justify-content-between gap-3'>
                 <div>
@@ -414,7 +412,7 @@ const DashBoard = () => {
           </div>
         </div>
         <div className='col'>
-          <div className='card shadow-none border bg-gradient-start-5 h-100'>
+          <div className='card shadow-none border bg-gradient-start-2 h-100'>
             <div className='card-body p-20'>
               <div className='d-flex flex-wrap align-items-center justify-content-between gap-3'>
                 <div>
@@ -447,7 +445,7 @@ const DashBoard = () => {
           </div>
         </div>
         <div className='col'>
-          <div className='card shadow-none border bg-gradient-start-5 h-100'>
+          <div className='card shadow-none border bg-gradient-start-3 h-100'>
             <div className='card-body p-20'>
               <div className='d-flex flex-wrap align-items-center justify-content-between gap-3'>
                 <div>
@@ -481,7 +479,7 @@ const DashBoard = () => {
         </div>
 
         <div className='col'>
-          <div className='card shadow-none border bg-gradient-start-5 h-100'>
+          <div className='card shadow-none border bg-gradient-start-1 h-100'>
             <div className='card-body p-20'>
               <div className='d-flex flex-wrap align-items-center justify-content-between gap-3'>
                 <div>
@@ -514,7 +512,7 @@ const DashBoard = () => {
           </div>
         </div>
         <div className='col'>
-          <div className='card shadow-none border bg-gradient-start-5 h-100'>
+          <div className='card shadow-none border bg-gradient-start-2 h-100'>
             <div className='card-body p-20'>
               <div className='d-flex flex-wrap align-items-center justify-content-between gap-3'>
                 <div>
@@ -547,7 +545,7 @@ const DashBoard = () => {
           </div>
         </div>
         <div className='col'>
-          <div className='card shadow-none border bg-gradient-start-5 h-100'>
+          <div className='card shadow-none border bg-gradient-start-3 h-100'>
             <div className='card-body p-20'>
               <div className='d-flex flex-wrap align-items-center justify-content-between gap-3'>
                 <div>
@@ -621,16 +619,15 @@ const DashBoard = () => {
                 <h6 className='mb-0'>
                   ৳ {dashboardData.orders?.[0]?.totalAmount}
                 </h6>
-                <span className='text-sm fw-semibold rounded-pill bg-success-focus text-success-main border br-success px-8 py-4 line-height-1 d-flex align-items-center gap-1'>
-                  10% <Icon icon='bxs:up-arrow' className='text-xs' />
+                <span className='text-xs fw-medium'>
+                  Total order {dashboardData.orders?.[0]?.totalOrder}
                 </span>
-                <span className='text-xs fw-medium'>+ $1500 Per Day</span>
               </div>
               <ReactApexChart
                 options={chartOptions}
                 series={chartSeries}
                 type='area'
-                height={264}
+                height={270}
               />
             </div>
           </div>
@@ -654,7 +651,7 @@ const DashBoard = () => {
                 options={barChartOptions}
                 series={barChartSeries}
                 type='bar'
-                height={264}
+                height={200}
               />
             </div>
           </div>
@@ -670,23 +667,27 @@ const DashBoard = () => {
                   options={donutChartOptions}
                   series={donutChartSeries}
                   type='donut'
-                  height={264}
+                  height={200}
                 />
               </div>
 
               <ul className='d-flex flex-wrap align-items-center justify-content-between mt-3 gap-3'>
                 <li className='d-flex align-items-center gap-2'>
-                  <span className='w-12-px h-12-px radius-2 bg-primary-600' />
+                  <span className='w-12-px h-12-px radius-2 bg-success-600' />
                   <span className='text-secondary-light text-sm fw-normal'>
                     Admin:
-                    <span className='text-primary-light fw-semibold'>500</span>
                   </span>
                 </li>
                 <li className='d-flex align-items-center gap-2'>
                   <span className='w-12-px h-12-px radius-2 bg-yellow' />
                   <span className='text-secondary-light text-sm fw-normal'>
-                    Subscribed:
-                    <span className='text-primary-light fw-semibold'>300</span>
+                    Editor:
+                  </span>
+                </li>
+                <li className='d-flex align-items-center gap-2'>
+                  <span className='w-12-px h-12-px radius-2 bg-yellow' />
+                  <span className='text-secondary-light text-sm fw-normal'>
+                    Employee:
                   </span>
                 </li>
               </ul>
@@ -695,7 +696,7 @@ const DashBoard = () => {
         </div>
       </div>
 
-      <div className='row mb-20'>
+      <div className='row mb-28'>
         <div className='col-xxl-9 col-xl-12'>
           <div className='card h-100 mt-28'>
             <div className='card-body p-24'>
@@ -754,19 +755,19 @@ const DashBoard = () => {
         </div>
         <div className='col-xxl-3 col-xl-12'>
           <div className='card h-100 mt-28'>
-            <div className='card-body'>
+            <div className='card-body p-24'>
               <div className='d-flex align-items-center flex-wrap gap-2 justify-content-between'>
                 <h6 className='mb-2 fw-bold text-lg mb-0'>Admin panel</h6>
               </div>
-              <div className='mt-32'>
+              <div className='mt-32 d-grid gap-20'>
                 {dashboardData.users?.[0]?.recentUsers?.map((item, index) => (
                   <div
                     key={index}
-                    className='d-flex align-items-center justify-content-between gap-3 mb-24'
+                    className='d-flex align-items-center justify-content-between gap-3 '
                   >
                     <div className='d-flex align-items-center'>
                       <img
-                        src='assets/images/users/user1.png'
+                        src='/assets/img/user1.png'
                         alt=''
                         className='w-40-px h-40-px rounded-circle flex-shrink-0 me-12 overflow-hidden'
                       />
@@ -792,6 +793,104 @@ const DashBoard = () => {
                     </span>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='row mb-28'>
+        <div className='col-xxl-6'>
+          <div className='card h-100 mt-28'>
+            <div className='card-body p-24'>
+              <div className='d-flex align-items-center flex-wrap gap-2 justify-content-between mb-20'>
+                <h6 className='mb-2 fw-bold text-lg mb-0'>
+                  Recent add products
+                </h6>
+              </div>
+              <div className='table-responsive scroll-sm'>
+                <table className='table bordered-table mb-0'>
+                  <thead>
+                    <tr>
+                      <th scope='col'>Name</th>
+                      <th scope='col'>Price</th>
+                      <th scope='col'>SKU </th>
+                      <th scope='col'>Stock Quantity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dashboardData.products?.[0]?.recentProducts.map(
+                      (item, index) => (
+                        <tr key={index}>
+                          <td>
+                            <div className='d-flex align-items-center'>
+                              <div className='flex-grow-1'>
+                                <h6 className='text-md mb-0 fw-normal'>
+                                  {item?.name}
+                                </h6>
+                              </div>
+                            </div>
+                          </td>
+                          <td>{item?.price}</td>
+                          <td>{item?.sku}</td>
+
+                          <td className='text-center'>
+                            <span className='bg-success-focus text-success-main px-32 py-4 rounded-pill fw-medium text-sm'>
+                              {item?.stockQuantity}
+                            </span>
+                          </td>
+                        </tr>
+                      )
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='col-xxl-6'>
+          <div className='card h-100 mt-28'>
+            <div className='card-body p-24'>
+              <div className='d-flex align-items-center flex-wrap gap-2 justify-content-between mb-20'>
+                <h6 className='mb-2 fw-bold text-lg mb-0'>
+                  Stock out products
+                </h6>
+              </div>
+              <div className='table-responsive scroll-sm'>
+                <table className='table bordered-table mb-0'>
+                  <thead>
+                    <tr>
+                      <th scope='col'>Name</th>
+                      <th scope='col'>Price</th>
+                      <th scope='col'>SKU </th>
+                      <th scope='col'>Stock Quantity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dashboardData.products?.[0]?.outOfStockProducts.map(
+                      (item, index) => (
+                        <tr key={index}>
+                          <td>
+                            <div className='d-flex align-items-center'>
+                              <div className='flex-grow-1'>
+                                <h6 className='text-md mb-0 fw-normal'>
+                                  {item?.name}
+                                </h6>
+                              </div>
+                            </div>
+                          </td>
+                          <td>{item?.price}</td>
+                          <td>{item?.sku}</td>
+
+                          <td className='text-center'>
+                            <span className='bg-danger-focus text-danger-main px-32 py-4 rounded-pill fw-medium text-sm'>
+                              {item?.stockQuantity}
+                            </span>
+                          </td>
+                        </tr>
+                      )
+                    )}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

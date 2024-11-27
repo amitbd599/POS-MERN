@@ -46,7 +46,7 @@ exports.exportData = async (req, res) => {
     );
 
     // close the file when developing mode
-    // fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
 
     res.download(filePath, `backup__${formattedDate}.json`, (err) => {
       if (err) {
@@ -118,12 +118,10 @@ exports.importData = async (req, res) => {
     // Rollback transaction
     await session.abortTransaction();
     session.endSession();
-    res
-      .status(200)
-      .json({
-        success: false,
-        message: "Failed to import data",
-        error: error.toString(),
-      });
+    res.status(200).json({
+      success: false,
+      message: "Failed to import data",
+      error: error.toString(),
+    });
   }
 };

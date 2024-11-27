@@ -327,3 +327,7 @@ table.dataTable td.dt-type-date {
 .apexcharts-yaxis {
   transform: translateX(30px);
 }
+
+.logo__invoice {
+  width: 200px;
+}

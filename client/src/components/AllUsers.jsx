@@ -72,7 +72,10 @@ const AllUsers = () => {
 
   return (
     <div className='card h-100 p-0 radius-12'>
-      <div className='card-header border-bottom bg-base py-16 px-24 d-flex align-items-center flex-wrap gap-3 justify-content-end'>
+      <div className='card-header border-bottom bg-base py-16 px-24 d-flex align-items-center flex-wrap gap-3 justify-content-between'>
+        <div>
+          <h5 className='card-title mb-0'>All Role Users</h5>
+        </div>
         <Link
           to='/add-user'
           className='btn btn-primary text-sm btn-sm px-12 py-12 radius-8 d-flex align-items-center gap-2'

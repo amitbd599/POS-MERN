@@ -83,7 +83,7 @@ exports.login = async (req, res) => {
       });
     }
   } catch (e) {
-    res.status(200).json({ status: "error", error: e.toString() });
+    res.status(200).json({ success: false, error: e.toString() });
   }
 };
 
@@ -177,7 +177,7 @@ exports.userUpdateById = async (req, res) => {
         .json({ success: false, message: "User role update unsuccessful." });
     }
   } catch (e) {
-    res.status(200).json({ status: "error", data: e.toString() });
+    res.status(200).json({ success: false, data: e.toString() });
   }
 };
 
@@ -199,7 +199,7 @@ exports.userRead = async (req, res) => {
     let data = await UserModel.aggregate([MatchStage, project]);
     res.status(200).json({ success: true, data: data[0] });
   } catch (e) {
-    res.status(200).json({ status: "error", error: e.toString() });
+    res.status(200).json({ success: false, error: e.toString() });
   }
 };
 
@@ -224,7 +224,7 @@ exports.userReadByID = async (req, res) => {
     let data = await UserModel.aggregate([MatchStage, project]);
     res.status(200).json({ success: true, data: data[0] });
   } catch (e) {
-    res.status(200).json({ status: "error", error: e.toString() });
+    res.status(200).json({ success: false, error: e.toString() });
   }
 };
 
@@ -235,7 +235,7 @@ exports.getAllUser = async (req, res) => {
     const pageNo = parseInt(req.params.pageNo); // Current page number
 
     if (isNaN(limit) || isNaN(pageNo)) {
-      return res.status(400).json({ message: "Invalid parameters" });
+      return res.status(200).json({ message: "Invalid parameters" });
     }
 
     const skip = (pageNo - 1) * limit;
@@ -270,7 +270,7 @@ exports.getAllUser = async (req, res) => {
     const result = await UserModel.aggregate([facet, project]);
     res.status(200).json({ success: true, data: result[0] });
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    res.status(200).json({ success: false, error: error.message });
   }
 };
 
@@ -300,6 +300,6 @@ exports.deleteUser = async (req, res) => {
       res.status(200).json({ success: false, message: "User not found!" });
     }
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    res.status(200).json({ success: false, error: error.message });
   }
 };

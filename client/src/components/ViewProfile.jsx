@@ -6,7 +6,7 @@ const ViewProfile = () => {
   let { nameRef, phoneRef, passwordRef } = useRef();
   let { profileDetailsRequest, profileDetails, profileUpdate } = UserStore();
   const [imagePreview, setImagePreview] = useState(
-    "assets/images/user-grid/user-grid-img13.png"
+    "/assets/img/user-grid-img13.png"
   );
   useEffect(() => {
     (() => {
@@ -48,7 +48,7 @@ const ViewProfile = () => {
       <div className='col-lg-4'>
         <div className='user-grid-card position-relative border radius-16 overflow-hidden bg-base h-100'>
           <img
-            src='assets/images/user-grid/user-grid-bg1.png'
+            src='/assets/img/user-grid-bg1.png'
             alt=''
             className='w-100 object-fit-cover'
           />

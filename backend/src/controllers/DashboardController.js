@@ -131,7 +131,7 @@ exports.getDashboardData = async (req, res) => {
     let products = await ProductsModel.aggregate([
       {
         $facet: {
-          recentProducts: [{ $sort: { createdAt: -1 } }, { $limit: 10 }],
+          recentProducts: [{ $sort: { createdAt: -1 } }, { $limit: 5 }],
           outOfStockProducts: [
             { $match: { stockQuantity: { $lt: 5 } } },
             { $limit: 10 },

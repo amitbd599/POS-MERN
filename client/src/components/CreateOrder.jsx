@@ -128,7 +128,7 @@ const CreateOrder = () => {
       <div className='col-xl-9'>
         <div className='card order__card '>
           <div className='card-header'>
-            <h5 className='card-title mb-0'>Order Products Table</h5>
+            <h5 className='card-title mb-0'>Create an order</h5>
           </div>
           <div className='card-body'>
             <div className=''>

@@ -42,7 +42,7 @@ const UpdateCategories = () => {
     <div className='col-md-12'>
       <div className='card'>
         <div className='card-header'>
-          <h6 className='card-title mb-0'>Categories Inputs</h6>
+          <h6 className='card-title mb-0'>Update Categories Inputs</h6>
         </div>
         <div className='card-body'>
           <div className='row gy-3'>

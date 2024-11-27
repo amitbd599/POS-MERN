@@ -10,7 +10,7 @@ const AddUser = () => {
 
   let { nameRef, emailRef, phoneRef, passwordRef } = useRef();
   const [imagePreview, setImagePreview] = useState(
-    "assets/images/user-grid/user-grid-img13.png"
+    "/assets/img/user-grid-img13.png"
   );
 
   //! Image upload

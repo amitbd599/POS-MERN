@@ -27,7 +27,7 @@ const AllCategories = () => {
       <div className='col-12'>
         <div className='card h-100'>
           <div className='card-header'>
-            <h5 className='card-title mb-0'>Default Table</h5>
+            <h5 className='card-title mb-0'>All Category</h5>
           </div>
           <div className='card-body'>
             <div className='table-responsive'>

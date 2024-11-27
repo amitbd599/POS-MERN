@@ -38,7 +38,7 @@ const AllProducts = () => {
     <div>
       <div className='card'>
         <div className='card-header'>
-          <h5 className='card-title mb-0'>Striped Rows</h5>
+          <h5 className='card-title mb-0'>All Products</h5>
         </div>
         <div className='card-body'>
           <div className='table-responsive'>
@@ -46,6 +46,7 @@ const AllProducts = () => {
               <thead>
                 <tr>
                   <th scope='col'>Items</th>
+                  <th scope='col'>Price</th>
                   <th scope='col'>SKU</th>
                   <th scope='col'>Stock </th>
                   <th scope='col'>Last update </th>
@@ -69,11 +70,22 @@ const AllProducts = () => {
                     </td>
                     <td>
                       <span className='text-sm text-secondary-light fw-bold'>
+                        {item?.price}
+                      </span>
+                    </td>
+                    <td>
+                      <span className='text-sm text-secondary-light fw-bold'>
                         {item?.sku}
                       </span>
                     </td>
                     <td>
-                      <span className='badge text-sm fw-semibold rounded-pill bg-warning-600 px-20 py-6 radius-4 text-white'>
+                      <span
+                        className={`badge text-sm fw-semibold  px-12 py-6 radius-4 text-white ${
+                          item?.stockQuantity > 10
+                            ? "text-success-600 bg-success-100"
+                            : "text-danger-600 bg-danger-100"
+                        }`}
+                      >
                         {item?.stockQuantity}
                       </span>
                     </td>

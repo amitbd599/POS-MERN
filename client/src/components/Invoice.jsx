@@ -33,17 +33,22 @@ const Invoice = () => {
                   <h3 className='text-xl'>Order id: #3492</h3>
                   <p className='mb-0 text-sm'>Order created: 25/08/2020</p>
                   <p className='mb-0 text-sm'>Create by: Amit Biswas</p>
+                  <p className='mb-0 text-sm'>Order status: Pending</p>
+                  <p className='mb-0 text-sm'>Paid method: Cash</p>
                 </div>
-                <div>
-                  <img
-                    src='assets/images/logo.png'
-                    alt='image_icon'
-                    className='mb-8'
-                  />
+                <div className='d-grid justify-content-end text-end'>
+                  <div>
+                    <img
+                      src='/assets/img/logo.png'
+                      alt='image_icon'
+                      className='mb-8 logo__invoice'
+                    />
+                  </div>
                   <p className='mb-1 text-sm'>
                     4517 Washington Ave. Manchester, Kentucky 39495
                   </p>
-                  <p className='mb-0 text-sm'>random@gmail.com, +1 543 2198</p>
+                  <p className='mb-0 text-sm'>random@gmail.com</p>
+                  <p className='mb-0 text-sm'> +1 543 2198</p>
                 </div>
               </div>
               <div className='py-28 px-20'>
@@ -67,26 +72,6 @@ const Invoice = () => {
                         <tr>
                           <td>Email</td>
                           <td className='ps-8'>: amitbd590@gmail.com</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div>
-                    <table className='text-sm text-secondary-light'>
-                      <tbody>
-                        <tr>
-                          <td>Order status</td>
-                          <td className='ps-8'>
-                            :
-                            <span className='ms-1 badge text-sm fw-semibold text-success-600 bg-success-100 px-10 py-4 radius-4 text-white'>
-                              Completed
-                            </span>
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td>Method</td>
-                          <td className='ps-8'>: Cash</td>
                         </tr>
                       </tbody>
                     </table>

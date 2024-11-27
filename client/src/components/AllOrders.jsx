@@ -183,7 +183,7 @@ const AllOrders = () => {
           </div>
         </div>
 
-        <div className='py-20'>
+        <div className='p-20'>
           <div className='d-flex align-items-center justify-content-between flex-wrap gap-2 mt-24'>
             <span>Showing 1 to 10 of {TotalData} entries</span>
             {TotalData > 10 ? (

@@ -116,12 +116,12 @@ const MasterLayout = ({ children }) => {
               className='light-logo'
             />
             <img
-              src='/assets/img/logo_white.png'
+              src='/assets/img/logo_1.png'
               alt='site logo'
               className='dark-logo'
             />
             <img
-              src='assets/images/logo-icon.png'
+              src='/assets/img/logo_1.png'
               alt='site logo'
               className='logo-icon'
             />
@@ -146,7 +146,7 @@ const MasterLayout = ({ children }) => {
                     }
                   >
                     <i className='ri-circle-fill circle-icon text-primary-600 w-auto' />
-                    Inner Bar
+                    Home
                   </NavLink>
                 </li>
               </ul>
@@ -385,10 +385,6 @@ const MasterLayout = ({ children }) => {
                 >
                   <Icon icon='heroicons:bars-3-solid' className='icon' />
                 </button>
-                <form className='navbar-search'>
-                  <input type='text' name='search' placeholder='Search' />
-                  <Icon icon='ion:search-outline' className='icon' />
-                </form>
               </div>
             </div>
             <div className='col-auto'>
@@ -471,7 +467,7 @@ const MasterLayout = ({ children }) => {
           <div className='row align-items-center justify-content-between'>
             <div className='col-auto'>
               <p className='mb-0'>
-                © 2024 POS Management. All Rights Reserved.
+                © 2024-2025 POS Management. All Rights Reserved.
               </p>
             </div>
             <div className='col-auto'>

@@ -99,6 +99,6 @@ exports.categoriesReadByID = async (req, res) => {
     let data = await CategoriesModel.aggregate([MatchStage]);
     res.status(200).json({ success: true, data: data[0] });
   } catch (e) {
-    res.status(200).json({ status: "error", error: e.toString() });
+    res.status(200).json({ success: false, error: e.toString() });
   }
 };
