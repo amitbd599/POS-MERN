@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DashboardStore from "../store/DashboardStore";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import ReactApexChart from "react-apexcharts";
+import { formatDate } from "../helper/helper";
 const DashBoard = () => {
   let { allDashboardDataRequest } = DashboardStore();
   let [dashboardData, setDashboardData] = useState([]);
@@ -9,6 +10,7 @@ const DashBoard = () => {
     { name: "This month", data: [] },
   ]);
   const [barChartSeries, setBarChartSeries] = useState([]);
+  const [donutChartSeries, setDonutChartSeries] = useState([0, 0, 0]);
 
   useEffect(() => {
     (async () => {
@@ -36,8 +38,15 @@ const DashBoard = () => {
               y: res?.ordersByStatusData?.Cancelled?.count || 0,
             },
           ];
-
           setBarChartSeries([{ name: "Order status", data: seriesData }]);
+
+          const donutSeriesData = [
+            res?.usersDataChart?.admin || 0,
+            res?.usersDataChart?.editor || 0,
+            res?.usersDataChart?.employee || 0,
+          ];
+
+          setDonutChartSeries(donutSeriesData);
         }
       });
     })();
@@ -215,9 +224,55 @@ const DashBoard = () => {
     },
   };
 
+  let donutChartOptions = {
+    // colors: ["#FF9F29", "#487FFF", "#45B369"],
+    colors: ["#45B369", "#FF9F29", "#487FFF"],
+    labels: ["Admin", "Editor", "Employee"],
+    legend: {
+      show: false,
+    },
+    chart: {
+      type: "donut",
+      height: 270,
+      sparkline: {
+        enabled: true, // Remove whitespace
+      },
+      margin: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+      },
+      padding: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+      },
+    },
+    stroke: {
+      width: 0,
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    responsive: [
+      {
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 200,
+          },
+          legend: {
+            position: "bottom",
+          },
+        },
+      },
+    ],
+  };
+
   // console.log(dashboardData.categories?.[0]?.totalCategories);
-  console.log(dashboardData.ordersByStatusData?.Completed);
-  console.log(!!dashboardData.ordersByStatusData?.Pending);
+  console.log(dashboardData.users?.[0]?.recentUsers);
 
   return (
     <section>
@@ -601,6 +656,143 @@ const DashBoard = () => {
                 type='bar'
                 height={264}
               />
+            </div>
+          </div>
+        </div>
+        <div className='col-xxl-3 col-xl-6'>
+          <div className='card h-100 radius-8 border-0 overflow-hidden'>
+            <div className='card-body p-24'>
+              <div className='d-flex align-items-center flex-wrap gap-2 justify-content-between mt-2'>
+                <h6 className='mb-2 fw-bold text-lg'>Users Overview</h6>
+              </div>
+              <div className='mt-16'>
+                <ReactApexChart
+                  options={donutChartOptions}
+                  series={donutChartSeries}
+                  type='donut'
+                  height={264}
+                />
+              </div>
+
+              <ul className='d-flex flex-wrap align-items-center justify-content-between mt-3 gap-3'>
+                <li className='d-flex align-items-center gap-2'>
+                  <span className='w-12-px h-12-px radius-2 bg-primary-600' />
+                  <span className='text-secondary-light text-sm fw-normal'>
+                    Admin:
+                    <span className='text-primary-light fw-semibold'>500</span>
+                  </span>
+                </li>
+                <li className='d-flex align-items-center gap-2'>
+                  <span className='w-12-px h-12-px radius-2 bg-yellow' />
+                  <span className='text-secondary-light text-sm fw-normal'>
+                    Subscribed:
+                    <span className='text-primary-light fw-semibold'>300</span>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className='row mb-20'>
+        <div className='col-xxl-9 col-xl-12'>
+          <div className='card h-100 mt-28'>
+            <div className='card-body p-24'>
+              <div className='d-flex align-items-center flex-wrap gap-2 justify-content-between mt-2'>
+                <h6 className='mb-2 fw-bold text-lg'>
+                  Recent Customers Overview
+                </h6>
+              </div>
+              <div className='tab-content mt-16' id='pills-tabContent'>
+                <div
+                  className='tab-pane fade show active'
+                  id='pills-to-do-list'
+                  role='tabpanel'
+                  aria-labelledby='pills-to-do-list-tab'
+                  tabIndex={0}
+                >
+                  <div className='table-responsive scroll-sm'>
+                    <table className='table bordered-table sm-table mb-0'>
+                      <thead>
+                        <tr>
+                          <th scope='col'>Users info </th>
+                          <th scope='col'>Registered On</th>
+                          <th scope='col'>Number</th>
+                          <th scope='col'>Address</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {dashboardData.customers?.[0]?.allCustomers?.map(
+                          (item, index) => (
+                            <tr key={index}>
+                              <td>
+                                <div className='d-flex align-items-center'>
+                                  <div className='flex-grow-1'>
+                                    <h6 className='text-md mb-0 fw-medium'>
+                                      {item?.name}
+                                    </h6>
+                                    <span className='text-sm text-secondary-light fw-medium'>
+                                      {item?.email}
+                                    </span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>{formatDate(item?.createdAt)}</td>
+                              <td> {item?.number}</td>
+                              <td>{item?.address}</td>
+                            </tr>
+                          )
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='col-xxl-3 col-xl-12'>
+          <div className='card h-100 mt-28'>
+            <div className='card-body'>
+              <div className='d-flex align-items-center flex-wrap gap-2 justify-content-between'>
+                <h6 className='mb-2 fw-bold text-lg mb-0'>Admin panel</h6>
+              </div>
+              <div className='mt-32'>
+                {dashboardData.users?.[0]?.recentUsers?.map((item, index) => (
+                  <div
+                    key={index}
+                    className='d-flex align-items-center justify-content-between gap-3 mb-24'
+                  >
+                    <div className='d-flex align-items-center'>
+                      <img
+                        src='assets/images/users/user1.png'
+                        alt=''
+                        className='w-40-px h-40-px rounded-circle flex-shrink-0 me-12 overflow-hidden'
+                      />
+                      <div className='flex-grow-1'>
+                        <h6 className='text-md mb-0 fw-medium'>{item?.name}</h6>
+                        <span className='text-sm text-secondary-light fw-medium'>
+                          {item?.email}
+                        </span>
+                      </div>
+                    </div>
+                    <span
+                      className={`badge text-sm fw-semibold  px-10 py-4 radius-4 text-white ${
+                        item?.role === "admin"
+                          ? "text-danger-600 bg-danger-100"
+                          : item?.role === "employee"
+                          ? "text-success-600 bg-success-100"
+                          : item?.role === "editor"
+                          ? "text-info-600 bg-info-100"
+                          : ""
+                      }`}
+                    >
+                      {item?.role.charAt(0).toUpperCase() + item?.role.slice(1)}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

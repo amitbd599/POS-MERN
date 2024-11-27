@@ -218,6 +218,20 @@ exports.getDashboardData = async (req, res) => {
       orderModelChart[data._id - 1] = data.totalAmount; // Assign amount to respective month index
     });
 
+    //! === 8 === monthlyOrderData
+    let usersData = await UserModel.aggregate([
+      {
+        $group: {
+          _id: "$role",
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+    const usersDataChart = {};
+    usersData.forEach((item) => {
+      usersDataChart[item._id] = item.count;
+    });
+
     let result = {
       categories,
       customers,
@@ -226,6 +240,7 @@ exports.getDashboardData = async (req, res) => {
       products,
       users,
       orderModelChart,
+      usersDataChart,
     };
     res.status(200).json({ success: true, data: result });
   } catch (error) {
