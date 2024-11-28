@@ -29,7 +29,7 @@ const CreateOrder = () => {
 
   useEffect(() => {
     (async () => {
-      await allProductRequest(200, 1).then(async (res) => {
+      await allProductRequest(500, 1).then(async (res) => {
         // convert it for use React Select npm
         const data = res?.product?.map((item) => ({
           ...item,
@@ -38,7 +38,7 @@ const CreateOrder = () => {
         }));
         setProducts(data);
       });
-      allCustomerRequest(200, 1).then(async (res) => {
+      allCustomerRequest(500, 1).then(async (res) => {
         // convert it for use React Select npm
         const data = res?.customer?.map((item) => ({
           value: item._id,
@@ -54,6 +54,7 @@ const CreateOrder = () => {
     const updatedRows = [...rows];
     updatedRows[index][field] = value;
     setRows(updatedRows);
+    calculateTotalPrice();
   };
 
   // Handle product selection change
@@ -61,8 +62,6 @@ const CreateOrder = () => {
     const selectedProduct = products.find(
       (product) => product.value === option?.value
     );
-
-    console.log(selectedProduct);
 
     if (selectedProduct) {
       const updatedRows = [...rows];
@@ -296,7 +295,7 @@ const CreateOrder = () => {
                       <h6 className='mb-16 text-neutral-700'>Order info:</h6>
                     </div>
                     <div className=' mt-24'>
-                      <h3 className='text-danger-600 mb-16'>${totalPrice}</h3>
+                      <h3 className='text-danger-600 mb-16'>৳ {totalPrice}</h3>
                       <span className='text-neutral-500 text-sm'>
                         Order by: <strong>{profileDetails?.name}</strong>
                       </span>
