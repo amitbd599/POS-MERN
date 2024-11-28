@@ -107,7 +107,6 @@ exports.deleteCustomer = async (req, res) => {
   try {
     const id = new ObjectId(req.params.id);
     const result = await CustomersModel.deleteOne({ _id: id });
-    console.log(result);
 
     if (result?.deletedCount === 1) {
       res.status(200).json({

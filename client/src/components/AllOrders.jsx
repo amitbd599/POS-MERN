@@ -137,6 +137,7 @@ const AllOrders = () => {
 
                         <td className='d-flex align-items-end justify-content-end gap-2'>
                           <Link
+                            target='_blank'
                             to={`/view-order/${item?._id}`}
                             className='btn btn-primary-600 radius-8 px-16 py-6 d-flex align-items-center gap-1'
                           >

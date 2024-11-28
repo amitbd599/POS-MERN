@@ -9,6 +9,14 @@ const DataSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
+    name: {
+      type: String,
+      required: true,
+    },
+    sku: {
+      type: String,
+      required: true,
+    },
     quantity: {
       type: Number,
       required: true,

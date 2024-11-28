@@ -149,6 +149,7 @@ router.post(
   OrderController.returnOrder
 );
 router.get("/all-orders/:item/:pageNo", middlewares, OrderController.getOrder);
+router.get("/read-order-by-id/:id", middlewares, OrderController.orderReadByID);
 
 //! Payment routes
 router.post(

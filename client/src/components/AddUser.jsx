@@ -15,12 +15,18 @@ const AddUser = () => {
 
   //! Image upload
   const readURL = (input) => {
-    if (input.target.files && input.target.files[0]) {
+    const file = input.target.files && input.target.files[0];
+    if (file) {
+      if (file.size > 100 * 1024) {
+        // 100 KB limit
+        ErrorToast("File size must be less than 100 KB");
+        return;
+      }
       const reader = new FileReader();
       reader.onload = (e) => {
         setImagePreview(e.target.result);
       };
-      reader.readAsDataURL(input.target.files[0]);
+      reader.readAsDataURL(file);
     }
   };
 

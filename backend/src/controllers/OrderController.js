@@ -12,7 +12,6 @@ exports.orderCreate = async (req, res) => {
   session.startTransaction();
   try {
     const { customerId, userId, products } = req.body;
-
     const customer = await CustomersModel.findById(customerId);
 
     // check if customer not exists
@@ -46,6 +45,8 @@ exports.orderCreate = async (req, res) => {
         productId: item.productId,
         quantity: item.quantity,
         price: product.price,
+        name: product.name,
+        sku: product.sku,
       };
       newProducts.push(newProduct);
       totalAmount += product.price * item.quantity;
@@ -73,6 +74,8 @@ exports.orderCreate = async (req, res) => {
             productId: item.productId,
             quantity: item.quantity,
             price: item.price,
+            name: item.name,
+            sku: item.sku,
           },
         ],
         { session }
@@ -182,8 +185,6 @@ exports.returnOrder = async (req, res) => {
         },
       },
     ]);
-
-    console.log(OrderProducts[0]);
 
     //! If the order not found
     if (!OrderProducts[0]) {
@@ -340,5 +341,64 @@ exports.getOrder = async (req, res) => {
     res.status(200).json({ success: true, data: result[0] });
   } catch (error) {
     res.status(200).json({ success: false, error: error.message });
+  }
+};
+
+//! get order id
+exports.orderReadByID = async (req, res) => {
+  try {
+    const id = new ObjectId(req.params.id);
+    let MatchStage = {
+      $match: {
+        _id: id,
+      },
+    };
+
+    let joinWithUser = {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "user",
+      },
+    };
+
+    let joinWithCustomer = {
+      $lookup: {
+        from: "customers",
+        localField: "customerId",
+        foreignField: "_id",
+        as: "customer",
+      },
+    };
+    let joinWithOrderProduct = {
+      $lookup: {
+        from: "orderproducts",
+        localField: "_id",
+        foreignField: "orderId",
+        as: "orderproducts",
+      },
+    };
+
+    let project = {
+      $project: {
+        updatedAt: 0,
+        "user.img": 0,
+        "user.createdAt": 0,
+        "user.updatedAt": 0,
+        "customer.createdAt": 0,
+        "customer.updatedAt": 0,
+      },
+    };
+    let data = await OrdersModel.aggregate([
+      MatchStage,
+      joinWithUser,
+      joinWithCustomer,
+      joinWithOrderProduct,
+      project,
+    ]);
+    res.status(200).json({ success: true, data: data[0] });
+  } catch (e) {
+    res.status(200).json({ success: false, error: e.toString() });
   }
 };

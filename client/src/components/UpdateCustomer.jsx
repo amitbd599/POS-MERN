@@ -13,7 +13,7 @@ const UpdateCustomer = () => {
         setProfileData(res);
       });
     })();
-  }, []);
+  }, [customerDetailsByIdRequest, id]);
 
   let { nameRef, emailRef, numberRef, addressRef } = useRef();
   let navigate = useNavigate();

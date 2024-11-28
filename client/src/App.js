@@ -18,6 +18,7 @@ import AllOrdersPage from "./pages/AllOrdersPage";
 import ViewOrderPage from "./pages/ViewOrderPage";
 import BackupDatabasePage from "./pages/BackupDatabasePage";
 import LoginPage from "./pages/LoginPage";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   return (
@@ -80,6 +81,7 @@ function App() {
 
         {/* login */}
         <Route exact path='/login' element={<LoginPage />} />
+        <Route exact path='*' element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   );

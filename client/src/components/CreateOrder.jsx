@@ -29,7 +29,7 @@ const CreateOrder = () => {
 
   useEffect(() => {
     (async () => {
-      await allProductRequest(20, 1).then(async (res) => {
+      await allProductRequest(200, 1).then(async (res) => {
         // convert it for use React Select npm
         const data = res?.product?.map((item) => ({
           ...item,
@@ -38,7 +38,7 @@ const CreateOrder = () => {
         }));
         setProducts(data);
       });
-      allCustomerRequest(500, 1).then(async (res) => {
+      allCustomerRequest(200, 1).then(async (res) => {
         // convert it for use React Select npm
         const data = res?.customer?.map((item) => ({
           value: item._id,
@@ -46,9 +46,8 @@ const CreateOrder = () => {
         }));
         setCustomers(data);
       });
-      calculateTotalPrice();
     })();
-  }, [allProductRequest, rows]);
+  }, [allProductRequest, allCustomerRequest]);
 
   // Handle input change
   const handleInputChange = (index, field, value) => {
@@ -59,9 +58,6 @@ const CreateOrder = () => {
 
   // Handle product selection change
   const handleProductChange = (index, option) => {
-    console.log(index, option?.value);
-    console.log(products);
-
     const selectedProduct = products.find(
       (product) => product.value === option?.value
     );
@@ -74,6 +70,7 @@ const CreateOrder = () => {
       updatedRows[index].price = selectedProduct.price;
       updatedRows[index].stockQuantity = selectedProduct.stockQuantity;
       setRows(updatedRows);
+      calculateTotalPrice();
     }
   };
 
@@ -119,8 +116,6 @@ const CreateOrder = () => {
         navigate("/all-order/1");
       }
     });
-
-    console.log(reqBody);
   };
 
   return (

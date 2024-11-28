@@ -109,7 +109,7 @@ const MasterLayout = ({ children }) => {
           <Icon icon='radix-icons:cross-2' />
         </button>
         <div>
-          <Link to='/index' className='sidebar-logo'>
+          <Link to='/' className='sidebar-logo'>
             <img
               src='/assets/img/logo.png'
               alt='site logo'
@@ -472,7 +472,16 @@ const MasterLayout = ({ children }) => {
             </div>
             <div className='col-auto'>
               <p className='mb-0'>
-                Made by <span className='text-primary-600'>Amit</span>
+                Made by{" "}
+                <span className='text-primary-600'>
+                  <a
+                    href='https://www.linkedin.com/in/amitbiswas-tm'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    Amit
+                  </a>
+                </span>
               </p>
             </div>
           </div>

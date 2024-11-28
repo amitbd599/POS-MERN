@@ -286,8 +286,8 @@ exports.logout = async (req, res) => {
 
 //! delete user
 exports.deleteUser = async (req, res) => {
-  const id = new ObjectId(req.params.id);
   try {
+    const id = new ObjectId(req.params.id);
     const result = await UserModel.deleteOne({ _id: id });
 
     if (result?.deletedCount === 1) {

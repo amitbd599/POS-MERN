@@ -331,3 +331,12 @@ table.dataTable td.dt-type-date {
 .logo__invoice {
   width: 200px;
 }
+
+.invoice-container {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin: 15px auto;
+  max-width: 850px;
+  padding: 70px 30px;
+}

@@ -93,11 +93,11 @@ const OrderStore = create((set) => ({
     }
   },
 
-  // product details by id -- done
-  productDetailsByIdRequest: async (id) => {
+  //! order details by id
+  orderDetailsByIdRequest: async (id) => {
     try {
       loadingRequest(true);
-      let res = await axios.get(baseURL + "/read-product-by-id/" + id, {
+      let res = await axios.get(baseURL + "/read-order-by-id/" + id, {
         withCredentials: true,
       });
       if (res?.data?.success === true) {
@@ -110,27 +110,7 @@ const OrderStore = create((set) => ({
     }
   },
 
-  // delete product api
-  deleteProductRequest: async (id) => {
-    try {
-      loadingRequest(true);
-      let res = await axios.delete(baseURL + "/delete-product/" + id, {
-        withCredentials: true,
-      });
-      if (res?.data?.success === true) {
-        loadingRequest(false);
-        SuccessToast(res?.data?.message);
-        return true;
-      } else {
-        loadingRequest(false);
-        ErrorToast(res?.data?.message);
-        return false;
-      }
-    } catch (e) {
-      loadingRequest(false);
-      unAuthorize(e.status);
-    }
-  },
+
 }));
 
 export default OrderStore;

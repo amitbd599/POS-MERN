@@ -31,7 +31,7 @@ const Login = () => {
       <div className='auth-right py-32 px-24 d-flex flex-column justify-content-center'>
         <div className='max-w-464-px mx-auto w-100'>
           <div>
-            <Link to='/index' className='mb-40 max-w-290-px'>
+            <Link to='/' className='mb-40 max-w-290-px'>
               <img src='/assets/img/logo.png' alt='' />
             </Link>
             <h4 className='mb-12'>Sign In to your Account</h4>

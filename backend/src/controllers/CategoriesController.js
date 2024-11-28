@@ -39,8 +39,8 @@ exports.getCategories = async (req, res) => {
 
 // Update categories
 exports.updateCategories = async (req, res) => {
-  const id = new ObjectId(req.params.id);
   try {
+    const id = new ObjectId(req.params.id);
     const reqBody = req.body;
     const result = await CategoriesModel.updateOne({ _id: id }, reqBody);
     res.status(200).json({
@@ -64,8 +64,8 @@ exports.updateCategories = async (req, res) => {
 
 // Delete categories
 exports.deleteCategories = async (req, res) => {
-  const id = new ObjectId(req.params.id);
   try {
+    const id = new ObjectId(req.params.id);
     // Check if any products reference this category
     const productCount = await ProductsModel.countDocuments({ categoryId: id });
     if (productCount > 0) {

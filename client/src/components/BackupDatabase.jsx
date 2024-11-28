@@ -1,4 +1,3 @@
-import { Icon } from "@iconify/react/dist/iconify.js";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import BackupStore from "../store/BackupStore";
