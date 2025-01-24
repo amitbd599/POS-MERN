@@ -4,6 +4,9 @@ import { baseURL } from "../helper/config";
 import { ErrorToast, SuccessToast, unAuthorize } from "../helper/helper";
 import LoadingStore from "./LoadingStore";
 const { loadingRequest } = LoadingStore.getState();
+
+console.log(baseURL);
+
 const UserStore = create((set) => ({
   //! Register-user api
   registerUserRequest: async (reqBody) => {
@@ -79,6 +82,7 @@ const UserStore = create((set) => ({
       if (res?.data?.success === true) {
         loadingRequest(false);
         set({ profileDetails: res?.data?.data });
+        return res?.data?.data;
       }
     } catch (e) {
       loadingRequest(false);

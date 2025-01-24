@@ -9,9 +9,11 @@ const ExpensesController = require("../controllers/ExpensesController.js");
 const CategoriesController = require("../controllers/CategoriesController.js");
 const BackupController = require("../controllers/BackupController.js");
 const DashboardController = require("../controllers/DashboardController.js");
+const FileUploadController = require("../controllers/FileUploadController.js");
 const middlewares = require("../middlewares/AuthVerification.js");
 const RoleBasedAccess = require("../middlewares/RoleBasedAccess.js");
-const { upload } = require("../middlewares/UploadMiddleware.js");
+const { uploadJSON } = require("../middlewares/UploadMiddleware.js");
+const uploadFile = require("../middlewares/FileUploads.js");
 
 // Register a new user
 router.post(
@@ -196,8 +198,16 @@ router.post(
   "/import-data",
   middlewares,
   RoleBasedAccess("admin"),
-  upload.single("file"),
+  uploadJSON.single("file"),
   BackupController.importData
+);
+
+//! file routes
+router.post(
+  "/file-upload",
+  middlewares,
+  uploadFile.array("file", 20),
+  FileUploadController.fileUpload
 );
 
 module.exports = router;

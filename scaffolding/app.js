@@ -57,6 +57,8 @@ app.use("/api/v1", router);
 
 app.use(express.static("client/dist"));
 
+app.use("/api/v1/get-file", express.static("uploads"));
+
 // Add React Front End Routing
 app.get("*", function (req, res) {
   res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));

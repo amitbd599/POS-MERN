@@ -16,4 +16,4 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-module.exports.upload = multer({ storage: fileStorageEngine, fileFilter });
+module.exports.uploadJSON = multer({ storage: fileStorageEngine, fileFilter });

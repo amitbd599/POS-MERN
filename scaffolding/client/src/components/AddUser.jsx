@@ -1,11 +1,14 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import UserStore from "../store/UserStore";
+import FileStore from "../store/FileStore";
 import { ErrorToast, IsEmpty } from "../helper/helper";
 import { useNavigate } from "react-router-dom";
 
 const AddUser = () => {
+  let [rowFile, setRowFile] = useState(null);
   let { registerUserRequest } = UserStore();
+  let { uploadFileRequest } = FileStore();
   let navigate = useNavigate();
 
   let { nameRef, emailRef, phoneRef, passwordRef } = useRef();
@@ -27,7 +30,20 @@ const AddUser = () => {
         setImagePreview(e.target.result);
       };
       reader.readAsDataURL(file);
+      setRowFile(file);
     }
+  };
+
+  let fileUploadFun = async () => {
+    if (!rowFile) {
+      ErrorToast("Please select a image file");
+      return;
+    }
+    const formData = new FormData();
+    formData.append("file", rowFile);
+    const result = await uploadFileRequest(formData);
+    // setFile(result?.data?.file?.[0]?.filename);
+    return { status: true, file: result?.data?.file?.[0]?.filename };
   };
 
   const [selectedRole, setSelectedRole] = useState("");
@@ -41,7 +57,6 @@ const AddUser = () => {
     let email = emailRef.value;
     let password = passwordRef.value;
     let number = phoneRef.value;
-    let img = imagePreview;
     let role = selectedRole;
 
     if (
@@ -53,16 +68,19 @@ const AddUser = () => {
     ) {
       ErrorToast("Please fill your profile");
     } else {
-      let result = await registerUserRequest({
-        name,
-        email,
-        number,
-        password,
-        img,
-        role,
-      });
-      if (result) {
-        navigate("/all-user/1");
+      let fileUploadResult = await fileUploadFun();
+      if (fileUploadResult?.status === true) {
+        let result = await registerUserRequest({
+          name,
+          email,
+          number,
+          password,
+          img: fileUploadResult.file,
+          role,
+        });
+        if (result) {
+          navigate("/all-user/1");
+        }
       }
     }
   };
@@ -92,10 +110,17 @@ const AddUser = () => {
                         htmlFor='imageUpload'
                         className='w-32-px h-32-px d-flex justify-content-center align-items-center bg-primary-50 text-primary-600 border border-primary-600 bg-hover-primary-100 text-lg rounded-circle'
                       >
-                        <Icon
-                          icon='solar:camera-outline'
-                          className='icon'
-                        ></Icon>
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          width={16}
+                          height={16}
+                          fill='currentColor'
+                          className='bi bi-camera'
+                          viewBox='0 0 16 16'
+                        >
+                          <path d='M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4z' />
+                          <path d='M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5m0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0' />
+                        </svg>
                       </label>
                     </div>
                     <div className='avatar-preview'>

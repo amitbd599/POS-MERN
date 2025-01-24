@@ -400,7 +400,7 @@ const MasterLayout = ({ children }) => {
                     data-bs-toggle='dropdown'
                   >
                     <img
-                      src={profileDetails?.img}
+                      src={`/api/v1/get-file/${profileDetails?.img}`}
                       alt='image_user'
                       className='w-40-px h-40-px object-fit-cover rounded-circle'
                     />

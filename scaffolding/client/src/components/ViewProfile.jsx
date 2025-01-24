@@ -5,15 +5,16 @@ import UserStore from "../store/UserStore";
 const ViewProfile = () => {
   let { nameRef, phoneRef, passwordRef } = useRef();
   let { profileDetailsRequest, profileDetails, profileUpdate } = UserStore();
-  const [imagePreview, setImagePreview] = useState(
-    "/assets/img/user-grid-img13.png"
-  );
+  const [imagePreview, setImagePreview] = useState("");
   useEffect(() => {
-    (() => {
-      profileDetailsRequest();
-      setImagePreview(profileDetails?.img);
+    (async () => {
+      await profileDetailsRequest().then((res) => {
+        console.log(res);
+
+        setImagePreview(`/api/v1/get-file/${res?.img}`);
+      });
     })();
-  }, [profileDetails?.img, profileDetailsRequest]);
+  }, []);
 
   //! Image upload
   const readURL = (input) => {
@@ -25,6 +26,8 @@ const ViewProfile = () => {
       reader.readAsDataURL(input.target.files[0]);
     }
   };
+
+  console.log(imagePreview);
 
   //! update User Profile
   const updateUserProfile = async () => {
@@ -56,7 +59,7 @@ const ViewProfile = () => {
             <div className='text-center border border-top-0 border-start-0 border-end-0'>
               <div>
                 <img
-                  src={profileDetails?.img}
+                  src={`/api/v1/get-file/${profileDetails?.img}`}
                   alt=''
                   className='border br-white border-width-2-px w-200-px h-200-px rounded-circle object-fit-cover'
                 />
@@ -150,21 +153,31 @@ const ViewProfile = () => {
                         htmlFor='imageUpload'
                         className='w-32-px h-32-px d-flex justify-content-center align-items-center bg-primary-50 text-primary-600 border border-primary-600 bg-hover-primary-100 text-lg rounded-circle'
                       >
-                        <Icon
-                          icon='solar:camera-outline'
-                          className='icon'
-                        ></Icon>
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          width={16}
+                          height={16}
+                          fill='currentColor'
+                          className='bi bi-camera'
+                          viewBox='0 0 16 16'
+                        >
+                          <path d='M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4z' />
+                          <path d='M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5m0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0' />
+                        </svg>
                       </label>
                     </div>
                     <div className='avatar-preview'>
-                      <div
-                        id='imagePreview'
-                        style={{
-                          backgroundImage: `url(${imagePreview})`,
-                          backgroundSize: "cover",
-                          backgroundPosition: "center",
-                        }}
-                      />
+                      <div id='imagePreview' className='overflow-hidden'>
+                        <img
+                          style={{
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            objectFit: "cover",
+                          }}
+                          src={imagePreview}
+                          alt=''
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
