@@ -1,7 +1,6 @@
-import  { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import BackupStore from "../store/BackupStore";
-import { backupURL } from "../helper/config";
+import { baseURL } from "../helper/config";
 
 const BackupDatabase = () => {
   let { importCreateRequest } = BackupStore();
@@ -13,7 +12,6 @@ const BackupDatabase = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
-
 
     await importCreateRequest(formData);
   };
@@ -47,12 +45,12 @@ const BackupDatabase = () => {
             <h6 className='text-lg fw-semibold mb-0'>Export Database</h6>
           </div>
           <div className='card-body p-24'>
-            <Link
-              to={backupURL}
+            <a
+              href={`${baseURL}/export-data`}
               className='btn btn-primary-600 radius-8 px-20 py-11'
             >
               Create a database backup
-            </Link>
+            </a>
           </div>
         </div>
       </div>

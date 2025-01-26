@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardStore from "../store/DashboardStore";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import ReactApexChart from "react-apexcharts";
@@ -23,7 +23,6 @@ const DashBoard = () => {
               data: res?.orderModelChart,
             },
           ]);
-
 
           const seriesData = [
             {
@@ -269,7 +268,6 @@ const DashBoard = () => {
       },
     ],
   };
-
 
   return (
     <section>
@@ -605,13 +603,16 @@ const DashBoard = () => {
           <div className='card h-100'>
             <div className='card-body'>
               <div className='d-flex flex-wrap align-items-center gap-2 mt-8'>
-                <h6 className='mb-0'>
+                <h6 className='mb-20'>
                   ৳ {dashboardData.orders?.[0]?.totalAmount}
                 </h6>
                 <span className='text-xs fw-medium'>
                   Total order {dashboardData.orders?.[0]?.totalOrder}
                 </span>
               </div>
+              <p className='fw-semibold mb-0'>
+                Graph view amount - ({new Date().getFullYear()})
+              </p>
               <ReactApexChart
                 options={chartOptions}
                 series={chartSeries}

@@ -1,0 +1,1516 @@
+{
+  "categories": [
+    {
+      "_id": "6744ba1206d24a4e5f63dbb5",
+      "name": "Automotive",
+      "description": "Car accessories, parts, and maintenance tools.",
+      "createdAt": "2024-11-25T17:55:30.251Z",
+      "updatedAt": "2024-11-25T17:55:30.251Z"
+    },
+    {
+      "_id": "6744ba0a06d24a4e5f63dbb0",
+      "name": "Groceries & Food",
+      "description": "Fresh produce, snacks, and beverages.",
+      "createdAt": "2024-11-25T17:55:22.940Z",
+      "updatedAt": "2024-11-25T17:55:22.940Z"
+    },
+    {
+      "_id": "6744b9d006d24a4e5f63db92",
+      "name": "Fashion",
+      "description": "Clothing, footwear, jewelry, and accessories.",
+      "createdAt": "2024-11-25T17:54:24.955Z",
+      "updatedAt": "2024-11-25T17:54:24.955Z"
+    },
+    {
+      "_id": "6744b9e806d24a4e5f63dba1",
+      "name": "Books & Stationery",
+      "description": "Fiction, textbooks, notebooks, and office supplies.",
+      "createdAt": "2024-11-25T17:54:48.978Z",
+      "updatedAt": "2024-11-25T17:54:48.978Z"
+    },
+    {
+      "_id": "6744ba0306d24a4e5f63dbab",
+      "name": "Toys & Baby Products",
+      "description": "Toys, baby care items, and kids’ clothing.",
+      "createdAt": "2024-11-25T17:55:15.579Z",
+      "updatedAt": "2024-11-25T17:55:15.579Z"
+    },
+    {
+      "_id": "6744ba1906d24a4e5f63dbba",
+      "name": "Pet Supplies",
+      "description": "Food, toys, and accessories for pets.",
+      "createdAt": "2024-11-25T17:55:37.451Z",
+      "updatedAt": "2024-11-25T17:55:37.451Z"
+    },
+    {
+      "_id": "6744b9f506d24a4e5f63dba6",
+      "name": "Sports & Outdoors",
+      "description": "Sports gear, activewear, and camping essentials.",
+      "createdAt": "2024-11-25T17:55:01.995Z",
+      "updatedAt": "2024-11-25T17:55:01.995Z"
+    },
+    {
+      "_id": "6744b9e006d24a4e5f63db9c",
+      "name": "Health & Beauty",
+      "description": "Skincare, makeup, fitness equipment, and supplements.",
+      "createdAt": "2024-11-25T17:54:40.770Z",
+      "updatedAt": "2024-11-25T17:54:40.770Z"
+    },
+    {
+      "_id": "6744b9c706d24a4e5f63db8d",
+      "name": "Electronics",
+      "description": "Devices like smartphones, laptops, TVs, and accessories.",
+      "createdAt": "2024-11-25T17:54:15.811Z",
+      "updatedAt": "2024-11-25T19:04:25.385Z"
+    },
+    {
+      "_id": "6744b9d806d24a4e5f63db97",
+      "name": "Home & Kitchen",
+      "description": "Furniture, appliances, cookware, and decor.",
+      "createdAt": "2024-11-25T17:54:32.834Z",
+      "updatedAt": "2024-11-25T17:54:32.834Z"
+    }
+  ],
+  "customers": [
+    {
+      "_id": "6744c05106d24a4e5f63dcc9",
+      "name": "Afroza Akhter",
+      "email": "afroza.akhter@example.com",
+      "number": "+8801912349876",
+      "address": "Cox's Bazar",
+      "createdAt": "2024-11-25T18:22:09.535Z",
+      "updatedAt": "2024-11-25T18:22:09.535Z"
+    },
+    {
+      "_id": "6744bff406d24a4e5f63dcaa",
+      "name": "Rubina Sultana",
+      "email": "rubina.sultana@example.com",
+      "number": "+8801816547893",
+      "address": "Rangpur",
+      "createdAt": "2024-11-25T18:20:36.630Z",
+      "updatedAt": "2024-11-25T18:20:36.630Z"
+    },
+    {
+      "_id": "6744c01606d24a4e5f63dcb6",
+      "name": "Mehnaz Begum",
+      "email": "mehnaz.begum@example.com",
+      "number": "+8801517654321",
+      "address": "Gazipur",
+      "createdAt": "2024-11-25T18:21:10.129Z",
+      "updatedAt": "2024-11-25T18:21:10.129Z"
+    },
+    {
+      "_id": "6744c02706d24a4e5f63dcbc",
+      "name": "Mahbubur Rahman",
+      "email": "mahbub.rahman@example.com",
+      "number": "+8801713322110",
+      "address": "Narayanganj",
+      "createdAt": "2024-11-25T18:21:27.254Z",
+      "updatedAt": "2025-01-26T05:29:01.840Z"
+    },
+    {
+      "_id": "6744bf5f06d24a4e5f63dc7c",
+      "name": "Tanvir Ahmed",
+      "email": "tanvir.ahmed@example.com",
+      "number": "+8801912343678",
+      "address": "Uttara, Dhaka",
+      "createdAt": "2024-11-25T18:18:07.442Z",
+      "updatedAt": "2025-01-23T05:02:20.690Z"
+    },
+    {
+      "_id": "6744c06106d24a4e5f63dccf",
+      "name": "Tareq Aziz",
+      "email": "tareq.aziz@example.com",
+      "number": "+8801978765432",
+      "address": "Jessore",
+      "createdAt": "2024-11-25T18:22:25.760Z",
+      "updatedAt": "2024-11-25T18:22:25.760Z"
+    },
+    {
+      "_id": "6744bf8406d24a4e5f63dc86",
+      "name": "Habib Ullah",
+      "email": "habib.ullah@example.com",
+      "number": "+8801512345678",
+      "address": "Chattogram",
+      "createdAt": "2024-11-25T18:18:44.619Z",
+      "updatedAt": "2024-11-25T18:18:44.619Z"
+    },
+    {
+      "_id": "6744bf9306d24a4e5f63dc8b",
+      "name": "Nusrat Jahan",
+      "email": "nusrat.jahan@example.com",
+      "number": "+8801612345678",
+      "address": "Sylhet",
+      "createdAt": "2024-11-25T18:18:59.476Z",
+      "updatedAt": "2024-11-25T18:18:59.476Z"
+    },
+    {
+      "_id": "6744bf4806d24a4e5f63dc77",
+      "name": "Shirin Akter",
+      "email": "shirin.akter@example.com",
+      "number": "+8801812345678",
+      "address": "Gulshan, Dhaka",
+      "createdAt": "2024-11-25T18:17:44.883Z",
+      "updatedAt": "2024-11-25T18:17:44.883Z"
+    },
+    {
+      "_id": "6744bf7306d24a4e5f63dc81",
+      "name": "Farzana Rahman",
+      "email": "farzana.rahman@example.com",
+      "number": "+8801711122334",
+      "address": "Mirpur, Dhaka",
+      "createdAt": "2024-11-25T18:18:27.699Z",
+      "updatedAt": "2024-11-25T18:18:27.699Z"
+    },
+    {
+      "_id": "6744bfd006d24a4e5f63dc9f",
+      "name": "Nafisa Anwar",
+      "email": "nafisa.anwar@example.com",
+      "number": "+8801519876543",
+      "address": "Mymensingh",
+      "createdAt": "2024-11-25T18:20:00.757Z",
+      "updatedAt": "2024-11-25T18:20:00.757Z"
+    },
+    {
+      "_id": "6744bfc006d24a4e5f63dc9a",
+      "name": "Imran Kabir",
+      "email": "imran.kabir@example.com",
+      "number": "+8801976543210",
+      "address": "Barisal",
+      "createdAt": "2024-11-25T18:19:44.452Z",
+      "updatedAt": "2024-11-25T18:19:44.452Z"
+    },
+    {
+      "_id": "6744bfa206d24a4e5f63dc90",
+      "name": "Rafiqul Islam",
+      "email": "rafiq.islam@example.com",
+      "number": "+8801719876543",
+      "address": "Khulna",
+      "createdAt": "2024-11-25T18:19:14.196Z",
+      "updatedAt": "2024-11-25T18:19:14.196Z"
+    },
+    {
+      "_id": "6744c03e06d24a4e5f63dcc3",
+      "name": "Rashedul Hasan",
+      "email": "rashed.hasan@example.com",
+      "number": "+8801816541234",
+      "address": "Bogura",
+      "createdAt": "2024-11-25T18:21:50.791Z",
+      "updatedAt": "2024-11-25T18:21:50.791Z"
+    },
+    {
+      "_id": "6744c07306d24a4e5f63dcd5",
+      "name": "Sanjida Parveen",
+      "email": "sanjida.parveen@example.com",
+      "number": "+8801511237894",
+      "address": "Pabna",
+      "createdAt": "2024-11-25T18:22:43.369Z",
+      "updatedAt": "2024-11-25T18:22:43.369Z"
+    },
+    {
+      "_id": "6744c00706d24a4e5f63dcb0",
+      "name": "Asif Chowdhury",
+      "email": "asif.chowdhury@example.com",
+      "number": "+8801998765432",
+      "address": "Savar, Dhaka",
+      "createdAt": "2024-11-25T18:20:55.176Z",
+      "updatedAt": "2024-11-25T18:20:55.176Z"
+    },
+    {
+      "_id": "6744c08206d24a4e5f63dcdb",
+      "name": "Firoz Mahmud",
+      "email": "firoz.mahmud@example.com",
+      "number": "+8801719871234",
+      "address": "Noakhali",
+      "createdAt": "2024-11-25T18:22:58.633Z",
+      "updatedAt": "2024-11-25T18:22:58.633Z"
+    }
+  ],
+  "orders": [
+    {
+      "_id": "6748a1d57e5f18feb5811e49",
+      "customerId": "6744bff406d24a4e5f63dcaa",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 849,
+      "status": "Pending",
+      "createdAt": "2024-11-28T17:01:09.223Z",
+      "updatedAt": "2024-11-28T17:01:09.223Z"
+    },
+    {
+      "_id": "6748a02a7e5f18feb5811d94",
+      "customerId": "6744bf9306d24a4e5f63dc8b",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 600,
+      "status": "Cancelled",
+      "createdAt": "2024-11-28T16:54:02.737Z",
+      "updatedAt": "2024-11-28T16:55:19.280Z"
+    },
+    {
+      "_id": "67489e5a7e5f18feb5811c41",
+      "customerId": "6744bff406d24a4e5f63dcaa",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 470,
+      "status": "Completed",
+      "createdAt": "2024-11-28T16:46:18.276Z",
+      "updatedAt": "2024-11-28T16:59:46.253Z"
+    },
+    {
+      "_id": "67489f417e5f18feb5811cec",
+      "customerId": "6744c06106d24a4e5f63dccf",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 125,
+      "status": "Returned",
+      "returnDate": "2024-11-28T16:58:03.997Z",
+      "createdAt": "2024-11-28T16:50:09.501Z",
+      "updatedAt": "2024-11-28T16:58:03.997Z"
+    },
+    {
+      "_id": "6755d168ac600a3c37d65f2e",
+      "customerId": "6744bf4806d24a4e5f63dc77",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 720,
+      "status": "Returned",
+      "returnDate": "2024-12-08T17:06:06.597Z",
+      "createdAt": "2024-12-08T17:03:36.091Z",
+      "updatedAt": "2024-12-08T17:06:06.598Z"
+    },
+    {
+      "_id": "67489f027e5f18feb5811cba",
+      "customerId": "6744c08206d24a4e5f63dcdb",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 1200,
+      "status": "Completed",
+      "createdAt": "2024-11-28T16:49:06.344Z",
+      "updatedAt": "2024-11-28T16:59:07.719Z"
+    },
+    {
+      "_id": "67489e107e5f18feb5811c17",
+      "customerId": "6744bf7306d24a4e5f63dc81",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 520,
+      "status": "Cancelled",
+      "createdAt": "2024-11-28T16:45:04.427Z",
+      "updatedAt": "2024-11-28T17:00:04.422Z"
+    },
+    {
+      "_id": "67489f527e5f18feb5811cfe",
+      "customerId": "6744bfd006d24a4e5f63dc9f",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 635,
+      "status": "Completed",
+      "createdAt": "2024-11-28T16:50:26.575Z",
+      "updatedAt": "2024-11-28T16:57:38.500Z"
+    },
+    {
+      "_id": "67489f6c7e5f18feb5811d10",
+      "customerId": "6744bfc006d24a4e5f63dc9a",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 900,
+      "status": "Completed",
+      "createdAt": "2024-11-28T16:50:52.772Z",
+      "updatedAt": "2024-11-28T16:57:28.876Z"
+    },
+    {
+      "_id": "67489f2f7e5f18feb5811cda",
+      "customerId": "6744bfa206d24a4e5f63dc90",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 1950,
+      "status": "Completed",
+      "createdAt": "2024-11-28T16:49:51.928Z",
+      "updatedAt": "2024-11-28T16:58:57.527Z"
+    },
+    {
+      "_id": "67489fbf7e5f18feb5811d47",
+      "customerId": "6744c05106d24a4e5f63dcc9",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 1200,
+      "status": "Returned",
+      "returnDate": "2024-11-28T16:56:18.262Z",
+      "createdAt": "2024-11-28T16:52:15.740Z",
+      "updatedAt": "2024-11-28T16:56:18.263Z"
+    },
+    {
+      "_id": "6748a01e7e5f18feb5811d83",
+      "customerId": "6744bfc006d24a4e5f63dc9a",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 600,
+      "status": "Completed",
+      "createdAt": "2024-11-28T16:53:50.220Z",
+      "updatedAt": "2024-11-28T16:55:48.930Z"
+    },
+    {
+      "_id": "67489e747e5f18feb5811c55",
+      "customerId": "6744bf4806d24a4e5f63dc77",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 2198,
+      "status": "Completed",
+      "createdAt": "2024-11-28T16:46:44.457Z",
+      "updatedAt": "2024-11-28T16:59:40.609Z"
+    },
+    {
+      "_id": "67489edc7e5f18feb5811c9d",
+      "customerId": "6744bfe106d24a4e5f63dca4",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 618,
+      "status": "Completed",
+      "createdAt": "2024-11-28T16:48:28.555Z",
+      "updatedAt": "2024-11-28T16:59:17.559Z"
+    },
+    {
+      "_id": "6748a0017e5f18feb5811d68",
+      "customerId": "6744c02706d24a4e5f63dcbc",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 720,
+      "status": "Completed",
+      "createdAt": "2024-11-28T16:53:21.197Z",
+      "updatedAt": "2024-11-28T16:56:00.534Z"
+    },
+    {
+      "_id": "67489e857e5f18feb5811c66",
+      "customerId": "6744c05106d24a4e5f63dcc9",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 636,
+      "status": "Cancelled",
+      "createdAt": "2024-11-28T16:47:01.839Z",
+      "updatedAt": "2024-11-28T16:59:33.873Z"
+    },
+    {
+      "_id": "67489ec67e5f18feb5811c8c",
+      "customerId": "6744c01606d24a4e5f63dcb6",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 919,
+      "status": "Completed",
+      "createdAt": "2024-11-28T16:48:06.902Z",
+      "updatedAt": "2024-11-28T16:59:23.383Z"
+    },
+    {
+      "_id": "67489f1b7e5f18feb5811cc8",
+      "customerId": "6744c02706d24a4e5f63dcbc",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 86,
+      "status": "Cancelled",
+      "createdAt": "2024-11-28T16:49:31.551Z",
+      "updatedAt": "2024-11-28T16:59:02.320Z"
+    },
+    {
+      "_id": "67489fd57e5f18feb5811d56",
+      "customerId": "6744c02706d24a4e5f63dcbc",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 675,
+      "status": "Cancelled",
+      "createdAt": "2024-11-28T16:52:37.698Z",
+      "updatedAt": "2024-11-28T16:56:05.749Z"
+    },
+    {
+      "_id": "6748a1e27e5f18feb5811e5a",
+      "customerId": "6744c00706d24a4e5f63dcb0",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 120,
+      "status": "Pending",
+      "createdAt": "2024-11-28T17:01:22.132Z",
+      "updatedAt": "2024-11-28T17:01:22.132Z"
+    },
+    {
+      "_id": "6748b0c67e5f18feb5811eda",
+      "customerId": "6744bf7306d24a4e5f63dc81",
+      "userId": "67481eb67e5f18feb5811b21",
+      "totalAmount": 1199,
+      "status": "Pending",
+      "createdAt": "2024-11-28T18:04:54.438Z",
+      "updatedAt": "2024-11-28T18:04:54.438Z"
+    },
+    {
+      "_id": "67489ef07e5f18feb5811cad",
+      "customerId": "6744bf9306d24a4e5f63dc8b",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 600,
+      "status": "Cancelled",
+      "createdAt": "2024-11-28T16:48:48.953Z",
+      "updatedAt": "2024-11-28T16:59:12.195Z"
+    },
+    {
+      "_id": "67489e357e5f18feb5811c2c",
+      "customerId": "6744bf4806d24a4e5f63dc77",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 310,
+      "status": "Returned",
+      "returnDate": "2024-11-28T16:59:57.858Z",
+      "createdAt": "2024-11-28T16:45:41.610Z",
+      "updatedAt": "2024-11-28T16:59:57.858Z"
+    },
+    {
+      "_id": "67489ea67e5f18feb5811c78",
+      "customerId": "6744bf5f06d24a4e5f63dc7c",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 1250,
+      "status": "Cancelled",
+      "createdAt": "2024-11-28T16:47:34.516Z",
+      "updatedAt": "2024-11-28T16:59:27.504Z"
+    },
+    {
+      "_id": "67489fa47e5f18feb5811d24",
+      "customerId": "6744bfa206d24a4e5f63dc90",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 3246,
+      "status": "Completed",
+      "createdAt": "2024-11-28T16:51:48.108Z",
+      "updatedAt": "2024-11-28T16:57:20.373Z"
+    },
+    {
+      "_id": "67489fb37e5f18feb5811d36",
+      "customerId": "6744c03e06d24a4e5f63dcc3",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 225,
+      "status": "Cancelled",
+      "createdAt": "2024-11-28T16:52:03.023Z",
+      "updatedAt": "2024-11-28T16:57:13.799Z"
+    },
+    {
+      "_id": "6748a2137e5f18feb5811e72",
+      "customerId": "6744c05106d24a4e5f63dcc9",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 35,
+      "status": "Completed",
+      "createdAt": "2024-11-28T17:02:11.625Z",
+      "updatedAt": "2025-01-26T04:56:25.142Z"
+    },
+    {
+      "_id": "6795beea46026202b389edc6",
+      "customerId": "6744bff406d24a4e5f63dcaa",
+      "userId": "673ed76bac8b1f46f4d4d5c2",
+      "totalAmount": 2666,
+      "status": "Completed",
+      "createdAt": "2025-01-26T04:49:46.047Z",
+      "updatedAt": "2025-01-26T04:50:54.893Z"
+    }
+  ],
+  "orderproducts": [
+    {
+      "_id": "67489e357e5f18feb5811c2e",
+      "productId": "6744bcfa06d24a4e5f63dc0c",
+      "orderId": "67489e357e5f18feb5811c2c",
+      "name": "Adidas Gym Bag",
+      "sku": "SPORT-008",
+      "quantity": 2,
+      "price": 50,
+      "createdAt": "2024-11-28T16:45:41.879Z",
+      "updatedAt": "2024-11-28T16:45:41.879Z"
+    },
+    {
+      "_id": "67489edc7e5f18feb5811c9f",
+      "productId": "6744be6506d24a4e5f63dc49",
+      "orderId": "67489edc7e5f18feb5811c9d",
+      "name": "Hair Straightener",
+      "sku": "BEAUTY-016",
+      "quantity": 1,
+      "price": 600,
+      "createdAt": "2024-11-28T16:48:28.835Z",
+      "updatedAt": "2024-11-28T16:48:28.835Z"
+    },
+    {
+      "_id": "67489fa47e5f18feb5811d26",
+      "productId": "6744bcfa06d24a4e5f63dc0c",
+      "orderId": "67489fa47e5f18feb5811d24",
+      "name": "Adidas Gym Bag",
+      "sku": "SPORT-008",
+      "quantity": 1,
+      "price": 50,
+      "createdAt": "2024-11-28T16:51:48.375Z",
+      "updatedAt": "2024-11-28T16:51:48.375Z"
+    },
+    {
+      "_id": "67489f027e5f18feb5811cbc",
+      "productId": "6744be6506d24a4e5f63dc49",
+      "orderId": "67489f027e5f18feb5811cba",
+      "name": "Hair Straightener",
+      "sku": "BEAUTY-016",
+      "quantity": 2,
+      "price": 600,
+      "createdAt": "2024-11-28T16:49:06.619Z",
+      "updatedAt": "2024-11-28T16:49:06.619Z"
+    },
+    {
+      "_id": "67489f6d7e5f18feb5811d14",
+      "productId": "6744bddc06d24a4e5f63dc21",
+      "orderId": "67489f6c7e5f18feb5811d10",
+      "name": "Car Vacuum Cleaner",
+      "sku": "AUTO-011",
+      "quantity": 1,
+      "price": 300,
+      "createdAt": "2024-11-28T16:50:53.312Z",
+      "updatedAt": "2024-11-28T16:50:53.312Z"
+    },
+    {
+      "_id": "67489fd57e5f18feb5811d58",
+      "productId": "6744bca706d24a4e5f63dbf3",
+      "orderId": "67489fd57e5f18feb5811d56",
+      "name": "Dell Inspiron Laptop",
+      "sku": "ELEC-005",
+      "quantity": 1,
+      "price": 600,
+      "createdAt": "2024-11-28T16:52:37.966Z",
+      "updatedAt": "2024-11-28T16:52:37.966Z"
+    },
+    {
+      "_id": "6748a1d57e5f18feb5811e4b",
+      "productId": "6744ba7c06d24a4e5f63dbc1",
+      "orderId": "6748a1d57e5f18feb5811e49",
+      "name": "Samsung Galaxy S23\t",
+      "sku": "ELEC-001\t",
+      "quantity": 1,
+      "price": 799,
+      "createdAt": "2024-11-28T17:01:09.505Z",
+      "updatedAt": "2024-11-28T17:01:09.505Z"
+    },
+    {
+      "_id": "67489ec77e5f18feb5811c8e",
+      "productId": "6744ba7c06d24a4e5f63dbc1",
+      "orderId": "67489ec67e5f18feb5811c8c",
+      "name": "Samsung Galaxy S23\t",
+      "sku": "ELEC-001\t",
+      "quantity": 1,
+      "price": 799,
+      "createdAt": "2024-11-28T16:48:07.177Z",
+      "updatedAt": "2024-11-28T16:48:07.177Z"
+    },
+    {
+      "_id": "67489e747e5f18feb5811c57",
+      "productId": "6744be6506d24a4e5f63dc49",
+      "orderId": "67489e747e5f18feb5811c55",
+      "name": "Hair Straightener",
+      "sku": "BEAUTY-016",
+      "quantity": 2,
+      "price": 600,
+      "createdAt": "2024-11-28T16:46:44.724Z",
+      "updatedAt": "2024-11-28T16:46:44.724Z"
+    },
+    {
+      "_id": "67489f427e5f18feb5811cf0",
+      "productId": "6744bcc906d24a4e5f63dbfe",
+      "orderId": "67489f417e5f18feb5811cec",
+      "name": "Olay Moisturizer",
+      "sku": "BEAUTY-006",
+      "quantity": 2,
+      "price": 25,
+      "createdAt": "2024-11-28T16:50:10.037Z",
+      "updatedAt": "2024-11-28T16:50:10.037Z"
+    },
+    {
+      "_id": "67489e5a7e5f18feb5811c45",
+      "productId": "6744be2c06d24a4e5f63dc39",
+      "orderId": "67489e5a7e5f18feb5811c41",
+      "name": "Women’s Handbag",
+      "sku": "FASH-014",
+      "quantity": 2,
+      "price": 75,
+      "createdAt": "2024-11-28T16:46:18.810Z",
+      "updatedAt": "2024-11-28T16:46:18.810Z"
+    },
+    {
+      "_id": "67489f527e5f18feb5811d00",
+      "productId": "6744bddc06d24a4e5f63dc21",
+      "orderId": "67489f527e5f18feb5811cfe",
+      "name": "Car Vacuum Cleaner",
+      "sku": "AUTO-011",
+      "quantity": 2,
+      "price": 300,
+      "createdAt": "2024-11-28T16:50:26.844Z",
+      "updatedAt": "2024-11-28T16:50:26.844Z"
+    },
+    {
+      "_id": "67489fd67e5f18feb5811d5a",
+      "productId": "6744be2c06d24a4e5f63dc39",
+      "orderId": "67489fd57e5f18feb5811d56",
+      "name": "Women’s Handbag",
+      "sku": "FASH-014",
+      "quantity": 1,
+      "price": 75,
+      "createdAt": "2024-11-28T16:52:38.234Z",
+      "updatedAt": "2024-11-28T16:52:38.234Z"
+    },
+    {
+      "_id": "6748a1e27e5f18feb5811e5c",
+      "productId": "6744be4606d24a4e5f63dc41",
+      "orderId": "6748a1e27e5f18feb5811e5a",
+      "name": "Memory Foam Pillow",
+      "sku": "HOME-015",
+      "quantity": 3,
+      "price": 40,
+      "createdAt": "2024-11-28T17:01:22.400Z",
+      "updatedAt": "2024-11-28T17:01:22.400Z"
+    },
+    {
+      "_id": "67489e5a7e5f18feb5811c43",
+      "productId": "6744be4606d24a4e5f63dc41",
+      "orderId": "67489e5a7e5f18feb5811c41",
+      "name": "Memory Foam Pillow",
+      "sku": "HOME-015",
+      "quantity": 2,
+      "price": 40,
+      "createdAt": "2024-11-28T16:46:18.544Z",
+      "updatedAt": "2024-11-28T16:46:18.544Z"
+    },
+    {
+      "_id": "67489ec77e5f18feb5811c90",
+      "productId": "6744bc5c06d24a4e5f63dbde",
+      "orderId": "67489ec67e5f18feb5811c8c",
+      "name": "Nike Air Max Shoes\t",
+      "sku": "FASH-002",
+      "quantity": 1,
+      "price": 120,
+      "createdAt": "2024-11-28T16:48:07.444Z",
+      "updatedAt": "2024-11-28T16:48:07.444Z"
+    },
+    {
+      "_id": "67489f1c7e5f18feb5811ccc",
+      "productId": "6744bcfa06d24a4e5f63dc0c",
+      "orderId": "67489f1b7e5f18feb5811cc8",
+      "name": "Adidas Gym Bag",
+      "sku": "SPORT-008",
+      "quantity": 1,
+      "price": 50,
+      "createdAt": "2024-11-28T16:49:32.089Z",
+      "updatedAt": "2024-11-28T16:49:32.089Z"
+    },
+    {
+      "_id": "67489f537e5f18feb5811d02",
+      "productId": "6744bd1b06d24a4e5f63dc13",
+      "orderId": "67489f527e5f18feb5811cfe",
+      "name": "LEGO Building Kit",
+      "sku": "TOY-009",
+      "quantity": 1,
+      "price": 35,
+      "createdAt": "2024-11-28T16:50:27.112Z",
+      "updatedAt": "2024-11-28T16:50:27.112Z"
+    },
+    {
+      "_id": "6755d168ac600a3c37d65f30",
+      "productId": "6744bc5c06d24a4e5f63dbde",
+      "orderId": "6755d168ac600a3c37d65f2e",
+      "name": "Nike Air Max Shoes\t",
+      "sku": "FASH-002",
+      "quantity": 6,
+      "price": 120,
+      "createdAt": "2024-12-08T17:03:36.389Z",
+      "updatedAt": "2024-12-08T17:03:36.389Z"
+    },
+    {
+      "_id": "67489e367e5f18feb5811c32",
+      "productId": "6744be2c06d24a4e5f63dc39",
+      "orderId": "67489e357e5f18feb5811c2c",
+      "name": "Women’s Handbag",
+      "sku": "FASH-014",
+      "quantity": 2,
+      "price": 75,
+      "createdAt": "2024-11-28T16:45:42.415Z",
+      "updatedAt": "2024-11-28T16:45:42.415Z"
+    },
+    {
+      "_id": "67489e867e5f18feb5811c68",
+      "productId": "6744be6506d24a4e5f63dc49",
+      "orderId": "67489e857e5f18feb5811c66",
+      "name": "Hair Straightener",
+      "sku": "BEAUTY-016",
+      "quantity": 1,
+      "price": 600,
+      "createdAt": "2024-11-28T16:47:02.109Z",
+      "updatedAt": "2024-11-28T16:47:02.109Z"
+    },
+    {
+      "_id": "67489ea67e5f18feb5811c7a",
+      "productId": "6744bca706d24a4e5f63dbf3",
+      "orderId": "67489ea67e5f18feb5811c78",
+      "name": "Dell Inspiron Laptop",
+      "sku": "ELEC-005",
+      "quantity": 1,
+      "price": 600,
+      "createdAt": "2024-11-28T16:47:34.796Z",
+      "updatedAt": "2024-11-28T16:47:34.796Z"
+    },
+    {
+      "_id": "67489f307e5f18feb5811cde",
+      "productId": "6744bca706d24a4e5f63dbf3",
+      "orderId": "67489f2f7e5f18feb5811cda",
+      "name": "Dell Inspiron Laptop",
+      "sku": "ELEC-005",
+      "quantity": 3,
+      "price": 600,
+      "createdAt": "2024-11-28T16:49:52.484Z",
+      "updatedAt": "2024-11-28T16:49:52.484Z"
+    },
+    {
+      "_id": "67489f417e5f18feb5811cee",
+      "productId": "6744be2c06d24a4e5f63dc39",
+      "orderId": "67489f417e5f18feb5811cec",
+      "name": "Women’s Handbag",
+      "sku": "FASH-014",
+      "quantity": 1,
+      "price": 75,
+      "createdAt": "2024-11-28T16:50:09.769Z",
+      "updatedAt": "2024-11-28T16:50:09.769Z"
+    },
+    {
+      "_id": "67489fc07e5f18feb5811d49",
+      "productId": "6744bca706d24a4e5f63dbf3",
+      "orderId": "67489fbf7e5f18feb5811d47",
+      "name": "Dell Inspiron Laptop",
+      "sku": "ELEC-005",
+      "quantity": 2,
+      "price": 600,
+      "createdAt": "2024-11-28T16:52:16.008Z",
+      "updatedAt": "2024-11-28T16:52:16.008Z"
+    },
+    {
+      "_id": "6748a01e7e5f18feb5811d85",
+      "productId": "6744bddc06d24a4e5f63dc21",
+      "orderId": "6748a01e7e5f18feb5811d83",
+      "name": "Car Vacuum Cleaner",
+      "sku": "AUTO-011",
+      "quantity": 1,
+      "price": 300,
+      "createdAt": "2024-11-28T16:53:50.488Z",
+      "updatedAt": "2024-11-28T16:53:50.488Z"
+    },
+    {
+      "_id": "6748b0c67e5f18feb5811edc",
+      "productId": "6744ba7c06d24a4e5f63dbc1",
+      "orderId": "6748b0c67e5f18feb5811eda",
+      "name": "Samsung Galaxy S23\t",
+      "sku": "ELEC-001\t",
+      "quantity": 1,
+      "price": 799,
+      "createdAt": "2024-11-28T18:04:54.721Z",
+      "updatedAt": "2024-11-28T18:04:54.721Z"
+    },
+    {
+      "_id": "67489ea77e5f18feb5811c7c",
+      "productId": "6744bcfa06d24a4e5f63dc0c",
+      "orderId": "67489ea67e5f18feb5811c78",
+      "name": "Adidas Gym Bag",
+      "sku": "SPORT-008",
+      "quantity": 1,
+      "price": 50,
+      "createdAt": "2024-11-28T16:47:35.065Z",
+      "updatedAt": "2024-11-28T16:47:35.065Z"
+    },
+    {
+      "_id": "67489fb37e5f18feb5811d3a",
+      "productId": "6744be2c06d24a4e5f63dc39",
+      "orderId": "67489fb37e5f18feb5811d36",
+      "name": "Women’s Handbag",
+      "sku": "FASH-014",
+      "quantity": 1,
+      "price": 75,
+      "createdAt": "2024-11-28T16:52:03.569Z",
+      "updatedAt": "2024-11-28T16:52:03.569Z"
+    },
+    {
+      "_id": "67489edd7e5f18feb5811ca1",
+      "productId": "6744bed906d24a4e5f63dc69",
+      "orderId": "67489edc7e5f18feb5811c9d",
+      "name": "Gourmet Coffee Beans",
+      "sku": "FOOD-020",
+      "quantity": 1,
+      "price": 18,
+      "createdAt": "2024-11-28T16:48:29.102Z",
+      "updatedAt": "2024-11-28T16:48:29.102Z"
+    },
+    {
+      "_id": "67489e107e5f18feb5811c1b",
+      "productId": "6744bd1b06d24a4e5f63dc13",
+      "orderId": "67489e107e5f18feb5811c17",
+      "name": "LEGO Building Kit",
+      "sku": "TOY-009",
+      "quantity": 2,
+      "price": 35,
+      "createdAt": "2024-11-28T16:45:04.988Z",
+      "updatedAt": "2024-11-28T16:45:04.988Z"
+    },
+    {
+      "_id": "67489ef17e5f18feb5811caf",
+      "productId": "6744be6506d24a4e5f63dc49",
+      "orderId": "67489ef07e5f18feb5811cad",
+      "name": "Hair Straightener",
+      "sku": "BEAUTY-016",
+      "quantity": 1,
+      "price": 600,
+      "createdAt": "2024-11-28T16:48:49.221Z",
+      "updatedAt": "2024-11-28T16:48:49.221Z"
+    },
+    {
+      "_id": "6748a0017e5f18feb5811d6c",
+      "productId": "6744bca706d24a4e5f63dbf3",
+      "orderId": "6748a0017e5f18feb5811d68",
+      "name": "Dell Inspiron Laptop",
+      "sku": "ELEC-005",
+      "quantity": 1,
+      "price": 600,
+      "createdAt": "2024-11-28T16:53:21.740Z",
+      "updatedAt": "2024-11-28T16:53:21.740Z"
+    },
+    {
+      "_id": "67489e867e5f18feb5811c6a",
+      "productId": "6744bed906d24a4e5f63dc69",
+      "orderId": "67489e857e5f18feb5811c66",
+      "name": "Gourmet Coffee Beans",
+      "sku": "FOOD-020",
+      "quantity": 2,
+      "price": 18,
+      "createdAt": "2024-11-28T16:47:02.377Z",
+      "updatedAt": "2024-11-28T16:47:02.377Z"
+    },
+    {
+      "_id": "67489fa47e5f18feb5811d28",
+      "productId": "6744ba7c06d24a4e5f63dbc1",
+      "orderId": "67489fa47e5f18feb5811d24",
+      "name": "Samsung Galaxy S23\t",
+      "sku": "ELEC-001\t",
+      "quantity": 4,
+      "price": 799,
+      "createdAt": "2024-11-28T16:51:48.642Z",
+      "updatedAt": "2024-11-28T16:51:48.642Z"
+    },
+    {
+      "_id": "6748a0017e5f18feb5811d6a",
+      "productId": "6744bebe06d24a4e5f63dc61",
+      "orderId": "6748a0017e5f18feb5811d68",
+      "name": "Baby Stroller",
+      "sku": "BABY-019",
+      "quantity": 1,
+      "price": 120,
+      "createdAt": "2024-11-28T16:53:21.472Z",
+      "updatedAt": "2024-11-28T16:53:21.472Z"
+    },
+    {
+      "_id": "67489f307e5f18feb5811cdc",
+      "productId": "6744bc8e06d24a4e5f63dbec",
+      "orderId": "67489f2f7e5f18feb5811cda",
+      "name": "Philips Air Fryer",
+      "sku": "HOME-004",
+      "quantity": 1,
+      "price": 150,
+      "createdAt": "2024-11-28T16:49:52.215Z",
+      "updatedAt": "2024-11-28T16:49:52.215Z"
+    },
+    {
+      "_id": "6748a02b7e5f18feb5811d96",
+      "productId": "6744bca706d24a4e5f63dbf3",
+      "orderId": "6748a02a7e5f18feb5811d94",
+      "name": "Dell Inspiron Laptop",
+      "sku": "ELEC-005",
+      "quantity": 1,
+      "price": 600,
+      "createdAt": "2024-11-28T16:54:03.005Z",
+      "updatedAt": "2024-11-28T16:54:03.005Z"
+    },
+    {
+      "_id": "6748b0c77e5f18feb5811ee0",
+      "productId": "6744be1106d24a4e5f63dc31",
+      "orderId": "6748b0c67e5f18feb5811eda",
+      "name": "Sony Headphones",
+      "sku": "ELEC-013",
+      "quantity": 1,
+      "price": 200,
+      "createdAt": "2024-11-28T18:04:55.260Z",
+      "updatedAt": "2024-11-28T18:04:55.260Z"
+    },
+    {
+      "_id": "67489e5b7e5f18feb5811c47",
+      "productId": "6744bebe06d24a4e5f63dc61",
+      "orderId": "67489e5a7e5f18feb5811c41",
+      "name": "Baby Stroller",
+      "sku": "BABY-019",
+      "quantity": 2,
+      "price": 120,
+      "createdAt": "2024-11-28T16:46:19.078Z",
+      "updatedAt": "2024-11-28T16:46:19.078Z"
+    },
+    {
+      "_id": "67489f6d7e5f18feb5811d12",
+      "productId": "6744bca706d24a4e5f63dbf3",
+      "orderId": "67489f6c7e5f18feb5811d10",
+      "name": "Dell Inspiron Laptop",
+      "sku": "ELEC-005",
+      "quantity": 1,
+      "price": 600,
+      "createdAt": "2024-11-28T16:50:53.044Z",
+      "updatedAt": "2024-11-28T16:50:53.044Z"
+    },
+    {
+      "_id": "67489fb37e5f18feb5811d38",
+      "productId": "6744be2c06d24a4e5f63dc39",
+      "orderId": "67489fb37e5f18feb5811d36",
+      "name": "Women’s Handbag",
+      "sku": "FASH-014",
+      "quantity": 2,
+      "price": 75,
+      "createdAt": "2024-11-28T16:52:03.302Z",
+      "updatedAt": "2024-11-28T16:52:03.302Z"
+    },
+    {
+      "_id": "6748a01e7e5f18feb5811d87",
+      "productId": "6744bddc06d24a4e5f63dc21",
+      "orderId": "6748a01e7e5f18feb5811d83",
+      "name": "Car Vacuum Cleaner",
+      "sku": "AUTO-011",
+      "quantity": 1,
+      "price": 300,
+      "createdAt": "2024-11-28T16:53:50.760Z",
+      "updatedAt": "2024-11-28T16:53:50.760Z"
+    },
+    {
+      "_id": "6748b0c67e5f18feb5811ede",
+      "productId": "6744be1106d24a4e5f63dc31",
+      "orderId": "6748b0c67e5f18feb5811eda",
+      "name": "Sony Headphones",
+      "sku": "ELEC-013",
+      "quantity": 1,
+      "price": 200,
+      "createdAt": "2024-11-28T18:04:54.991Z",
+      "updatedAt": "2024-11-28T18:04:54.991Z"
+    },
+    {
+      "_id": "67489e107e5f18feb5811c19",
+      "productId": "6744be1106d24a4e5f63dc31",
+      "orderId": "67489e107e5f18feb5811c17",
+      "name": "Sony Headphones",
+      "sku": "ELEC-013",
+      "quantity": 2,
+      "price": 200,
+      "createdAt": "2024-11-28T16:45:04.717Z",
+      "updatedAt": "2024-11-28T16:45:04.717Z"
+    },
+    {
+      "_id": "67489f1b7e5f18feb5811cca",
+      "productId": "6744bed906d24a4e5f63dc69",
+      "orderId": "67489f1b7e5f18feb5811cc8",
+      "name": "Gourmet Coffee Beans",
+      "sku": "FOOD-020",
+      "quantity": 2,
+      "price": 18,
+      "createdAt": "2024-11-28T16:49:31.818Z",
+      "updatedAt": "2024-11-28T16:49:31.818Z"
+    },
+    {
+      "_id": "67489e117e5f18feb5811c1d",
+      "productId": "6744bcfa06d24a4e5f63dc0c",
+      "orderId": "67489e107e5f18feb5811c17",
+      "name": "Adidas Gym Bag",
+      "sku": "SPORT-008",
+      "quantity": 1,
+      "price": 50,
+      "createdAt": "2024-11-28T16:45:05.255Z",
+      "updatedAt": "2024-11-28T16:45:05.255Z"
+    },
+    {
+      "_id": "67489e367e5f18feb5811c30",
+      "productId": "6744bea306d24a4e5f63dc59",
+      "orderId": "67489e357e5f18feb5811c2c",
+      "name": "Hiking Backpack",
+      "sku": "SPORT-018",
+      "quantity": 1,
+      "price": 60,
+      "createdAt": "2024-11-28T16:45:42.146Z",
+      "updatedAt": "2024-11-28T16:45:42.146Z"
+    },
+    {
+      "_id": "67489e747e5f18feb5811c59",
+      "productId": "6744bc7706d24a4e5f63dbe5",
+      "orderId": "67489e747e5f18feb5811c55",
+      "name": "Wooden Dining Table",
+      "sku": "HOME-003",
+      "quantity": 2,
+      "price": 499,
+      "createdAt": "2024-11-28T16:46:44.992Z",
+      "updatedAt": "2024-11-28T16:46:44.992Z"
+    },
+    {
+      "_id": "67489ea77e5f18feb5811c7e",
+      "productId": "6744bca706d24a4e5f63dbf3",
+      "orderId": "67489ea67e5f18feb5811c78",
+      "name": "Dell Inspiron Laptop",
+      "sku": "ELEC-005",
+      "quantity": 1,
+      "price": 600,
+      "createdAt": "2024-11-28T16:47:35.340Z",
+      "updatedAt": "2024-11-28T16:47:35.340Z"
+    },
+    {
+      "_id": "6748a1d57e5f18feb5811e4d",
+      "productId": "6744bcfa06d24a4e5f63dc0c",
+      "orderId": "6748a1d57e5f18feb5811e49",
+      "name": "Adidas Gym Bag",
+      "sku": "SPORT-008",
+      "quantity": 1,
+      "price": 50,
+      "createdAt": "2024-11-28T17:01:09.774Z",
+      "updatedAt": "2024-11-28T17:01:09.774Z"
+    },
+    {
+      "_id": "6748a2137e5f18feb5811e74",
+      "productId": "6744bd1b06d24a4e5f63dc13",
+      "orderId": "6748a2137e5f18feb5811e72",
+      "name": "LEGO Building Kit",
+      "sku": "TOY-009",
+      "quantity": 1,
+      "price": 35,
+      "createdAt": "2024-11-28T17:02:11.898Z",
+      "updatedAt": "2024-11-28T17:02:11.898Z"
+    },
+    {
+      "_id": "6795beea46026202b389edc8",
+      "productId": "6744bd1b06d24a4e5f63dc13",
+      "orderId": "6795beea46026202b389edc6",
+      "name": "LEGO Building Kit",
+      "sku": "TOY-009",
+      "quantity": 2,
+      "price": 35,
+      "createdAt": "2025-01-26T04:49:46.332Z",
+      "updatedAt": "2025-01-26T04:49:46.332Z"
+    },
+    {
+      "_id": "6795beea46026202b389edca",
+      "productId": "6744ba7c06d24a4e5f63dbc1",
+      "orderId": "6795beea46026202b389edc6",
+      "name": "Samsung Galaxy S23\t",
+      "sku": "ELEC-001\t",
+      "quantity": 2,
+      "price": 799,
+      "createdAt": "2025-01-26T04:49:46.606Z",
+      "updatedAt": "2025-01-26T04:49:46.606Z"
+    },
+    {
+      "_id": "6795beea46026202b389edcc",
+      "productId": "6744bc7706d24a4e5f63dbe5",
+      "orderId": "6795beea46026202b389edc6",
+      "name": "Wooden Dining Table",
+      "sku": "HOME-003",
+      "quantity": 2,
+      "price": 499,
+      "createdAt": "2025-01-26T04:49:46.877Z",
+      "updatedAt": "2025-01-26T04:49:46.877Z"
+    }
+  ],
+  "payments": [
+    {
+      "_id": "6748a10a7e5f18feb5811de5",
+      "orderId": "67489f417e5f18feb5811cec",
+      "amount": 125,
+      "paymentMethod": "Cash",
+      "paymentDate": "2024-11-28T16:57:46.505Z",
+      "status": "Refunded",
+      "refundDate": "2024-11-28T16:58:04.534Z",
+      "createdAt": "2024-11-28T16:57:46.507Z",
+      "updatedAt": "2024-11-28T16:58:04.535Z"
+    },
+    {
+      "_id": "6755d17dac600a3c37d65f37",
+      "orderId": "6755d168ac600a3c37d65f2e",
+      "amount": 720,
+      "paymentMethod": "Cash",
+      "paymentDate": "2024-12-08T17:03:57.731Z",
+      "status": "Refunded",
+      "refundDate": "2024-12-08T17:06:07.136Z",
+      "createdAt": "2024-12-08T17:03:57.733Z",
+      "updatedAt": "2024-12-08T17:06:07.139Z"
+    },
+    {
+      "_id": "6748a1027e5f18feb5811de0",
+      "orderId": "67489f527e5f18feb5811cfe",
+      "amount": 635,
+      "paymentMethod": "Cash",
+      "paymentDate": "2024-11-28T16:57:38.230Z",
+      "status": "Paid",
+      "createdAt": "2024-11-28T16:57:38.231Z",
+      "updatedAt": "2024-11-28T16:57:38.231Z"
+    },
+    {
+      "_id": "6748a16b7e5f18feb5811e0a",
+      "orderId": "67489ec67e5f18feb5811c8c",
+      "amount": 919,
+      "paymentMethod": "Cash",
+      "paymentDate": "2024-11-28T16:59:23.112Z",
+      "status": "Paid",
+      "createdAt": "2024-11-28T16:59:23.113Z",
+      "updatedAt": "2024-11-28T16:59:23.113Z"
+    },
+    {
+      "_id": "6748a0f87e5f18feb5811ddb",
+      "orderId": "67489f6c7e5f18feb5811d10",
+      "amount": 900,
+      "paymentMethod": "Bank",
+      "paymentDate": "2024-11-28T16:57:28.605Z",
+      "status": "Paid",
+      "createdAt": "2024-11-28T16:57:28.606Z",
+      "updatedAt": "2024-11-28T16:57:28.606Z"
+    },
+    {
+      "_id": "6748a1887e5f18feb5811e25",
+      "orderId": "67489e357e5f18feb5811c2c",
+      "amount": 310,
+      "paymentMethod": "Cash",
+      "paymentDate": "2024-11-28T16:59:52.802Z",
+      "status": "Refunded",
+      "refundDate": "2024-11-28T16:59:58.397Z",
+      "createdAt": "2024-11-28T16:59:52.802Z",
+      "updatedAt": "2024-11-28T16:59:58.397Z"
+    },
+    {
+      "_id": "6748a0a07e5f18feb5811dbc",
+      "orderId": "6748a0017e5f18feb5811d68",
+      "amount": 720,
+      "paymentMethod": "Cash",
+      "paymentDate": "2024-11-28T16:56:00.256Z",
+      "status": "Paid",
+      "createdAt": "2024-11-28T16:56:00.257Z",
+      "updatedAt": "2024-11-28T16:56:00.257Z"
+    },
+    {
+      "_id": "6748a0ad7e5f18feb5811dc6",
+      "orderId": "67489fbf7e5f18feb5811d47",
+      "amount": 1200,
+      "paymentMethod": "Cash",
+      "paymentDate": "2024-11-28T16:56:13.138Z",
+      "status": "Refunded",
+      "refundDate": "2024-11-28T16:56:18.802Z",
+      "createdAt": "2024-11-28T16:56:13.139Z",
+      "updatedAt": "2024-11-28T16:56:18.803Z"
+    },
+    {
+      "_id": "6748a15b7e5f18feb5811dfc",
+      "orderId": "67489f027e5f18feb5811cba",
+      "amount": 1200,
+      "paymentMethod": "Cash",
+      "paymentDate": "2024-11-28T16:59:07.449Z",
+      "status": "Paid",
+      "createdAt": "2024-11-28T16:59:07.450Z",
+      "updatedAt": "2024-11-28T16:59:07.450Z"
+    },
+    {
+      "_id": "6748a1817e5f18feb5811e1f",
+      "orderId": "67489e5a7e5f18feb5811c41",
+      "amount": 470,
+      "paymentMethod": "Cash",
+      "paymentDate": "2024-11-28T16:59:45.981Z",
+      "status": "Paid",
+      "createdAt": "2024-11-28T16:59:45.982Z",
+      "updatedAt": "2024-11-28T16:59:45.982Z"
+    },
+    {
+      "_id": "6748a17c7e5f18feb5811e1a",
+      "orderId": "67489e747e5f18feb5811c55",
+      "amount": 2198,
+      "paymentMethod": "Cash",
+      "paymentDate": "2024-11-28T16:59:40.329Z",
+      "status": "Paid",
+      "createdAt": "2024-11-28T16:59:40.330Z",
+      "updatedAt": "2024-11-28T16:59:40.330Z"
+    },
+    {
+      "_id": "6748a0f07e5f18feb5811dd6",
+      "orderId": "67489fa47e5f18feb5811d24",
+      "amount": 3246,
+      "paymentMethod": "Cash",
+      "paymentDate": "2024-11-28T16:57:20.102Z",
+      "status": "Paid",
+      "createdAt": "2024-11-28T16:57:20.103Z",
+      "updatedAt": "2024-11-28T16:57:20.103Z"
+    },
+    {
+      "_id": "6748a1657e5f18feb5811e05",
+      "orderId": "67489edc7e5f18feb5811c9d",
+      "amount": 618,
+      "paymentMethod": "Cash",
+      "paymentDate": "2024-11-28T16:59:17.289Z",
+      "status": "Paid",
+      "createdAt": "2024-11-28T16:59:17.290Z",
+      "updatedAt": "2024-11-28T16:59:17.290Z"
+    },
+    {
+      "_id": "6748a0947e5f18feb5811db7",
+      "orderId": "6748a01e7e5f18feb5811d83",
+      "amount": 600,
+      "paymentMethod": "Cash",
+      "paymentDate": "2024-11-28T16:55:48.657Z",
+      "status": "Paid",
+      "createdAt": "2024-11-28T16:55:48.658Z",
+      "updatedAt": "2024-11-28T16:55:48.658Z"
+    },
+    {
+      "_id": "6748a1517e5f18feb5811df2",
+      "orderId": "67489f2f7e5f18feb5811cda",
+      "amount": 1950,
+      "paymentMethod": "Cash",
+      "paymentDate": "2024-11-28T16:58:57.244Z",
+      "status": "Paid",
+      "createdAt": "2024-11-28T16:58:57.245Z",
+      "updatedAt": "2024-11-28T16:58:57.245Z"
+    },
+    {
+      "_id": "6795bf2e46026202b389edd6",
+      "orderId": "6795beea46026202b389edc6",
+      "amount": 2666,
+      "paymentMethod": "Cash",
+      "paymentDate": "2025-01-26T04:50:54.603Z",
+      "status": "Paid",
+      "createdAt": "2025-01-26T04:50:54.604Z",
+      "updatedAt": "2025-01-26T04:50:54.604Z"
+    },
+    {
+      "_id": "6795c07846026202b389ee0c",
+      "orderId": "6748a2137e5f18feb5811e72",
+      "amount": 35,
+      "paymentMethod": "Cash",
+      "paymentDate": "2025-01-26T04:56:24.850Z",
+      "status": "Paid",
+      "createdAt": "2025-01-26T04:56:24.851Z",
+      "updatedAt": "2025-01-26T04:56:24.851Z"
+    }
+  ],
+  "products": [
+    {
+      "_id": "6744bda006d24a4e5f63dc1a",
+      "name": "Organic Almonds",
+      "description": "Premium quality, 1lb pack.",
+      "price": 360,
+      "sku": "FOOD-010",
+      "categoryId": "6744ba0a06d24a4e5f63dbb0",
+      "stockQuantity": 20,
+      "createdAt": "2024-11-25T18:10:40.311Z",
+      "updatedAt": "2025-01-26T04:48:52.516Z"
+    },
+    {
+      "_id": "6744bd1b06d24a4e5f63dc13",
+      "name": "LEGO Building Kit",
+      "description": "500-piece creative toy set.\t",
+      "price": 35,
+      "sku": "TOY-009",
+      "categoryId": "6744ba0306d24a4e5f63dbab",
+      "stockQuantity": 114,
+      "createdAt": "2024-11-25T18:08:27.256Z",
+      "updatedAt": "2025-01-26T04:49:47.150Z"
+    },
+    {
+      "_id": "6744be2c06d24a4e5f63dc39",
+      "name": "Women’s Handbag",
+      "description": "Stylish leather tote bag",
+      "price": 75,
+      "sku": "FASH-014",
+      "categoryId": "6744b9d006d24a4e5f63db92",
+      "stockQuantity": 48,
+      "createdAt": "2024-11-25T18:13:00.708Z",
+      "updatedAt": "2024-11-28T16:59:57.589Z"
+    },
+    {
+      "_id": "6744bed906d24a4e5f63dc69",
+      "name": "Gourmet Coffee Beans",
+      "description": "Arabica blend, 2lb pack",
+      "price": 18,
+      "sku": "FOOD-020",
+      "categoryId": "6744ba0a06d24a4e5f63dbb0",
+      "stockQuantity": 89,
+      "createdAt": "2024-11-25T18:15:53.576Z",
+      "updatedAt": "2024-11-28T16:59:33.603Z"
+    },
+    {
+      "_id": "6744ba7c06d24a4e5f63dbc1",
+      "name": "Samsung Galaxy S23\t",
+      "description": "Latest flagship smartphone, 128GB.\t",
+      "price": 799,
+      "sku": "ELEC-001\t",
+      "categoryId": "6744b9c706d24a4e5f63db8d",
+      "stockQuantity": 85,
+      "createdAt": "2024-11-25T17:57:16.113Z",
+      "updatedAt": "2025-01-26T04:49:47.429Z"
+    },
+    {
+      "_id": "6744bc7706d24a4e5f63dbe5",
+      "name": "Wooden Dining Table",
+      "description": "Solid oak wood, 6-seater",
+      "price": 499,
+      "sku": "HOME-003",
+      "categoryId": "6744b9d806d24a4e5f63db97",
+      "stockQuantity": 36,
+      "createdAt": "2024-11-25T18:05:43.377Z",
+      "updatedAt": "2025-01-26T04:49:47.700Z"
+    },
+    {
+      "_id": "6744bc8e06d24a4e5f63dbec",
+      "name": "Philips Air Fryer",
+      "description": "Healthy cooking, 4L capacity.",
+      "price": 150,
+      "sku": "HOME-004",
+      "categoryId": "6744b9d806d24a4e5f63db97",
+      "stockQuantity": 3,
+      "createdAt": "2024-11-25T18:06:06.594Z",
+      "updatedAt": "2024-11-28T16:49:52.752Z"
+    },
+    {
+      "_id": "6744bca706d24a4e5f63dbf3",
+      "name": "Dell Inspiron Laptop",
+      "description": "15.6\" FHD, 8GB RAM, 256GB SSD.",
+      "price": 600,
+      "sku": "ELEC-005",
+      "categoryId": "6744b9c706d24a4e5f63db8d",
+      "stockQuantity": 47,
+      "createdAt": "2024-11-25T18:06:31.626Z",
+      "updatedAt": "2024-11-28T16:59:27.219Z"
+    },
+    {
+      "_id": "6744bcc906d24a4e5f63dbfe",
+      "name": "Olay Moisturizer",
+      "description": "Hydrating cream for daily use",
+      "price": 25,
+      "sku": "BEAUTY-006",
+      "categoryId": "6744b9e006d24a4e5f63db9c",
+      "stockQuantity": 199,
+      "createdAt": "2024-11-25T18:07:05.330Z",
+      "updatedAt": "2024-11-28T16:58:03.727Z"
+    },
+    {
+      "_id": "6744bc5c06d24a4e5f63dbde",
+      "name": "Nike Air Max Shoes\t",
+      "description": "Lightweight, breathable sports shoes.\t",
+      "price": 120,
+      "sku": "FASH-002",
+      "categoryId": "6744b9d006d24a4e5f63db92",
+      "stockQuantity": 66,
+      "createdAt": "2024-11-25T18:05:16.217Z",
+      "updatedAt": "2024-12-08T17:06:47.975Z"
+    },
+    {
+      "_id": "6744bce206d24a4e5f63dc05",
+      "name": "Fictional Novel Set",
+      "description": "Collection of 5 best-selling novels",
+      "price": 45,
+      "sku": "BOOK-007",
+      "categoryId": "6744b9e806d24a4e5f63dba1",
+      "stockQuantity": 62,
+      "createdAt": "2024-11-25T18:07:30.390Z",
+      "updatedAt": "2024-11-28T06:23:22.199Z"
+    },
+    {
+      "_id": "6744bddc06d24a4e5f63dc21",
+      "name": "Car Vacuum Cleaner",
+      "description": "Compact, portable, high suction power",
+      "price": 300,
+      "sku": "AUTO-011",
+      "categoryId": "6744ba1206d24a4e5f63dbb5",
+      "stockQuantity": 65,
+      "createdAt": "2024-11-25T18:11:40.715Z",
+      "updatedAt": "2024-11-28T16:53:51.301Z"
+    },
+    {
+      "_id": "6744bebe06d24a4e5f63dc61",
+      "name": "Baby Stroller",
+      "description": "Lightweight, foldable, with canopy",
+      "price": 120,
+      "sku": "BABY-019",
+      "categoryId": "6744ba0306d24a4e5f63dbab",
+      "stockQuantity": 67,
+      "createdAt": "2024-11-25T18:15:26.520Z",
+      "updatedAt": "2024-11-28T16:53:22.009Z"
+    },
+    {
+      "_id": "6744bdf806d24a4e5f63dc29",
+      "name": "Dog Chew Toy",
+      "description": "Durable, non-toxic rubber",
+      "price": 100,
+      "sku": "PET-012",
+      "categoryId": "6744ba1906d24a4e5f63dbba",
+      "stockQuantity": 0,
+      "createdAt": "2024-11-25T18:12:08.243Z",
+      "updatedAt": "2024-11-28T07:52:23.001Z"
+    },
+    {
+      "_id": "6744be4606d24a4e5f63dc41",
+      "name": "Memory Foam Pillow",
+      "description": "Ergonomic, hypoallergenic",
+      "price": 40,
+      "sku": "HOME-015",
+      "categoryId": "6744b9d806d24a4e5f63db97",
+      "stockQuantity": 95,
+      "createdAt": "2024-11-25T18:13:26.662Z",
+      "updatedAt": "2024-11-28T17:01:22.666Z"
+    },
+    {
+      "_id": "6744bea306d24a4e5f63dc59",
+      "name": "Hiking Backpack",
+      "description": "Lightweight, 30L capacity.",
+      "price": 60,
+      "sku": "SPORT-018",
+      "categoryId": "6744b9f506d24a4e5f63dba6",
+      "stockQuantity": 80,
+      "createdAt": "2024-11-25T18:14:59.951Z",
+      "updatedAt": "2024-11-28T16:59:57.320Z"
+    },
+    {
+      "_id": "6744be8706d24a4e5f63dc51",
+      "name": "Drawing Pad Set",
+      "description": "Includes pencils, markers, and pad.",
+      "price": 25,
+      "sku": "BOOK-017",
+      "categoryId": "6744b9e806d24a4e5f63dba1",
+      "stockQuantity": 0,
+      "createdAt": "2024-11-25T18:14:31.359Z",
+      "updatedAt": "2024-11-28T07:52:31.987Z"
+    },
+    {
+      "_id": "6744bcfa06d24a4e5f63dc0c",
+      "name": "Adidas Gym Bag",
+      "description": "Spacious, durable, waterproof",
+      "price": 50,
+      "sku": "SPORT-008",
+      "categoryId": "6744b9f506d24a4e5f63dba6",
+      "stockQuantity": 62,
+      "createdAt": "2024-11-25T18:07:54.983Z",
+      "updatedAt": "2024-11-28T17:01:10.311Z"
+    },
+    {
+      "_id": "6744be1106d24a4e5f63dc31",
+      "name": "Sony Headphones",
+      "description": "Noise-cancelling, wireless",
+      "price": 200,
+      "sku": "ELEC-013",
+      "categoryId": "6744b9c706d24a4e5f63db8d",
+      "stockQuantity": 43,
+      "createdAt": "2024-11-25T18:12:33.146Z",
+      "updatedAt": "2024-11-28T18:04:56.086Z"
+    },
+    {
+      "_id": "6744be6506d24a4e5f63dc49",
+      "name": "Hair Straightener",
+      "description": "Ceramic plates, adjustable heat.",
+      "price": 600,
+      "sku": "BEAUTY-016",
+      "categoryId": "6744b9e006d24a4e5f63db9c",
+      "stockQuantity": 75,
+      "createdAt": "2024-11-25T18:13:57.774Z",
+      "updatedAt": "2024-11-28T16:59:33.333Z"
+    }
+  ],
+  "user": [
+    {
+      "_id": "673ed76bac8b1f46f4d4d5c2",
+      "name": "Amit Biswas",
+      "email": "amitbd590@gmail.com",
+      "password": "$2a$10$YETNE3dXgfdiUhLAl40CouTIfruFTEc2u7EER/8Do.LHt40Q8l5WW",
+      "img": "api-img1737869309223-ProfileImage(1).png",
+      "number": "01814331350",
+      "role": "admin",
+      "createdAt": "2024-11-21T06:47:07.056Z",
+      "updatedAt": "2025-01-26T05:28:29.925Z"
+    },
+    {
+      "_id": "6795bd0746026202b389ed9e",
+      "name": "Nora Mcclain",
+      "email": "vilaco@mailinator.com",
+      "password": "$2a$10$PCuCe48UXhMEBDO3WJxHJOiek65iflTO7kN3O7y.VQJN7B8HFpajm",
+      "img": "api-img1737866502741-bug.png",
+      "number": "338",
+      "role": "editor",
+      "createdAt": "2025-01-26T04:41:43.018Z",
+      "updatedAt": "2025-01-26T04:42:14.325Z"
+    }
+  ]
+}
