@@ -1,16 +1,16 @@
-import { Icon } from "@iconify/react/dist/iconify.js";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ErrorToast, formatDate, IsEmpty } from "../helper/helper";
 import UserStore from "../store/UserStore";
+import FileStore from "../store/FileStore";
 const ViewProfile = () => {
   let { nameRef, phoneRef, passwordRef } = useRef();
+  let [rowFile, setRowFile] = useState(null);
   let { profileDetailsRequest, profileDetails, profileUpdate } = UserStore();
+  let { uploadFileRequest } = FileStore();
   const [imagePreview, setImagePreview] = useState("");
   useEffect(() => {
     (async () => {
       await profileDetailsRequest().then((res) => {
-        console.log(res);
-
         setImagePreview(`/api/v1/get-file/${res?.img}`);
       });
     })();
@@ -18,30 +18,54 @@ const ViewProfile = () => {
 
   //! Image upload
   const readURL = (input) => {
-    if (input.target.files && input.target.files[0]) {
+    const file = input.target.files && input.target.files[0];
+    if (file) {
+      if (file.size > 100 * 1024) {
+        // 100 KB limit
+        ErrorToast("File size must be less than 100 KB");
+        return;
+      }
       const reader = new FileReader();
       reader.onload = (e) => {
         setImagePreview(e.target.result);
       };
-      reader.readAsDataURL(input.target.files[0]);
+      reader.readAsDataURL(file);
+      setRowFile(file);
     }
   };
 
-  console.log(imagePreview);
+  let fileUploadFun = async () => {
+    if (!rowFile) {
+      ErrorToast("Please select a image file");
+      return;
+    }
+    const formData = new FormData();
+    formData.append("file", rowFile);
+    const result = await uploadFileRequest(formData);
+    // setFile(result?.data?.file?.[0]?.filename);
+    return { status: true, file: result?.data?.file?.[0]?.filename };
+  };
 
   //! update User Profile
   const updateUserProfile = async () => {
     let name = nameRef.value;
     let number = phoneRef.value;
     let password = passwordRef.value;
-    let img = imagePreview;
 
     if (IsEmpty(name) || IsEmpty(number) || IsEmpty(password)) {
       ErrorToast("Please fill your profile");
     } else {
-      let result = await profileUpdate({ name, number, password, img });
-      if (result) {
-        profileDetailsRequest();
+      let fileUploadResult = await fileUploadFun();
+      if (fileUploadResult?.status === true) {
+        let result = await profileUpdate({
+          name,
+          number,
+          password,
+          img: fileUploadResult.file,
+        });
+        if (result) {
+          profileDetailsRequest();
+        }
       }
     }
   };

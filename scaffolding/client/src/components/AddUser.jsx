@@ -1,4 +1,3 @@
-import { Icon } from "@iconify/react/dist/iconify.js";
 import { useRef, useState } from "react";
 import UserStore from "../store/UserStore";
 import FileStore from "../store/FileStore";

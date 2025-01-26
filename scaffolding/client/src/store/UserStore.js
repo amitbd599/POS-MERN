@@ -5,8 +5,6 @@ import { ErrorToast, SuccessToast, unAuthorize } from "../helper/helper";
 import LoadingStore from "./LoadingStore";
 const { loadingRequest } = LoadingStore.getState();
 
-console.log(baseURL);
-
 const UserStore = create((set) => ({
   //! Register-user api
   registerUserRequest: async (reqBody) => {

@@ -253,7 +253,11 @@ const AllUsers = () => {
                     <div className='col-12'>
                       <div className='inner__card'>
                         <div className='img__card'>
-                          <img src={user?.img} className='img-fluid' alt='' />
+                          <img
+                            src={`/api/v1/get-file/${user?.img}`}
+                            className='img-fluid'
+                            alt=''
+                          />
                           <div className='text__inner'>
                             <p>
                               Name: <strong>{user?.name}</strong>{" "}

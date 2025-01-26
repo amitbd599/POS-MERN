@@ -1,4 +1,4 @@
-export const fileUpload = (req, res) => {
+const fileUpload = (req, res) => {
   try {
     if (req.files.length > 0) {
       return res.status(200).json({
@@ -13,3 +13,5 @@ export const fileUpload = (req, res) => {
     return { status: false, error: e };
   }
 };
+
+module.exports = { fileUpload };
