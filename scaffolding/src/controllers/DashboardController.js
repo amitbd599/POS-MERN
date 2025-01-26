@@ -3,7 +3,7 @@ const CustomersModel = require("../models/CustomersModel");
 const OrdersModel = require("../models/OrdersModel");
 const ProductsModel = require("../models/ProductsModel");
 const UserModel = require("../models/UserModel");
-
+const currentYear = new Date().getFullYear();
 // get all data
 exports.getDashboardData = async (req, res) => {
   try {
@@ -203,6 +203,11 @@ exports.getDashboardData = async (req, res) => {
     //! === 7 === monthlyOrderData
     let monthlyOrderData = await OrdersModel.aggregate([
       {
+        $match: {
+          $expr: { $eq: [{ $year: "$createdAt" }, currentYear] }, // Filter orders by the current year
+        },
+      },
+      {
         $group: {
           _id: { $month: "$createdAt" }, // Group by month
           totalAmount: { $sum: "$totalAmount" }, // Sum up order amounts
@@ -212,7 +217,8 @@ exports.getDashboardData = async (req, res) => {
         $sort: { _id: 1 }, // Sort by month (1 = Jan, 12 = Dec)
       },
     ]);
-    // Map data to ensure all 12 months are represented
+
+    //! Map data to ensure all 12 months are represented
     const orderModelChart = Array(12).fill(0); // Default 0 for all months
     monthlyOrderData.forEach((data) => {
       orderModelChart[data._id - 1] = data.totalAmount; // Assign amount to respective month index
