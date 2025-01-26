@@ -303,3 +303,11 @@ exports.deleteUser = async (req, res) => {
     res.status(200).json({ success: false, error: error.message });
   }
 };
+
+exports.verifyAuth = async (req, res) => {
+  try {
+    res.status(200).json({ success: true });
+  } catch (error) {
+    res.status(200).json({ success: false, error: error.message });
+  }
+};

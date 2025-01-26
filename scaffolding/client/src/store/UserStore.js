@@ -48,6 +48,24 @@ const UserStore = create((set) => ({
     }
   },
 
+  //! verify-auth
+  verifyAuthRequest: async () => {
+    try {
+      let res = await axios.get(baseURL + "/verify-auth", {
+        withCredentials: true,
+        credentials: "include",
+      });
+      if (res?.data?.success === true) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      loadingRequest(false);
+      unAuthorize(e.status);
+    }
+  },
+
   //! login-user api -- done
   loginUserRequest: async (reqBody) => {
     try {

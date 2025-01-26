@@ -42,6 +42,7 @@ router.delete(
   RoleBasedAccess("admin"),
   UserController.deleteUser
 );
+router.get("/verify-auth", middlewares, UserController.verifyAuth);
 router.get("/logout-profile", UserController.logout);
 
 // Create a customer

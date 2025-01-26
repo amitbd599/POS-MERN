@@ -19,6 +19,7 @@ import ViewOrderPage from "./pages/ViewOrderPage";
 import BackupDatabasePage from "./pages/BackupDatabasePage";
 import LoginPage from "./pages/LoginPage";
 import ErrorPage from "./pages/ErrorPage";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   console.warn = () => {};
@@ -28,59 +29,171 @@ function App() {
     <BrowserRouter>
       <RouteScrollToTop />
       <Routes>
-        <Route exact path='/' element={<HomePage />} />
+        <Route
+          exact
+          path='/'
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
+        />
 
         {/* categories */}
         <Route
           exact
           path='/create-categories'
-          element={<CreateCategoriesPage />}
+          element={
+            <PrivateRoute>
+              <CreateCategoriesPage />
+            </PrivateRoute>
+          }
         />
         <Route
           exact
           path='/all-categories/:pageNo'
-          element={<AllCategoriesPage />}
+          element={
+            <PrivateRoute>
+              <AllCategoriesPage />
+            </PrivateRoute>
+          }
         />
         <Route
           exact
           path='/update-categories/:id'
-          element={<UpdateCategoriesPage />}
+          element={
+            <PrivateRoute>
+              <UpdateCategoriesPage />
+            </PrivateRoute>
+          }
         />
 
         {/* products */}
-        <Route exact path='/create-product' element={<CreateProductPage />} />
-        <Route exact path='/all-product/:pageNo' element={<AllProductPage />} />
+        <Route
+          exact
+          path='/create-product'
+          element={
+            <PrivateRoute>
+              <CreateProductPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path='/all-product/:pageNo'
+          element={
+            <PrivateRoute>
+              <AllProductPage />
+            </PrivateRoute>
+          }
+        />
         <Route
           exact
           path='/update-product/:id'
-          element={<UpdateProductPage />}
+          element={
+            <PrivateRoute>
+              <UpdateProductPage />
+            </PrivateRoute>
+          }
         />
 
         {/* customer */}
-        <Route exact path='/create-customer' element={<CreateCustomerPage />} />
+        <Route
+          exact
+          path='/create-customer'
+          element={
+            <PrivateRoute>
+              <CreateCustomerPage />
+            </PrivateRoute>
+          }
+        />
         <Route
           exact
           path='/all-customer/:pageNo'
-          element={<AllCustomerPage />}
+          element={
+            <PrivateRoute>
+              <AllCustomerPage />
+            </PrivateRoute>
+          }
         />
         <Route
           exact
           path='/update-customer/:id'
-          element={<UpdateCustomerPage />}
+          element={
+            <PrivateRoute>
+              <UpdateCustomerPage />
+            </PrivateRoute>
+          }
         />
 
         {/* user */}
-        <Route exact path='/add-user' element={<AddUserPage />} />
-        <Route exact path='/all-user/:pageNo' element={<AllUsersPage />} />
-        <Route exact path='/view-profile' element={<ViewProfilePage />} />
+        <Route
+          exact
+          path='/add-user'
+          element={
+            <PrivateRoute>
+              <AddUserPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path='/all-user/:pageNo'
+          element={
+            <PrivateRoute>
+              <AllUsersPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path='/view-profile'
+          element={
+            <PrivateRoute>
+              <ViewProfilePage />
+            </PrivateRoute>
+          }
+        />
 
         {/* orders */}
-        <Route exact path='/create-order' element={<CreateOrderPage />} />
-        <Route exact path='/all-order/:pageNo' element={<AllOrdersPage />} />
-        <Route exact path='/view-order/:id' element={<ViewOrderPage />} />
+        <Route
+          exact
+          path='/create-order'
+          element={
+            <PrivateRoute>
+              <CreateOrderPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path='/all-order/:pageNo'
+          element={
+            <PrivateRoute>
+              <AllOrdersPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path='/view-order/:id'
+          element={
+            <PrivateRoute>
+              <ViewOrderPage />
+            </PrivateRoute>
+          }
+        />
 
         {/* backup */}
-        <Route exact path='/backup-database' element={<BackupDatabasePage />} />
+        <Route
+          exact
+          path='/backup-database'
+          element={
+            <PrivateRoute>
+              <BackupDatabasePage />
+            </PrivateRoute>
+          }
+        />
 
         {/* login */}
         <Route exact path='/login' element={<LoginPage />} />

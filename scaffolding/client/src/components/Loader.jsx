@@ -1,4 +1,3 @@
-import React from "react";
 import LoadingStore from "../store/LoadingStore";
 
 const Loader = () => {
